@@ -7,19 +7,29 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="se.bth.homejungle.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:name="se.bth.homejungle.ui.plants.PlantFragment"
+        android:label="@string/title_plants"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="se.bth.homejungle.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_database"
+        android:name="se.bth.homejungle.ui.database.DatabaseFragment"
+        android:label="@string/title_database"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="se.bth.homejungle.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_calendar"
+        android:name="se.bth.homejungle.ui.calendar.CalendarFragment"
+        android:label="@string/title_calendar"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_giveaways"
+        android:name="se.bth.homejungle.ui.giveaways.GiveawaysFragment"
+        android:label="@string/title_giveaways"
+        tools:layout="@layout/fragment_giveaways" />
+    <fragment
+        android:id="@+id/navigation_marketplace"
+        android:name="se.bth.homejungle.ui.marketplace.Marketplace"
+        android:label="@string/title_marketplace"
+        tools:layout="@layout/fragment_marketplace" />
 </navigation>
