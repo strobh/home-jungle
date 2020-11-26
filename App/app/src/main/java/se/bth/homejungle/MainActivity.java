@@ -1,6 +1,8 @@
 package se.bth.homejungle;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -9,12 +11,36 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
+
+import java.util.Arrays;
+import java.util.List;
+
+import se.bth.homejungle.storage.AppDatabase;
+import se.bth.homejungle.storage.dao.PlantManager;
+import se.bth.homejungle.storage.entity.Plant;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
+
+                PlantManager plantManager = db.getPlantManager();
+                Plant newPlant = new Plant("My Plant", "Some description");
+                plantManager.insert(newPlant);
+
+                List<Plant> plants = plantManager.getAll();
+                Log.i("Database", Arrays.toString(plants.toArray()));
+            }
+        });
+
+
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
