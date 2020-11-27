@@ -1,9 +1,7 @@
-package se.bth.homejungle.ui.plants;
+package se.bth.homejungle.ui.plants.futureplants;
 
-import android.content.ClipData;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.SweepGradient;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -15,19 +13,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.CustomAdapter;
-import se.bth.homejungle.adapter.SwipeItemAdapter;
 
 public class FuturePlantsFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package se.bth.homejungle.ui.plants;
+package se.bth.homejungle.ui.plants.futureplants;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

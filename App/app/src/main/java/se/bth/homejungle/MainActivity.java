@@ -26,20 +26,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
-
-                PlantManager plantManager = db.getPlantManager();
-                Plant newPlant = new Plant("My Plant", "Some description");
-                plantManager.insert(newPlant);
-
-                List<Plant> plants = plantManager.getAll();
-                Log.i("Database", Arrays.toString(plants.toArray()));
-            }
+        AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
+        PlantManager plantManager = db.getPlantManager();
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Plant newPlant = new Plant("My Plant", "Some description");
+            plantManager.insert(newPlant);
         });
-
 
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);

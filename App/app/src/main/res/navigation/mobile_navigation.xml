@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_plant"
-        android:name="se.bth.homejungle.ui.plants.YourPlantsFragment"
+        android:name="se.bth.homejungle.ui.plants.yourplants.YourPlantsFragment"
         android:label="@string/title_your_plants"
         tools:layout="@layout/fragment_your_plants" >
         <action
@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/futurePlantsFragment"
-        android:name="se.bth.homejungle.ui.plants.FuturePlantsFragment"
+        android:name="se.bth.homejungle.ui.plants.futureplants.FuturePlantsFragment"
         android:label="@string/title_future_plants" />
     <fragment
         android:id="@+id/testPlantFragment"

@@ -4,8 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -16,6 +14,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.SwipeAdapter;
+import se.bth.homejungle.ui.plants.futureplants.FuturePlantsFragment;
+import se.bth.homejungle.ui.plants.yourplants.YourPlantsFragment;
 
 
 public class HomeFragment extends Fragment {

@@ -15,10 +15,10 @@ public interface SpeciesManager {
     List<Species> getAll();
 
     @Query("SELECT * FROM species WHERE category LIKE :category")
-    List<Species> getAllByCategory(int category);
+    List<Species> getAllByCategory(String category);
 
     @Query("SELECT * FROM species WHERE name LIKE :name")
-    List<Species> getAllByName(int name);
+    List<Species> getAllByName(String name);
 
     @Query("SELECT * FROM species WHERE id = :id LIMIT 1")
     Species findById(int id);
