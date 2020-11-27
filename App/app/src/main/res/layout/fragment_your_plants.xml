@@ -37,17 +37,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:divider="@null"
-        android:dividerHeight="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line">
-
-    </ListView>
+        app:layout_constraintTop_toBottomOf="@+id/line" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

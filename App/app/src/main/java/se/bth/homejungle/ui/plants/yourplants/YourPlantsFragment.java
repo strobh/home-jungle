@@ -24,15 +24,23 @@ import se.bth.homejungle.adapter.YourPlantsListAdapter;
 
 public class YourPlantsFragment extends Fragment {
 
-    ListView listView;
     ImageButton add_button;
-
 
     private YourPlantsViewModel plantViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         plantViewModel = new ViewModelProvider(this).get(YourPlantsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_your_plants, container, false);
+
+        RecyclerView recyclerView = root.findViewById(R.id.idRecyclerView);
+        final YourPlantsListAdapter adapter = new YourPlantsListAdapter(new YourPlantsListAdapter.PlantDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        plantViewModel.getPlants().observe(getViewLifecycleOwner(), plants -> {
+            adapter.submitList(plants);
+        });
+
 
         add_button = root.findViewById(R.id.btn_add);
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -41,11 +49,6 @@ public class YourPlantsFragment extends Fragment {
                 Navigation.findNavController(root).navigate(R.id.navigation_database);
             }
         });
-
-        RecyclerView recyclerView = root.findViewById(R.id.idRecyclerView);
-        final YourPlantsListAdapter adapter = new YourPlantsListAdapter(new YourPlantsListAdapter.PlantDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         /*recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
