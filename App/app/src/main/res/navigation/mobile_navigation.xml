@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="se.bth.homejungle.ui.plants.PlantFragment"
-        android:label="@string/title_plants"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_plant"
+        android:name="se.bth.homejungle.ui.plants.YourPlantsFragment"
+        android:label="@string/title_your_plants"
+        tools:layout="@layout/fragment_your_plants" >
+        <action
+            android:id="@+id/openSinglePlantView"
+            app:destination="@id/testPlantFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_database"
@@ -32,4 +36,22 @@
         android:name="se.bth.homejungle.ui.marketplace.Marketplace"
         android:label="@string/title_marketplace"
         tools:layout="@layout/fragment_marketplace" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="se.bth.homejungle.ui.plants.HomeFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/futurePlantsFragment"
+        android:name="se.bth.homejungle.ui.plants.FuturePlantsFragment"
+        android:label="@string/title_future_plants" />
+    <fragment
+        android:id="@+id/testPlantFragment"
+        android:name="se.bth.homejungle.ui.plants.TestPlantFragment"
+        android:label="fragment_test_plant"
+        tools:layout="@layout/fragment_test_plant" />
+    <fragment
+        android:id="@+id/databaseListFragment"
+        android:name="se.bth.homejungle.ui.database.DatabaseListFragment"
+        android:label="@string/title_list_database" />
 </navigation>
