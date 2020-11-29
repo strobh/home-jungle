@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 import java.util.Objects;
 
-@Entity
+@Entity(tableName = "species")
 public class Species {
 
     @PrimaryKey(autoGenerate = true)

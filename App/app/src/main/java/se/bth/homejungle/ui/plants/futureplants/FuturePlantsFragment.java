@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +22,12 @@ import com.google.android.material.snackbar.Snackbar;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.CustomAdapter;
+import se.bth.homejungle.adapter.FuturePlantsAdapter;
+import se.bth.homejungle.adapter.YourPlantsListAdapter;
+import se.bth.homejungle.ui.plants.yourplants.YourPlantsViewModel;
 
 public class FuturePlantsFragment extends Fragment {
 
- //   ListView listView;
     RecyclerView recyclerView;
     ImageButton add_button;
 
@@ -33,13 +36,20 @@ public class FuturePlantsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         futurePlantsViewModel = new ViewModelProvider(this).get(FuturePlantsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_future_plants, container, false);
 
-   /*     listView = (ListView) root.findViewById(R.id.idListView);
-        ListAdapter listAdapter = new FuturePlantsAdapter(getActivity(), futurePlantsViewModel.getPlantnames(), futurePlantsViewModel.getPlantdate(), futurePlantsViewModel.getImgid());
-        listView.setAdapter(listAdapter);*/
+        recyclerView = root.findViewById(R.id.idRecyclerView);
+        final FuturePlantsAdapter adapter = new FuturePlantsAdapter(new FuturePlantsAdapter.PlantDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        futurePlantsViewModel.getFuturePlantsWithSpecies().observe(getViewLifecycleOwner(), plants -> {
+            Log.v("Database", "Future plants: " + plants.size());
+            adapter.submitList(plants);
+        });
+
+
 
         add_button = (ImageButton) root.findViewById(R.id.btn_add);
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -48,14 +58,6 @@ public class FuturePlantsFragment extends Fragment {
                 Navigation.findNavController(root).navigate(R.id.navigation_database);
             }
         });
-
-
-        CustomAdapter customAdapter = new CustomAdapter(futurePlantsViewModel.getPlantnames(), futurePlantsViewModel.getPlantdate(), futurePlantsViewModel.getImgid());
-
-        recyclerView = (RecyclerView) root.findViewById(R.id.idRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter((RecyclerView.Adapter) customAdapter);
-
 
      //   ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemAdapter(customAdapter));
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

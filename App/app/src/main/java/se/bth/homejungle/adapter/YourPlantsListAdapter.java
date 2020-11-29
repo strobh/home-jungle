@@ -11,7 +11,6 @@ import java.util.Objects;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.yourplants.PlantListItem;
 
-
 public class YourPlantsListAdapter extends ListAdapter<PlantWithSpecies, PlantListItem> {
 
     public YourPlantsListAdapter(@NonNull DiffUtil.ItemCallback<PlantWithSpecies> diffCallback) {

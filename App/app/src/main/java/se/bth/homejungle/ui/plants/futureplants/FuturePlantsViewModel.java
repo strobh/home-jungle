@@ -1,37 +1,38 @@
 package se.bth.homejungle.ui.plants.futureplants;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.entity.FuturePlant;
+import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
+import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.repository.FuturePlantRepository;
+import se.bth.homejungle.storage.repository.PlantRepository;
 
-public class FuturePlantsViewModel extends ViewModel {
+public class FuturePlantsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<String> mText;
+    private final FuturePlantRepository futurePlantRepository;
+    private final LiveData<List<FuturePlantWithSpecies>> futurePlantsWithSpecies;
 
-    String[] plantnames = {"Cactus", "Flower", "Plant"};
-    String[] plantdate = {"May-April", "June", "September"};
-    Integer[] imgid = {R.drawable.plant1, R.drawable.plant2, R.drawable.plant3};
-
-    public FuturePlantsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+    public FuturePlantsViewModel(Application application) {
+        super(application);
+        futurePlantRepository = new FuturePlantRepository(application);
+        futurePlantsWithSpecies = futurePlantRepository.getFuturePlantsWithSpecies();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<FuturePlantWithSpecies>> getFuturePlantsWithSpecies() {
+        return futurePlantsWithSpecies;
     }
 
-    public String[] getPlantnames(){
-        return plantnames;
-    }
-
-    public String[] getPlantdate(){
-        return plantdate;
-    }
-
-    public Integer[] getImgid(){
-        return imgid;
+    public void insert(FuturePlant plant) {
+        futurePlantRepository.insert(plant);
     }
 }

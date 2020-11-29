@@ -1,6 +1,7 @@
 package se.bth.homejungle.ui.plants.yourplants;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class YourPlantsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         plantViewModel.getPlantsWithSpecies().observe(getViewLifecycleOwner(), plants -> {
+            Log.v("Database", "Your plants: " + plants.size());
             adapter.submitList(plants);
         });
 

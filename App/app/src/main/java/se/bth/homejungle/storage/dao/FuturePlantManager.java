@@ -14,11 +14,11 @@ import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
 
 @Dao
 public interface FuturePlantManager {
-    @Query("SELECT * FROM future_plant ORDER BY description")
+    @Query("SELECT * FROM future_plant")
     LiveData<List<FuturePlant>> getFuturePlants();
 
     @Transaction
-    @Query("SELECT * FROM future_plant ORDER BY description")
+    @Query("SELECT * FROM future_plant")
     LiveData<List<FuturePlantWithSpecies>> getFuturePlantsWithSpecies();
 
     @Query("SELECT * FROM future_plant WHERE id = :id LIMIT 1")

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 import se.bth.homejungle.storage.converter.DateConverter;
 
-@Entity
+@Entity(tableName = "plant")
 @TypeConverters(DateConverter.class)
 public class Plant {
 

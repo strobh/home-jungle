@@ -1,6 +1,7 @@
 package se.bth.homejungle.storage.repository;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -33,7 +34,11 @@ public class PlantRepository {
     }
 
     public void insert(Plant plant) {
-        AppDatabase.databaseWriteExecutor.execute(() -> plantManager.insert(plant));
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            long id = plantManager.insert(plant);
+            System.out.println("Plant was added: " + id);
+            Log.v("PlantDatabase", "Plant was added: " + id);
+        });
     }
 
     public void delete(Plant plant) {
