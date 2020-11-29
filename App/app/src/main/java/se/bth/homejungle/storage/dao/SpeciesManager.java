@@ -1,5 +1,6 @@
 package se.bth.homejungle.storage.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -12,19 +13,19 @@ import se.bth.homejungle.storage.entity.Species;
 @Dao
 public interface SpeciesManager {
     @Query("SELECT * FROM species")
-    List<Species> getAll();
+    LiveData<List<Species>> getSpecies();
 
     @Query("SELECT * FROM species WHERE category LIKE :category")
-    List<Species> getAllByCategory(String category);
+    LiveData<List<Species>> getAllByCategory(String category);
 
     @Query("SELECT * FROM species WHERE name LIKE :name")
-    List<Species> getAllByName(String name);
+    LiveData<List<Species>> getAllByName(String name);
 
     @Query("SELECT * FROM species WHERE id = :id LIMIT 1")
-    Species findById(int id);
+    LiveData<Species> findById(long id);
 
     @Insert
-    void insert(Species species);
+    long insert(Species species);
 
     @Delete
     void delete(Species species);

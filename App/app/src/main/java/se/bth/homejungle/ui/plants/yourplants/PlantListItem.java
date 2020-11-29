@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.format.DateTimeFormatter;
+
 import se.bth.homejungle.R;
-import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
 
 public class PlantListItem extends RecyclerView.ViewHolder {
 
@@ -28,9 +30,11 @@ public class PlantListItem extends RecyclerView.ViewHolder {
         plant_img = itemView.findViewById(R.id.plant_img);
     }
 
-    public void bind(Plant plant) {
-        plant_name.setText(plant.name);
-        plant_desc.setText(plant.description);
+    public void bind(PlantWithSpecies plantWithSpecies) {
+        plant_name.setText(plantWithSpecies.getSpecies().getName());
+        plant_desc.setText(plantWithSpecies.getPlant().getDescription());
+        water_amount.setText(plantWithSpecies.getSpecies().getWater() + " l");
+        water_time.setText(plantWithSpecies.getNextWateringDate().format(DateTimeFormatter.ISO_DATE));
         // TODO: finish
     }
 

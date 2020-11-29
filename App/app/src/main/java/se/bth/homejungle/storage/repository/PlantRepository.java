@@ -9,6 +9,7 @@ import java.util.List;
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.dao.PlantManager;
 import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
 
 public class PlantRepository {
 
@@ -19,11 +20,15 @@ public class PlantRepository {
         this.plantManager = db.getPlantManager();
     }
 
-    public LiveData<List<Plant>> getAll() {
-        return plantManager.getAll();
+    public LiveData<List<Plant>> getPlants() {
+        return plantManager.getPlants();
     }
 
-    public LiveData<Plant> findById(int id) {
+    public LiveData<List<PlantWithSpecies>> getPlantsWithSpecies() {
+        return plantManager.getPlantsWithSpecies();
+    }
+
+    public LiveData<Plant> findById(long id) {
         return plantManager.findById(id);
     }
 

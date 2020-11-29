@@ -8,21 +8,22 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.storage.repository.PlantRepository;
 
 public class YourPlantsViewModel extends AndroidViewModel {
 
     private final PlantRepository plantRepository;
-    private final LiveData<List<Plant>> plants;
+    private final LiveData<List<PlantWithSpecies>> plantsWithSpecies;
 
     public YourPlantsViewModel(Application application) {
         super(application);
         plantRepository = new PlantRepository(application);
-        plants = plantRepository.getAll();
+        plantsWithSpecies = plantRepository.getPlantsWithSpecies();
     }
 
-    public LiveData<List<Plant>> getPlants() {
-        return plants;
+    public LiveData<List<PlantWithSpecies>> getPlantsWithSpecies() {
+        return plantsWithSpecies;
     }
 
     public void insert(Plant plant) {

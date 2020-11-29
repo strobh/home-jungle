@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -37,7 +36,7 @@ public class YourPlantsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        plantViewModel.getPlants().observe(getViewLifecycleOwner(), plants -> {
+        plantViewModel.getPlantsWithSpecies().observe(getViewLifecycleOwner(), plants -> {
             adapter.submitList(plants);
         });
 

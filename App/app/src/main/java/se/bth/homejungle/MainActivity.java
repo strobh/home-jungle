@@ -1,24 +1,20 @@
 package se.bth.homejungle;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.room.Room;
 
-import java.util.Arrays;
-import java.util.List;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.dao.PlantManager;
+import se.bth.homejungle.storage.dao.SpeciesManager;
 import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.storage.entity.Species;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,8 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
         AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
         PlantManager plantManager = db.getPlantManager();
+        SpeciesManager speciesManager = db.getSpeciesManager();
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            Plant newPlant = new Plant("My Plant", "Some description");
+            Species species = new Species("Ficus", "Ficus category", "Nice tree for home", "Plant it", 0.5, 3, 5);
+            long speciesId = speciesManager.insert(species);
+
+            Plant newPlant = new Plant(speciesId,  "Ficus in living room");
             plantManager.insert(newPlant);
         });
 

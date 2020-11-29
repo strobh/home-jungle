@@ -2,17 +2,25 @@ package se.bth.homejungle.storage.converter;
 
 import androidx.room.TypeConverter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DateConverter {
 
     @TypeConverter
-    public static Date toDate(Long timestamp) {
-        return timestamp == null ? null: new Date(timestamp);
+    public static LocalDate toLocalDate(String dateString) {
+        if (dateString == null) {
+            return null;
+        } else {
+            return LocalDate.parse(dateString);
+        }
     }
 
     @TypeConverter
-    public static Long fromDate(Date date) {
-        return date == null ? null : date.getTime();
+    public static String fromLocalDate(LocalDate date) {
+        if (date == null) {
+            return null;
+        } else {
+            return date.toString();
+        }
     }
 }

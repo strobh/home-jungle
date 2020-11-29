@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 

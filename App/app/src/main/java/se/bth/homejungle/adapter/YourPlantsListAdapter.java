@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.ListAdapter;
 
 import java.util.Objects;
 
-import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.yourplants.PlantListItem;
 
 
-public class YourPlantsListAdapter extends ListAdapter<Plant, PlantListItem> {
+public class YourPlantsListAdapter extends ListAdapter<PlantWithSpecies, PlantListItem> {
 
-    public YourPlantsListAdapter(@NonNull DiffUtil.ItemCallback<Plant> diffCallback) {
+    public YourPlantsListAdapter(@NonNull DiffUtil.ItemCallback<PlantWithSpecies> diffCallback) {
         super(diffCallback);
     }
 
@@ -25,18 +25,18 @@ public class YourPlantsListAdapter extends ListAdapter<Plant, PlantListItem> {
 
     @Override
     public void onBindViewHolder(PlantListItem holder, int position) {
-        Plant currentPlant = getItem(position);
+        PlantWithSpecies currentPlant = getItem(position);
         holder.bind(currentPlant);
     }
 
-    public static class PlantDiff extends DiffUtil.ItemCallback<Plant> {
+    public static class PlantDiff extends DiffUtil.ItemCallback<PlantWithSpecies> {
         @Override
-        public boolean areItemsTheSame(@NonNull Plant oldItem, @NonNull Plant newItem) {
+        public boolean areItemsTheSame(@NonNull PlantWithSpecies oldItem, @NonNull PlantWithSpecies newItem) {
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Plant oldItem, @NonNull Plant newItem) {
+        public boolean areContentsTheSame(@NonNull PlantWithSpecies oldItem, @NonNull PlantWithSpecies newItem) {
             return Objects.equals(oldItem, newItem);
         }
     }

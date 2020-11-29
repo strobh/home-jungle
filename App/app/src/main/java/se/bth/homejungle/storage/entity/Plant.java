@@ -5,7 +5,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 import se.bth.homejungle.storage.converter.DateConverter;
 
@@ -14,19 +15,64 @@ import se.bth.homejungle.storage.converter.DateConverter;
 public class Plant {
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
-    @ColumnInfo(name="name")
-    public String name;
+    @ColumnInfo(name = "species_id")
+    public long speciesId;
 
-    @ColumnInfo(name="description")
+    @ColumnInfo(name = "description")
     public String description;
 
-    @ColumnInfo(name="last_watered")
-    public Date lastWatered;
+    @ColumnInfo(name = "last_watered")
+    public LocalDate lastWatered;
 
-    public Plant(String name, String description) {
-        this.name = name;
+    public Plant(long speciesId, String description) {
+        this.speciesId = speciesId;
         this.description = description;
+        this.lastWatered = LocalDate.now();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public long getSpeciesId() {
+        return speciesId;
+    }
+
+    public void setSpeciesId(long speciesId) {
+        this.speciesId = speciesId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getLastWatered() {
+        return lastWatered;
+    }
+
+    public void setLastWatered(LocalDate lastWatered) {
+        this.lastWatered = lastWatered;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plant plant = (Plant) o;
+        return id == plant.id &&
+                speciesId == plant.speciesId &&
+                Objects.equals(description, plant.description) &&
+                Objects.equals(lastWatered, plant.lastWatered);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, speciesId, description, lastWatered);
     }
 }
