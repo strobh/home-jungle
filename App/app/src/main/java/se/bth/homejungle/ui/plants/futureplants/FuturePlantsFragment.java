@@ -74,9 +74,6 @@ public class FuturePlantsFragment extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 // Remove item from backing list here
-                //futurePlantsViewModel.delete();
-
-
                 int itemPosition = viewHolder.getAdapterPosition();
                 futurePlantsViewModel.getFuturePlantsWithSpecies().observe(getViewLifecycleOwner(), plants -> {
                     Log.v("Delete: ", plants.get(itemPosition).getFuturePlant().getDescription());
