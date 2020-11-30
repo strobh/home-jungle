@@ -1,4 +1,4 @@
-package se.bth.homejungle.ui.database;
+package se.bth.homejungle.ui.database.categories;
 
 import android.app.Application;
 

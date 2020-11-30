@@ -5,17 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.DatabaseView;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.DatabaseAdapter;
-import se.bth.homejungle.ui.database.DatabaseViewModel;
 
 
 public class DatabaseListFragment extends Fragment {

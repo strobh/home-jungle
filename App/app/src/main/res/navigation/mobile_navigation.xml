@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_database"
-        android:name="se.bth.homejungle.ui.database.DatabaseFragment"
+        android:name="se.bth.homejungle.ui.database.categories.DatabaseFragment"
         android:label="@string/title_database"
         tools:layout="@layout/fragment_dashboard" >
         <argument
@@ -71,5 +71,8 @@
         <action
             android:id="@+id/database_to_plantpage"
             app:destination="@id/testPlantFragment" />
+        <argument
+            android:name="category_id"
+            app:argType="long" />
     </fragment>
 </navigation>

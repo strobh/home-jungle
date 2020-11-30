@@ -17,7 +17,7 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
 
     public MarketplaceListItem(@NonNull View itemView) {
         super(itemView);
-        plant_name = itemView.findViewById(R.id.plant_name);
+        plant_name = itemView.findViewById(R.id.category_name);
         user_name = itemView.findViewById(R.id.user_name);
         distance = itemView.findViewById(R.id.distance);
         itemView.setOnClickListener(this);

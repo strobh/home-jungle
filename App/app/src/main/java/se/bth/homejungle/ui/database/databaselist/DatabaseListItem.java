@@ -23,8 +23,8 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
 
     public DatabaseListItem(@NonNull View itemView) {
         super(itemView);
-        plant_name = itemView.findViewById(R.id.plant_name);
-        plant_img = itemView.findViewById(R.id.plant_img);
+        plant_name = itemView.findViewById(R.id.category_name);
+        plant_img = itemView.findViewById(R.id.category_img);
         itemView.setOnClickListener(this);
     }
 
