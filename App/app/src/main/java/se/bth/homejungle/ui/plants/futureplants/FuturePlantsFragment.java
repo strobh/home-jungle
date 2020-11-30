@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,8 @@ import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.CustomAdapter;
 import se.bth.homejungle.adapter.FuturePlantsAdapter;
 import se.bth.homejungle.adapter.YourPlantsListAdapter;
+import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
+import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 import se.bth.homejungle.ui.plants.yourplants.YourPlantsViewModel;
 
 public class FuturePlantsFragment extends Fragment {
@@ -49,15 +52,15 @@ public class FuturePlantsFragment extends Fragment {
             adapter.submitList(plants);
         });
 
-
-
-        add_button = (ImageButton) root.findViewById(R.id.btn_add);
+        add_button = root.findViewById(R.id.btn_add);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(root).navigate(R.id.navigation_database);
+                NavDirections action = HomeFragmentDirections.homeToDatabase(2);
+                Navigation.findNavController(root).navigate(action);
             }
         });
+
 
      //   ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemAdapter(customAdapter));
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -71,10 +74,20 @@ public class FuturePlantsFragment extends Fragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 // Remove item from backing list here
-                View customView = inflater.inflate(R.layout.popup_window, null);
-            //    PopupWindow mPopupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-             //   mPopupWindow.showAtLocation(getView(), Gravity.CENTER,0,0);
-             //   customAdapter.notifyDataSetChanged();
+                //futurePlantsViewModel.delete();
+
+
+                int itemPosition = viewHolder.getAdapterPosition();
+                futurePlantsViewModel.getFuturePlantsWithSpecies().observe(getViewLifecycleOwner(), plants -> {
+                    Log.v("Delete: ", plants.get(itemPosition).getFuturePlant().getDescription());
+                    long plant_id = plants.get(itemPosition).getFuturePlant().getId();
+                    futurePlantsViewModel.delete(plant_id);
+                });
+
+             /*   View customView = inflater.inflate(R.layout.popup_window, null);
+                PopupWindow mPopupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                mPopupWindow.showAtLocation(getView(), Gravity.CENTER,0,0);
+                customAdapter.notifyDataSetChanged();*/
                 showUndoSnackbar();
             }
 

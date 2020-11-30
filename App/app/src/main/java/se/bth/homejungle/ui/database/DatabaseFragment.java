@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import se.bth.homejungle.R;
 
 public class DatabaseFragment extends Fragment {
+    TextView direction;
 
     private DatabaseViewModel databaseViewModel;
 
@@ -22,14 +23,27 @@ public class DatabaseFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         databaseViewModel =
                 new ViewModelProvider(this).get(DatabaseViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-     /*   databaseViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+        View root = inflater.inflate(R.layout.fragment_database, container, false);
+        direction = root.findViewById(R.id.direction);
+
+        //TODO try catch not the best way to handle this!
+        int origin = 0;
+        try {
+            origin = DatabaseFragmentArgs.fromBundle(getArguments()).getDirection();
+        }  catch (Exception e) {
+            origin = 0;
+        }
+        switch (origin){
+            case 1:
+                direction.setText("From YourPlants");
+                break;
+            case 2:
+                direction.setText("From FuturePlants");
+                break;
+            default:
+                direction.setText("From anywhere else");
+        }
+
         return root;
     }
 }

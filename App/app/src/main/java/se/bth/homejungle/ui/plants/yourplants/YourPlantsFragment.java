@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import java.io.OutputStreamWriter;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.YourPlantsListAdapter;
+import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
 public class YourPlantsFragment extends Fragment {
 
@@ -42,12 +44,12 @@ public class YourPlantsFragment extends Fragment {
             adapter.submitList(plants);
         });
 
-
         add_button = root.findViewById(R.id.btn_add);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(root).navigate(R.id.navigation_database);
+                NavDirections action = HomeFragmentDirections.homeToDatabase(1);
+                Navigation.findNavController(root).navigate(action);
             }
         });
 

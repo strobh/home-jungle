@@ -15,7 +15,14 @@
         android:id="@+id/navigation_database"
         android:name="se.bth.homejungle.ui.database.DatabaseFragment"
         android:label="@string/title_database"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <argument
+            android:name="direction"
+            app:argType="integer" />
+        <action
+            android:id="@+id/open_category"
+            app:destination="@id/databaseListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_calendar"
@@ -40,6 +47,9 @@
         <action
             android:id="@+id/home_to_plantpage"
             app:destination="@id/testPlantFragment" />
+        <action
+            android:id="@+id/home_to_database"
+            app:destination="@id/navigation_database" />
     </fragment>
     <fragment
         android:id="@+id/futurePlantsFragment"

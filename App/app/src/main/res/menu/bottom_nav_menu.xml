@@ -12,7 +12,7 @@
         android:title="@string/title_calendar" />
 
     <item
-        android:id="@+id/databaseListFragment"
+        android:id="@+id/navigation_database"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_database" />
 

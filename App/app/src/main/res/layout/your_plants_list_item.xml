@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
 
     <TextView
-        android:id="@+id/tv_plant_desc"
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -55,17 +55,17 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_clock"
         app:layout_constraintStart_toEndOf="@+id/plant_img"
-        app:layout_constraintTop_toBottomOf="@+id/tv_plant_desc" />
+        app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
     <TextView
-        android:id="@+id/tv_water_amount"
+        android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/drop_icon"
-        app:layout_constraintTop_toBottomOf="@+id/tv_plant_desc" />
+        app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
     <View
         android:id="@+id/alarm_icon"
@@ -74,8 +74,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_drop"
-        app:layout_constraintStart_toEndOf="@+id/tv_water_amount"
-        app:layout_constraintTop_toBottomOf="@+id/tv_plant_desc" />
+        app:layout_constraintStart_toEndOf="@+id/distance"
+        app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
     <TextView
         android:id="@+id/tv_water_time"
@@ -85,6 +85,6 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/alarm_icon"
-        app:layout_constraintTop_toBottomOf="@id/tv_plant_desc" />
+        app:layout_constraintTop_toBottomOf="@id/user_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
