@@ -23,7 +23,7 @@ public class PlantListItem extends RecyclerView.ViewHolder {
 
     public PlantListItem(View itemView) {
         super(itemView);
-        plant_name = itemView.findViewById(R.id.tv_plant_name);
+        plant_name = itemView.findViewById(R.id.plant_name);
         plant_desc = itemView.findViewById(R.id.tv_plant_desc);
         water_amount = itemView.findViewById(R.id.tv_water_amount);
         water_time = itemView.findViewById(R.id.tv_water_time);

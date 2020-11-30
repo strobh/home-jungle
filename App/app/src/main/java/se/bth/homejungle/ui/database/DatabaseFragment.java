@@ -24,12 +24,12 @@ public class DatabaseFragment extends Fragment {
                 new ViewModelProvider(this).get(DatabaseViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
-        databaseViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+     /*   databaseViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        });*/
         return root;
     }
 }

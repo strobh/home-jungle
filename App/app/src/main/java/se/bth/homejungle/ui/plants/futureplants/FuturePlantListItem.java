@@ -22,7 +22,7 @@ public class FuturePlantListItem extends RecyclerView.ViewHolder {
 
     public FuturePlantListItem(View itemView) {
         super(itemView);
-        plant_name = itemView.findViewById(R.id.tv_plant_name);
+        plant_name = itemView.findViewById(R.id.plant_name);
         plant_desc = itemView.findViewById(R.id.tv_plant_desc3);
         plant_date = itemView.findViewById(R.id.plant_date);
         plant_img = itemView.findViewById(R.id.plant_img);

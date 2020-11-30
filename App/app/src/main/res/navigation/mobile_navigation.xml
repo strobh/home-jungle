@@ -52,6 +52,6 @@
         tools:layout="@layout/fragment_test_plant" />
     <fragment
         android:id="@+id/databaseListFragment"
-        android:name="se.bth.homejungle.ui.database.DatabaseListFragment"
+        android:name="se.bth.homejungle.ui.database.databaselist.DatabaseListFragment"
         android:label="@string/title_list_database" />
 </navigation>
