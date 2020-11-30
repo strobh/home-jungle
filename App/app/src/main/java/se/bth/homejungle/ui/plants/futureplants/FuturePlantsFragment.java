@@ -75,11 +75,8 @@ public class FuturePlantsFragment extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 // Remove item from backing list here
                 int itemPosition = viewHolder.getAdapterPosition();
-                futurePlantsViewModel.getFuturePlantsWithSpecies().observe(getViewLifecycleOwner(), plants -> {
-                    Log.v("Delete: ", plants.get(itemPosition).getFuturePlant().getDescription());
-                    long plant_id = plants.get(itemPosition).getFuturePlant().getId();
-                    futurePlantsViewModel.delete(plant_id);
-                });
+                FuturePlantWithSpecies plantWithSpecies = adapter.getByPosition(itemPosition);
+                futurePlantsViewModel.delete(plantWithSpecies.getFuturePlant());
 
              /*   View customView = inflater.inflate(R.layout.popup_window, null);
                 PopupWindow mPopupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);

@@ -36,7 +36,7 @@ public class SpeciesRepository {
     }
 
     public void insert(Species species) {
-        AppDatabase.databaseWriteExecutor.execute(() -> speciesManager.delete(species));
+        AppDatabase.databaseWriteExecutor.execute(() -> speciesManager.insert(species));
     }
 
     public void delete(Species species) {
