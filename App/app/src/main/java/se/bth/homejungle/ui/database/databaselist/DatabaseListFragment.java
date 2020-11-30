@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -37,6 +38,23 @@ public class DatabaseListFragment extends Fragment {
             Log.v("Database:", "Species: " + species.size());
             adapter.submitList(species);
         });
+
+
+
+      //  recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      /*      @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                NavDirections action = YourPlantsFragmentDirections.openSinglePlantView();
+             //   OpenSinglePlantViewAction action = YourPlantsFragmentDirections.OpenSinglePlantView();
+//                HomeFragment parentFragment = (HomeFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.homeFragment);
+
+            //    Navigation.findNavController(root).navigate(R.id.testPlantFragment);
+                NavController navController = Navigation.findNavController(root);
+                Navigation.findNavController(root).navigate(action);
+
+                Toast.makeText(getActivity(), "Item clicked", Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
         return root;
     }

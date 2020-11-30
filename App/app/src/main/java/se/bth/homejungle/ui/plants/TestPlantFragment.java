@@ -16,17 +16,11 @@ public class TestPlantFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         View root = inflater.inflate(R.layout.fragment_test_plant, container, false);
         planttype = root.findViewById(R.id.tv_plant_type);
+        long plantid = TestPlantFragmentArgs.fromBundle(getArguments()).getPlantid();
+        planttype.setText("plantid: " + plantid);
         return root;
     }
-/*
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        String string_planttype = TestPlantFragmentArgs.fromBundle(getArguments()).getTypeOfPlant();
-        planttype.setText(string_planttype);
-    }*/
+
 }

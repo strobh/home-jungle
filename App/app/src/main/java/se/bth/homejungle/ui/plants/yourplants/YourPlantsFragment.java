@@ -51,21 +51,6 @@ public class YourPlantsFragment extends Fragment {
             }
         });
 
-        /*recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                NavDirections action = YourPlantsFragmentDirections.openSinglePlantView();
-             //   OpenSinglePlantViewAction action = YourPlantsFragmentDirections.OpenSinglePlantView();
-//                HomeFragment parentFragment = (HomeFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.homeFragment);
-
-            //    Navigation.findNavController(root).navigate(R.id.testPlantFragment);
-                NavController navController = Navigation.findNavController(root);
-                Navigation.findNavController(root).navigate(action);
-
-                Toast.makeText(getActivity(), "Item clicked", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
         WriteBtn(root);
         ReadBtn(root);
 
