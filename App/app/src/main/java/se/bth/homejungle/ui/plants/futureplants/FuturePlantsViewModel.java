@@ -36,8 +36,7 @@ public class FuturePlantsViewModel extends AndroidViewModel {
         futurePlantRepository.insert(plant);
     }
 
-    public void delete(long plant_id) {
-        LiveData<FuturePlant> plant = futurePlantRepository.findById(plant_id);
-       // futurePlantRepository.delete(plant);
+    public void delete(FuturePlant plant) {
+        futurePlantRepository.delete(plant);
     }
 }

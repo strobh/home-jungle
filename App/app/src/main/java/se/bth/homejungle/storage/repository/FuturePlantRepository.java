@@ -37,6 +37,6 @@ public class FuturePlantRepository {
     }
 
     public void delete(FuturePlant plant) {
-        AppDatabase.databaseWriteExecutor.execute(() -> futurePlantManager.insert(plant));
+        AppDatabase.databaseWriteExecutor.execute(() -> futurePlantManager.delete(plant));
     }
 }

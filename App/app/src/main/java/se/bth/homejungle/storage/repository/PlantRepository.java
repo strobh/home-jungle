@@ -34,11 +34,7 @@ public class PlantRepository {
     }
 
     public void insert(Plant plant) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            long id = plantManager.insert(plant);
-            System.out.println("Plant was added: " + id);
-            Log.v("PlantDatabase", "Plant was added: " + id);
-        });
+        AppDatabase.databaseWriteExecutor.execute(() -> plantManager.insert(plant));
     }
 
     public void delete(Plant plant) {

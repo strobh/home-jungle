@@ -17,6 +17,10 @@ public class YourPlantsListAdapter extends ListAdapter<PlantWithSpecies, PlantLi
         super(diffCallback);
     }
 
+    public PlantWithSpecies getByPosition(int position) {
+        return getCurrentList().get(position);
+    }
+
     @Override
     public PlantListItem onCreateViewHolder(ViewGroup parent, int viewType) {
         return PlantListItem.create(parent);

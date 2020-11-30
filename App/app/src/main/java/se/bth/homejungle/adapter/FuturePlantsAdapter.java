@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
+import java.util.List;
 import java.util.Objects;
 
+import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
 import se.bth.homejungle.ui.plants.futureplants.FuturePlantListItem;
 
@@ -15,6 +17,10 @@ public class FuturePlantsAdapter extends ListAdapter<FuturePlantWithSpecies, Fut
 
     public FuturePlantsAdapter(@NonNull DiffUtil.ItemCallback<FuturePlantWithSpecies> diffCallback) {
         super(diffCallback);
+    }
+
+    public FuturePlantWithSpecies getByPosition(int position) {
+        return getCurrentList().get(position);
     }
 
     @Override
