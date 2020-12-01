@@ -5,24 +5,36 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
+import androidx.room.Update;
 
 import java.util.List;
 
+import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.SpeciesWithCategory;
 
 @Dao
 public interface SpeciesManager {
-    @Query("SELECT * FROM species")
+    @Query("SELECT * FROM species ORDER BY name")
     LiveData<List<Species>> getSpecies();
 
-    @Query("SELECT * FROM species WHERE category LIKE :category")
-    LiveData<List<Species>> getAllByCategory(String category);
+    @Transaction
+    @Query("SELECT * FROM species ORDER BY name")
+    LiveData<List<SpeciesWithCategory>> getSpeciesWithCategory();
 
-    @Query("SELECT * FROM species WHERE name LIKE :name")
-    LiveData<List<Species>> getAllByName(String name);
+    @Query("SELECT * FROM species WHERE category_id = :categoryId ORDER BY name")
+    LiveData<List<Species>> getSpeciesByCategory(long categoryId);
+
+    @Query("SELECT * FROM species WHERE name LIKE :name ORDER BY name")
+    LiveData<List<Species>> getSpeciesByName(String name);
 
     @Query("SELECT * FROM species WHERE id = :id LIMIT 1")
     LiveData<Species> findById(long id);
+
+    @Query("SELECT * FROM species WHERE id = :id LIMIT 1")
+    LiveData<SpeciesWithCategory> findSpeciesWithCategoryById(long id);
 
     @Insert
     long insert(Species species);

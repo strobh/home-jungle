@@ -9,14 +9,16 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import se.bth.homejungle.storage.dao.CategoryManager;
 import se.bth.homejungle.storage.dao.FuturePlantManager;
 import se.bth.homejungle.storage.dao.PlantManager;
 import se.bth.homejungle.storage.dao.SpeciesManager;
 import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.SpeciesCategory;
 
-@Database(entities = {Plant.class, FuturePlant.class, Species.class}, version = 3)
+@Database(entities = {Plant.class, FuturePlant.class, Species.class, SpeciesCategory.class}, version = 4, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     /**
@@ -27,6 +29,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PlantManager getPlantManager();
     public abstract FuturePlantManager getFuturePlantManager();
     public abstract SpeciesManager getSpeciesManager();
+    public abstract CategoryManager getCategoryManager();
 
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =

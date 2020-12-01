@@ -12,11 +12,11 @@ public class Species {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
+    @ColumnInfo(name="category_id")
+    public long categoryId;
+
     @ColumnInfo(name="name")
     public String name;
-
-    @ColumnInfo(name="category")
-    public String category;
 
     @ColumnInfo(name="description")
     public String description;
@@ -33,9 +33,9 @@ public class Species {
     @ColumnInfo(name="sun")
     public double sun;
 
-    public Species(String name, String category, String description, String howToStart, double water, int waterDays, double sun) {
+    public Species(long categoryId, String name, String description, String howToStart, double water, int waterDays, double sun) {
         this.name = name;
-        this.category = category;
+        this.categoryId = categoryId;
         this.description = description;
         this.howToStart = howToStart;
         this.water = water;
@@ -55,12 +55,12 @@ public class Species {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getDescription() {
@@ -109,17 +109,17 @@ public class Species {
         if (o == null || getClass() != o.getClass()) return false;
         Species species = (Species) o;
         return id == species.id &&
+                categoryId == species.categoryId &&
                 Double.compare(species.water, water) == 0 &&
                 waterDays == species.waterDays &&
                 Double.compare(species.sun, sun) == 0 &&
                 Objects.equals(name, species.name) &&
-                Objects.equals(category, species.category) &&
                 Objects.equals(description, species.description) &&
                 Objects.equals(howToStart, species.howToStart);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, category, description, howToStart, water, waterDays, sun);
+        return Objects.hash(id, categoryId, name, description, howToStart, water, waterDays, sun);
     }
 }

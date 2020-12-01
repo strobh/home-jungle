@@ -14,12 +14,14 @@ import java.time.LocalDate;
 import java.util.concurrent.Future;
 
 import se.bth.homejungle.storage.AppDatabase;
+import se.bth.homejungle.storage.dao.CategoryManager;
 import se.bth.homejungle.storage.dao.FuturePlantManager;
 import se.bth.homejungle.storage.dao.PlantManager;
 import se.bth.homejungle.storage.dao.SpeciesManager;
 import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.SpeciesCategory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,24 +30,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
+        CategoryManager categoryManager = db.getCategoryManager();
         SpeciesManager speciesManager = db.getSpeciesManager();
         PlantManager plantManager = db.getPlantManager();
         FuturePlantManager futurePlantManager = db.getFuturePlantManager();
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            Species species = new Species("Ficus", "Ficus category", "Nice tree for home", "Plant it", 0.5, 3, 5);
-            long speciesId = speciesManager.insert(species);
+            SpeciesCategory category1 = new SpeciesCategory("Trees");
+            long categoryTree = categoryManager.insert(category1);
+            SpeciesCategory category2 = new SpeciesCategory("Herbs");
+            categoryManager.insert(category2);
+            SpeciesCategory category3 = new SpeciesCategory("Flowers");
+            long categoryFlower = categoryManager.insert(category3);
 
-            Plant newPlant1 = new Plant(speciesId,  "Living room");
+            Species species1 = new Species(categoryTree, "Ficus", "Nice tree for home", "Plant it", 0.5, 3, 5);
+            long ficusId = speciesManager.insert(species1);
+            Plant newPlant1 = new Plant(ficusId,  "Living room");
+            newPlant1.setLastWatered(LocalDate.now().plusDays(5));
             plantManager.insert(newPlant1);
-            Plant newPlant2 = new Plant(speciesId,  "Kitchen");
+            Plant newPlant2 = new Plant(ficusId,  "Kitchen");
+            newPlant2.setLastWatered(LocalDate.now().plusDays(-4));
             plantManager.insert(newPlant2);
-            Plant newPlant3 = new Plant(speciesId,  "Bathroom");
+            Plant newPlant3 = new Plant(ficusId,  "Bathroom");
             plantManager.insert(newPlant3);
-
-            FuturePlant futurePlant1 = new FuturePlant(speciesId, "For balcony", LocalDate.now().plusMonths(5));
+            FuturePlant futurePlant1 = new FuturePlant(ficusId, "For balcony", LocalDate.now().plusMonths(5));
             futurePlantManager.insert(futurePlant1);
-            FuturePlant futurePlant2 = new FuturePlant(speciesId, "For friends", LocalDate.now().plusMonths(5));
+            FuturePlant futurePlant2 = new FuturePlant(ficusId, "For friends", LocalDate.now().plusMonths(5));
             futurePlantManager.insert(futurePlant2);
+
+            Species species2 = new Species(categoryFlower, "Orchid", "Nice flower for home", "Plant it", 0.2, 5, 2);
+            long orchidId = speciesManager.insert(species2);
+            Plant newPlant4 = new Plant(orchidId,  "Living room");
+            plantManager.insert(newPlant4);
         });
 
         setContentView(R.layout.activity_main);

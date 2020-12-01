@@ -3,15 +3,18 @@ package se.bth.homejungle.storage.converter;
 import androidx.room.TypeConverter;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DateConverter {
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
     @TypeConverter
     public static LocalDate toLocalDate(String dateString) {
         if (dateString == null) {
             return null;
         } else {
-            return LocalDate.parse(dateString);
+            return formatter.parse(dateString, LocalDate::from);
         }
     }
 
@@ -20,7 +23,7 @@ public class DateConverter {
         if (date == null) {
             return null;
         } else {
-            return date.toString();
+            return date.format(formatter);
         }
     }
 }
