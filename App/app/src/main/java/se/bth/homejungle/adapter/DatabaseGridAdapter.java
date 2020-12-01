@@ -12,11 +12,11 @@ import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.ui.database.categories.DatabaseGridItem;
 
 public class DatabaseGridAdapter extends ListAdapter<Species, DatabaseGridItem>{
-    int origin;
+    int source;
 
-    public DatabaseGridAdapter(@NonNull DiffUtil.ItemCallback<Species> diffCallback, int origin) {
+    public DatabaseGridAdapter(@NonNull DiffUtil.ItemCallback<Species> diffCallback, int source) {
         super(diffCallback);
-        this.origin = origin;
+        this.source = source;
     }
 
     @NonNull
@@ -28,7 +28,7 @@ public class DatabaseGridAdapter extends ListAdapter<Species, DatabaseGridItem>{
     @Override
     public void onBindViewHolder(@NonNull DatabaseGridItem holder, int position) {
         Species currentPlant = getItem(position);
-        holder.bind(currentPlant, origin);
+        holder.bind(currentPlant, source);
     }
 
     public static class PlantDiff extends DiffUtil.ItemCallback<Species>{

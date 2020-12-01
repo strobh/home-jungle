@@ -64,4 +64,8 @@ public class DatabaseFragment extends Fragment {
 
         return root;
     }
+
+    public void testMethod(){
+
+    }
 }
