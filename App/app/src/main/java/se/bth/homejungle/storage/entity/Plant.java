@@ -60,6 +60,10 @@ public class Plant {
         this.lastWatered = lastWatered;
     }
 
+    public void waterPlantToday() {
+        this.lastWatered = LocalDate.now();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

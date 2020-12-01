@@ -33,15 +33,19 @@ public class PlantRepository {
         return plantManager.findById(id);
     }
 
+    public LiveData<List<PlantWithSpecies>> getNextWateredPlants() {
+        return plantManager.getNextWateredPlants();
+    }
+
     public void insert(Plant plant) {
         AppDatabase.databaseWriteExecutor.execute(() -> plantManager.insert(plant));
     }
 
-    public void delete(Plant plant) {
-        AppDatabase.databaseWriteExecutor.execute(() -> plantManager.delete(plant));
+    public void update(Plant plant) {
+        AppDatabase.databaseWriteExecutor.execute(() -> plantManager.update(plant));
     }
 
-    public LiveData<List<PlantWithSpecies>> getNextWateredPlants() {
-        return plantManager.getNextWateredPlants();
+    public void delete(Plant plant) {
+        AppDatabase.databaseWriteExecutor.execute(() -> plantManager.delete(plant));
     }
 }

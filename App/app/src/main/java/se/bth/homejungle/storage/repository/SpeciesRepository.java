@@ -9,6 +9,7 @@ import java.util.List;
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.dao.SpeciesManager;
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.SpeciesWithCategory;
 
 public class SpeciesRepository {
 
@@ -23,16 +24,24 @@ public class SpeciesRepository {
         return speciesManager.getSpecies();
     }
 
-    public LiveData<List<Species>> getAllByCategory(String category) {
-        return speciesManager.getAllByCategory(category);
+    public LiveData<List<SpeciesWithCategory>> getSpeciesWithCategory() {
+        return speciesManager.getSpeciesWithCategory();
     }
 
-    public LiveData<List<Species>> getAllByName(String name) {
-        return speciesManager.getAllByName(name);
+    public LiveData<List<Species>> getSpeciesByCategory(long categoryId) {
+        return speciesManager.getSpeciesByCategory(categoryId);
+    }
+
+    public LiveData<List<Species>> getSpeciesByName(String name) {
+        return speciesManager.getSpeciesByName(name);
     }
 
     public LiveData<Species> findById(long id) {
         return speciesManager.findById(id);
+    }
+
+    public LiveData<SpeciesWithCategory> findSpeciesWithCategoryById(long id) {
+        return speciesManager.findSpeciesWithCategoryById(id);
     }
 
     public void insert(Species species) {
