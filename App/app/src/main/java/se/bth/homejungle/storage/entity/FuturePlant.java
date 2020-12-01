@@ -52,12 +52,12 @@ public class FuturePlant {
      *
      * @param speciesId The id of the species of the plant.
      * @param description The description of the plant by which the user can identify it.
-     * @param plantDayOfSpecies The date when the user has to plant the seeds.
+     * @param plantDay The date when the user has to plant the seeds.
      */
-    public FuturePlant(long speciesId, String description, LocalDate plantDayOfSpecies) {
+    public FuturePlant(long speciesId, String description, LocalDate plantDay) {
         this.speciesId = speciesId;
         this.description = description;
-        this.plantDay = calculatePlantDateFromSpecies(plantDayOfSpecies);
+        this.plantDay = calculatePlantDateFromSpecies(plantDay);
     }
 
     /**

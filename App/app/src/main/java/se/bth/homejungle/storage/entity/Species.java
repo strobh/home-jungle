@@ -3,9 +3,12 @@ package se.bth.homejungle.storage.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.time.LocalDate;
 import java.util.Objects;
+
+import se.bth.homejungle.storage.converter.DateConverter;
 
 /**
  * The Species entity class encapsulates a plant species.
@@ -19,6 +22,7 @@ import java.util.Objects;
  * The Android Room Persistence Library automatically creates a database table for this entity.
  */
 @Entity(tableName = "species")
+@TypeConverters(DateConverter.class)
 public class Species {
 
     /**
