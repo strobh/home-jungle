@@ -12,7 +12,6 @@ import java.util.List;
 
 import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
-import se.bth.homejungle.storage.entity.Plant;
 
 @Dao
 public interface FuturePlantManager {

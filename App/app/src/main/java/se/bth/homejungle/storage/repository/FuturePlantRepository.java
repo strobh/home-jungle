@@ -10,11 +10,10 @@ import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.dao.FuturePlantManager;
 import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
-import se.bth.homejungle.storage.entity.Plant;
 
 public class FuturePlantRepository {
 
-    private FuturePlantManager futurePlantManager;
+    private final FuturePlantManager futurePlantManager;
 
     public FuturePlantRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);

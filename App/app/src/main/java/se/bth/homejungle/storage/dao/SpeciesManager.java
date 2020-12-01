@@ -6,12 +6,9 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
-import androidx.room.Update;
 
 import java.util.List;
 
-import se.bth.homejungle.storage.entity.Plant;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.entity.SpeciesWithCategory;
 

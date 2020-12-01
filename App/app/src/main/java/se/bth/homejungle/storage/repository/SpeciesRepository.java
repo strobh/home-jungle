@@ -13,7 +13,7 @@ import se.bth.homejungle.storage.entity.SpeciesWithCategory;
 
 public class SpeciesRepository {
 
-    private SpeciesManager speciesManager;
+    private final SpeciesManager speciesManager;
 
     public SpeciesRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);

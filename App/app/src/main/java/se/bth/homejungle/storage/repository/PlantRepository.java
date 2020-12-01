@@ -1,7 +1,6 @@
 package se.bth.homejungle.storage.repository;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -14,7 +13,7 @@ import se.bth.homejungle.storage.entity.PlantWithSpecies;
 
 public class PlantRepository {
 
-    private PlantManager plantManager;
+    private final PlantManager plantManager;
 
     public PlantRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
