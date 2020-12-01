@@ -52,7 +52,6 @@ public class PlantListItem extends RecyclerView.ViewHolder implements View.OnCli
 
     @Override
     public void onClick(View view) {
-
         NavDirections action = HomeFragmentDirections.homeToPlantpage(plant_id);
         Navigation.findNavController(view).navigate(action);
     }

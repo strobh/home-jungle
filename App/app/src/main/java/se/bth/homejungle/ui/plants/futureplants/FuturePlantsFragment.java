@@ -1,8 +1,6 @@
 package se.bth.homejungle.ui.plants.futureplants;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,13 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import se.bth.homejungle.R;
-import se.bth.homejungle.adapter.CustomAdapter;
 import se.bth.homejungle.adapter.FuturePlantsAdapter;
-import se.bth.homejungle.adapter.YourPlantsListAdapter;
 import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
-import se.bth.homejungle.ui.plants.yourplants.YourPlantsViewModel;
 
 public class FuturePlantsFragment extends Fragment {
 
@@ -63,8 +59,9 @@ public class FuturePlantsFragment extends Fragment {
 
 
      //   ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemAdapter(customAdapter));
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            ColorDrawable background = new ColorDrawable(Color.RED);;
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            FuturePlantWithSpecies deleteItem;
 
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -73,61 +70,39 @@ public class FuturePlantsFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                // Remove item from backing list here
                 int itemPosition = viewHolder.getAdapterPosition();
-                FuturePlantWithSpecies plantWithSpecies = adapter.getByPosition(itemPosition);
-                futurePlantsViewModel.delete(plantWithSpecies.getFuturePlant());
-
-             /*   View customView = inflater.inflate(R.layout.popup_window, null);
-                PopupWindow mPopupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                mPopupWindow.showAtLocation(getView(), Gravity.CENTER,0,0);
-                customAdapter.notifyDataSetChanged();*/
+                deleteItem = adapter.getByPosition(itemPosition);
+                futurePlantsViewModel.delete(deleteItem.getFuturePlant());
                 showUndoSnackbar();
             }
 
-
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                       // .addBackgroundColor(ContextCompat.getColor(getContext(), R.color.red))
+                        .addActionIcon(R.drawable.ic_delete)
+                        .create()
+                        .decorate();
+
                 super.onChildDraw(c, recyclerView, viewHolder, dX,
                         dY, actionState, isCurrentlyActive);
-                View itemView = viewHolder.itemView;
-                int backgroundCornerOffset = 20;
-                if (dX > 0) { // Swiping to the right
-                    background.setBounds(itemView.getLeft(), itemView.getTop(),
-                            itemView.getLeft() + ((int) dX) + backgroundCornerOffset,
-                            itemView.getBottom());
-
-                } else if (dX < 0) { // Swiping to the left
-                    background.setBounds(itemView.getRight() + ((int) dX) - backgroundCornerOffset,
-                            itemView.getTop(), itemView.getRight(), itemView.getBottom());
-                } else { // view is unSwiped
-                    background.setBounds(0, 0, 0, 0);
-                }
-                background.draw(c);
             }
 
             private void showUndoSnackbar() {
                 View view = getActivity().findViewById(R.id.idRecyclerView);
                 Snackbar snackbar = Snackbar.make(view, R.string.snack_bar_text,
                         Snackbar.LENGTH_LONG);
-                snackbar.setAction("Undo", v -> undoDelete());
-      //          snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete());
+                snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete());
                 snackbar.show();
             }
 
             private void undoDelete(){
+                futurePlantsViewModel.insert(deleteItem.getFuturePlant());
                 System.out.println("undo delete!");
             }
-
-          /*  private void undoDelete() {
-                mListItems.add(mRecentlyDeletedItemPosition,
-                        mRecentlyDeletedItem);
-                notifyItemInserted(mRecentlyDeletedItemPosition);
-            }*/
         });
 
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        // Inflate the layout for this fragment
         return root;
     }
 

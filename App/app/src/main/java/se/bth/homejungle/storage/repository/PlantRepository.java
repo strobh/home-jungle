@@ -40,4 +40,8 @@ public class PlantRepository {
     public void delete(Plant plant) {
         AppDatabase.databaseWriteExecutor.execute(() -> plantManager.delete(plant));
     }
+
+    public LiveData<List<PlantWithSpecies>> getNextWateredPlants() {
+        return plantManager.getNextWateredPlants();
+    }
 }

@@ -24,6 +24,9 @@ public interface PlantManager {
     @Query("SELECT * FROM plant WHERE id = :id LIMIT 1")
     LiveData<Plant> findById(long id);
 
+    @Query("SELECT * FROM plant ORDER BY last_watered LIMIT 15")
+    LiveData<List<PlantWithSpecies>> getNextWateredPlants();
+
     @Insert
     long insert(Plant plant);
 

@@ -7,11 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.database.DatabaseUtilsCompat;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.adapter.DatabaseAdapter;
 import se.bth.homejungle.storage.entity.Species;
 
 
@@ -20,6 +22,7 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
     ImageView category_img;
     TextView category_name;
     long category_id;
+    int source;
 
     public DatabaseGridItem(@NonNull View itemView) {
         super(itemView);
@@ -28,9 +31,10 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
         itemView.setOnClickListener(this);
     }
 
-    public void bind(Species currentCategory){
+    public void bind(Species currentCategory, int source){
         category_name.setText(currentCategory.getName());
         category_id = currentCategory.getId();
+        this.source = source;
     }
 
     public static DatabaseGridItem create(ViewGroup parent){
@@ -42,7 +46,8 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
     @Override
     //TODO: implement category ID
     public void onClick(View view) {
-        NavDirections action = DatabaseFragmentDirections.openCategory(1);
+        long category_id = 1;
+        NavDirections action = DatabaseFragmentDirections.openCategory(category_id, source);
         Navigation.findNavController(view).navigate(action);
     }
 }

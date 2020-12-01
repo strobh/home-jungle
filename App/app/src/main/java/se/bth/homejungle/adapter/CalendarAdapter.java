@@ -9,25 +9,22 @@ import androidx.recyclerview.widget.ListAdapter;
 import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
-import se.bth.homejungle.ui.plants.yourplants.PlantListItem;
+import se.bth.homejungle.ui.calendar.CalendarListItem;
 
-public class YourPlantsListAdapter extends ListAdapter<PlantWithSpecies, PlantListItem> {
+public class CalendarAdapter extends ListAdapter<PlantWithSpecies, CalendarListItem> {
 
-    public YourPlantsListAdapter(@NonNull DiffUtil.ItemCallback<PlantWithSpecies> diffCallback) {
+    public CalendarAdapter(DiffUtil.ItemCallback<PlantWithSpecies> diffCallback){
         super(diffCallback);
     }
 
-    public PlantWithSpecies getByPosition(int position) {
-        return getCurrentList().get(position);
+    @NonNull
+    @Override
+    public CalendarListItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return CalendarListItem.create(parent);
     }
 
     @Override
-    public PlantListItem onCreateViewHolder(ViewGroup parent, int viewType) {
-        return PlantListItem.create(parent);
-    }
-
-    @Override
-    public void onBindViewHolder(PlantListItem holder, int position) {
+    public void onBindViewHolder(@NonNull CalendarListItem holder, int position) {
         PlantWithSpecies currentPlant = getItem(position);
         holder.bind(currentPlant);
     }

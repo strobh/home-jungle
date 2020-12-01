@@ -1,6 +1,7 @@
 package se.bth.homejungle.ui.calendar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,25 +12,32 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.adapter.CalendarAdapter;
 
 public class CalendarFragment extends Fragment {
 
+    RecyclerView recyclerView;
     private CalendarViewModel calendarViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        calendarViewModel =
-                new ViewModelProvider(this).get(CalendarViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        calendarViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
+        calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_calendar, container, false);
+        recyclerView = root.findViewById(R.id.idRecyclerView);
+
+        final CalendarAdapter adapter = new CalendarAdapter(new CalendarAdapter.PlantDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        calendarViewModel.getPlantsWithSpecies().observe(getViewLifecycleOwner(), plantWithSpecies -> {
+            Log.v("Database", "Calendar: " + plantWithSpecies.size());
+            adapter.submitList(plantWithSpecies);
         });
+
         return root;
     }
 }

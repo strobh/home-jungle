@@ -31,23 +31,15 @@ public class DatabaseFragment extends Fragment {
         direction = root.findViewById(R.id.direction);
         recyclerView = root.findViewById(R.id.idRecyclerView);
 
-        final DatabaseGridAdapter adapter = new DatabaseGridAdapter(new DatabaseGridAdapter.PlantDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
-        databaseViewModel.getSpecies().observe(getViewLifecycleOwner(), species -> {
-            Log.v("Database:", "Grid-Species: " + species.size());
-            adapter.submitList(species);
-        });
 
         //TODO try catch not the best way to handle this!
-        int origin = 0;
+        int source = 0;
         try {
-            origin = DatabaseFragmentArgs.fromBundle(getArguments()).getDirection();
+            source = DatabaseFragmentArgs.fromBundle(getArguments()).getSource();
         }  catch (Exception e) {
-            origin = 0;
+            source = 0;
         }
-        switch (origin){
+        switch (source){
             case 1:
                 direction.setText("From YourPlants");
                 break;
@@ -57,6 +49,18 @@ public class DatabaseFragment extends Fragment {
             default:
                 direction.setText("From anywhere else");
         }
+
+        final DatabaseGridAdapter adapter = new DatabaseGridAdapter(new DatabaseGridAdapter.PlantDiff(), source);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+        databaseViewModel.getSpecies().observe(getViewLifecycleOwner(), species -> {
+            Log.v("Database:", "Grid-Species: " + species.size());
+            adapter.submitList(species);
+        });
+
+
+
 
         return root;
     }

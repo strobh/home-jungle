@@ -1,5 +1,6 @@
 package se.bth.homejungle.ui.plants.yourplants;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,22 +13,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import com.google.android.material.snackbar.Snackbar;
 
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import se.bth.homejungle.R;
-import se.bth.homejungle.adapter.YourPlantsListAdapter;
+import se.bth.homejungle.adapter.YourPlantsAdapter;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
 public class YourPlantsFragment extends Fragment {
 
     ImageButton add_button;
-
     private YourPlantsViewModel plantViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class YourPlantsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_your_plants, container, false);
 
         RecyclerView recyclerView = root.findViewById(R.id.idRecyclerView);
-        final YourPlantsListAdapter adapter = new YourPlantsListAdapter(new YourPlantsListAdapter.PlantDiff());
+        final YourPlantsAdapter adapter = new YourPlantsAdapter(new YourPlantsAdapter.PlantDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -53,54 +53,53 @@ public class YourPlantsFragment extends Fragment {
             }
         });
 
-        WriteBtn(root);
-        ReadBtn(root);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            PlantWithSpecies deleteItem;
 
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int itemPosition = viewHolder.getAdapterPosition();
+                deleteItem = adapter.getByPosition(itemPosition);
+                plantViewModel.delete(deleteItem.getPlant());
+                showUndoSnackbar();
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        // .addBackgroundColor(ContextCompat.getColor(getContext(), R.color.red))
+                        .addActionIcon(R.drawable.ic_delete)
+                        .create()
+                        .decorate();
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX,
+                        dY, actionState, isCurrentlyActive);
+            }
+
+            public void showUndoSnackbar(){
+                Snackbar snackbar = Snackbar.make(recyclerView, R.string.snack_bar_text, Snackbar.LENGTH_SHORT);
+                snackbar.setAction(R.string.snack_bar_undo, v->undoDelete());
+                snackbar.show();
+            }
+
+            public void undoDelete(){
+                plantViewModel.insert(deleteItem.getPlant());
+            }
+        });
+
+        itemTouchHelper.attachToRecyclerView(recyclerView);
         return root;
     }
 
-    // write text to file
-    public void WriteBtn(View v) {
-        // add-write text into file
-        try {
-            FileOutputStream fileout = getActivity().openFileOutput("your_plants.txt", getActivity().MODE_PRIVATE);
-            OutputStreamWriter outputWriter=new OutputStreamWriter(fileout);
-            outputWriter.write("name");
-            outputWriter.close();
-
-            //display file saved message
-            /*Toast.makeText(getBaseContext(), "File saved successfully!",
-                    Toast.LENGTH_SHORT).show();*/
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void ReadBtn(View v) {
-     //   TextView textmsg = v.findViewById(R.id.textmsg);
-        //reading text from file
-        try {
-            FileInputStream fileIn = getActivity().openFileInput("your_plants.txt");
-            InputStreamReader InputRead = new InputStreamReader(fileIn);
-
-            char[] inputBuffer = new char[100];
-            String s = "";
-            int charRead;
-
-            while ((charRead = InputRead.read(inputBuffer)) > 0) {
-                // char to string conversion
-                String readstring = String.copyValueOf(inputBuffer, 0, charRead);
-                s += readstring;
-            }
-            InputRead.close();
-       //     textmsg.setText(s);
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
+
 
 
 }

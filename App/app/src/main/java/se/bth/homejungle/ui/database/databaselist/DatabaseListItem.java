@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,10 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
         plant_name = itemView.findViewById(R.id.category_name);
         plant_img = itemView.findViewById(R.id.category_img);
         itemView.setOnClickListener(this);
+        ImageButton add_button = itemView.findViewById(R.id.btn_add);
+       /* add_button.setOnClickListener(new View.OnClickListener(){
+
+        });*/
     }
 
     public void bind(Species currentPlant) {

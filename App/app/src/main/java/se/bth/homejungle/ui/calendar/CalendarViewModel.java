@@ -1,19 +1,28 @@
 package se.bth.homejungle.ui.calendar;
 
+import android.app.Application;
+import android.database.sqlite.SQLiteConstraintException;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class CalendarViewModel extends ViewModel {
+import java.util.List;
 
-    private MutableLiveData<String> mText;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.repository.PlantRepository;
 
-    public CalendarViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+public class CalendarViewModel extends AndroidViewModel {
+
+    private final PlantRepository plantRepository;
+    private final LiveData<List<PlantWithSpecies>> plantsWithSpecies;
+
+    public CalendarViewModel(Application application) {
+        super(application);
+        plantRepository = new PlantRepository(application);
+        plantsWithSpecies = plantRepository.getNextWateredPlants();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<PlantWithSpecies>> getPlantsWithSpecies() {
+        return plantsWithSpecies;
     }
 }

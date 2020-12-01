@@ -16,19 +16,19 @@
         android:name="se.bth.homejungle.ui.database.categories.DatabaseFragment"
         android:label="@string/title_database"
         tools:layout="@layout/fragment_dashboard" >
-        <argument
-            android:name="direction"
-            app:argType="integer" />
         <action
             android:id="@+id/open_category"
             app:destination="@id/databaseListFragment" />
+        <argument
+            android:name="source"
+            app:argType="integer" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_calendar"
         android:name="se.bth.homejungle.ui.calendar.CalendarFragment"
         android:label="@string/title_calendar"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/navigation_giveaways"
         android:name="se.bth.homejungle.ui.giveaways.GiveawaysFragment"
@@ -74,5 +74,8 @@
         <argument
             android:name="category_id"
             app:argType="long" />
+        <argument
+            android:name="source"
+            app:argType="integer" />
     </fragment>
 </navigation>
