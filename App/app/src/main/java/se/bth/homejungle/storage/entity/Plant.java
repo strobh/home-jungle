@@ -61,6 +61,16 @@ public class Plant {
         this.lastWatered = LocalDate.now();
     }
 
+    /**
+     * Creates a new plant based on the information of a future plant.
+     *
+     * @param futurePlant The future plant that was now planted.
+     * @return The plant created base on the information of a future plant.
+     */
+    public static Plant createFromFuturePlant(FuturePlant futurePlant) {
+        return new Plant(futurePlant.getSpeciesId(), futurePlant.getDescription());
+    }
+
     public long getId() {
         return id;
     }

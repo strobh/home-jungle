@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -68,14 +69,21 @@ public class Species {
     @ColumnInfo(name="sun")
     public double sun;
 
-    public Species(long categoryId, String name, String description, String howToStart, double water, int waterDays, double sun) {
-        this.name = name;
+    /**
+     * When seeds of the species should be planted.
+     */
+    @ColumnInfo(name="plant_date")
+    public LocalDate plantDate;
+
+    public Species(long categoryId, String name, String description, String howToStart, double water, int waterDays, double sun, LocalDate plantDate) {
         this.categoryId = categoryId;
+        this.name = name;
         this.description = description;
         this.howToStart = howToStart;
         this.water = water;
         this.waterDays = waterDays;
         this.sun = sun;
+        this.plantDate = plantDate;
     }
 
     public long getId() {
@@ -138,6 +146,14 @@ public class Species {
         this.sun = sun;
     }
 
+    public LocalDate getPlantDate() {
+        return plantDate;
+    }
+
+    public void setPlantDate(LocalDate plantDate) {
+        this.plantDate = plantDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -150,11 +166,12 @@ public class Species {
                 Double.compare(species.sun, sun) == 0 &&
                 Objects.equals(name, species.name) &&
                 Objects.equals(description, species.description) &&
-                Objects.equals(howToStart, species.howToStart);
+                Objects.equals(howToStart, species.howToStart) &&
+                Objects.equals(plantDate, species.plantDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, categoryId, name, description, howToStart, water, waterDays, sun);
+        return Objects.hash(id, categoryId, name, description, howToStart, water, waterDays, sun, plantDate);
     }
 }

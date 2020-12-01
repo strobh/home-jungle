@@ -52,12 +52,33 @@ public class FuturePlant {
      *
      * @param speciesId The id of the species of the plant.
      * @param description The description of the plant by which the user can identify it.
-     * @param plantDay The date when the user has to plant the seeds.
+     * @param plantDayOfSpecies The date when the user has to plant the seeds.
      */
-    public FuturePlant(long speciesId, String description, LocalDate plantDay) {
+    public FuturePlant(long speciesId, String description, LocalDate plantDayOfSpecies) {
         this.speciesId = speciesId;
         this.description = description;
-        this.plantDay = plantDay;
+        this.plantDay = calculatePlantDateFromSpecies(plantDayOfSpecies);
+    }
+
+    /**
+     * Calculates the plant day of a plant based on the generic plant day of a species,
+     * which has 0 as year.
+     *
+     * @param plantDayOfSpecies The generic plant day of a species which has 0 as year.
+     * @return The correct plant day with the current or next year depending on which day is next.
+     */
+    private LocalDate calculatePlantDateFromSpecies(LocalDate plantDayOfSpecies) {
+        // change the year of the date to the current year
+        int currentYear = LocalDate.now().getYear();
+        LocalDate plantDay = plantDayOfSpecies.withYear(currentYear);
+
+        // if the plant date is in the future, use it
+        if (plantDay.isAfter(LocalDate.now())) {
+            return plantDay;
+        }
+
+        // otherwise, we take the next year
+        return plantDay.withYear(currentYear + 1);
     }
 
     public long getId() {

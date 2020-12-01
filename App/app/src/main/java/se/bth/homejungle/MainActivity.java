@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             SpeciesCategory category3 = new SpeciesCategory("Flowers");
             long categoryFlower = categoryManager.insert(category3);
 
-            Species species1 = new Species(categoryTree, "Ficus", "Nice tree for home", "Plant it", 0.5, 3, 5);
+            Species species1 = new Species(categoryTree, "Ficus", "Nice tree for home", "Plant it", 0.5, 3, 5, LocalDate.of(0, 3, 1));
             long ficusId = speciesManager.insert(species1);
             Plant newPlant1 = new Plant(ficusId,  "Living room");
             newPlant1.setLastWatered(LocalDate.now().plusDays(5));
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             FuturePlant futurePlant2 = new FuturePlant(ficusId, "For friends", LocalDate.now().plusMonths(5));
             futurePlantManager.insert(futurePlant2);
 
-            Species species2 = new Species(categoryFlower, "Orchid", "Nice flower for home", "Plant it", 0.2, 5, 2);
+            Species species2 = new Species(categoryFlower, "Orchid", "Nice flower for home", "Plant it", 0.2, 5, 2, LocalDate.of(0, 3, 15));
             long orchidId = speciesManager.insert(species2);
             Plant newPlant4 = new Plant(orchidId,  "Living room");
             plantManager.insert(newPlant4);
