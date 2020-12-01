@@ -52,7 +52,7 @@ public interface SpeciesManager {
      * @param name The name (or part of it) to search for.
      * @return List of all plant species with a given name.
      */
-    @Query("SELECT * FROM species WHERE name LIKE '%:name%' ORDER BY name")
+    @Query("SELECT * FROM species WHERE name LIKE '%'||:name||'%' ORDER BY name")
     LiveData<List<Species>> getSpeciesByName(String name);
 
     /**
