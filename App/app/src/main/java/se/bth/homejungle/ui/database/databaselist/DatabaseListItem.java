@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
@@ -101,6 +102,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                     public void onClick(DialogInterface dialog, int which) {
                         String description = input.getText().toString();
                         databaseListFragment.insertToOwnPlants(plant_id, description);
+                        Toast.makeText(databaseListFragment.getActivity(), "Added to your plants", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show();
