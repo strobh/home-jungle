@@ -21,6 +21,7 @@ public class SpeciesCategory {
      * The id of the category.
      */
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "category_id")
     public long id;
 
     /**

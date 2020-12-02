@@ -1,7 +1,6 @@
 package se.bth.homejungle.ui.calendar;
 
 import android.app.Application;
-import android.database.sqlite.SQLiteConstraintException;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -9,24 +8,27 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
-import se.bth.homejungle.storage.repository.PlantRepository;
+import se.bth.homejungle.storage.entity.view.CalendarEvent;
+import se.bth.homejungle.storage.repository.CalendarRepository;
 
 public class CalendarViewModel extends AndroidViewModel {
 
-    private final PlantRepository plantRepository;
-    private final LiveData<List<PlantWithSpecies>> plantsWithSpecies;
+    private final CalendarRepository calendarRepository;
+    private final LiveData<List<CalendarEvent>> calendarEvents;
 
     public CalendarViewModel(Application application) {
         super(application);
-        plantRepository = new PlantRepository(application);
-        plantsWithSpecies = plantRepository.getNextWateredPlants();
+        calendarRepository = new CalendarRepository(application);
+        calendarEvents = calendarRepository.getCalendarEvents();
     }
 
-    public LiveData<List<PlantWithSpecies>> getPlantsWithSpecies() {
-        return plantsWithSpecies;
+    public LiveData<List<CalendarEvent>> getCalendarEvents() {
+        return calendarEvents;
     }
+
 
     public void waterPlant(long plantId){
         //TODO: water plant in database and update list
     }
 }
+

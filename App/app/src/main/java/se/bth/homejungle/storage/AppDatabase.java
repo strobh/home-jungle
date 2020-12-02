@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import se.bth.homejungle.storage.dao.CalendarManager;
 import se.bth.homejungle.storage.dao.CategoryManager;
 import se.bth.homejungle.storage.dao.FuturePlantManager;
 import se.bth.homejungle.storage.dao.PlantManager;
@@ -30,6 +31,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract FuturePlantManager getFuturePlantManager();
     public abstract SpeciesManager getSpeciesManager();
     public abstract CategoryManager getCategoryManager();
+    public abstract CalendarManager getCalendarManager();
 
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =

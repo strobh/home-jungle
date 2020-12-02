@@ -5,12 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,9 +30,9 @@ public class CalendarFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        calendarViewModel.getPlantsWithSpecies().observe(getViewLifecycleOwner(), plantWithSpecies -> {
-            Log.v("Database", "Calendar: " + plantWithSpecies.size());
-            adapter.submitList(plantWithSpecies);
+        calendarViewModel.getCalendarEvents().observe(getViewLifecycleOwner(), calendarEvent -> {
+            //Log.v("Database", "Calendar: " + plantWithSpecies.size());
+            adapter.submitList(calendarEvent);
         });
 
         return root;
@@ -45,3 +42,4 @@ public class CalendarFragment extends Fragment {
         calendarViewModel.waterPlant(plantId);
     }
 }
+

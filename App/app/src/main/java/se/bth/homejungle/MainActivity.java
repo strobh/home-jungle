@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             futurePlantManager.insert(futurePlant1);
             FuturePlant futurePlant2 = new FuturePlant(ficusId, "For friends", LocalDate.now().plusMonths(5));
             futurePlantManager.insert(futurePlant2);
+            FuturePlant futurePlant3 = new FuturePlant(ficusId, "For test", LocalDate.now().plusDays(2));
+            futurePlantManager.insert(futurePlant3);
 
             Species species2 = new Species(categoryFlower, "Orchid", "Nice flower for home", "Plant it", 0.2, 5, 2, LocalDate.of(0, 3, 15));
             long orchidId = speciesManager.insert(species2);

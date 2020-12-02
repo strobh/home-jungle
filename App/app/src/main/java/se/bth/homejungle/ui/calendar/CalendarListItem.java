@@ -1,6 +1,6 @@
 package se.bth.homejungle.ui.calendar;
 
-import android.provider.MediaStore;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 import se.bth.homejungle.R;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.CalendarEvent;
+import se.bth.homejungle.storage.entity.view.CalendarEventType;
 
 public class CalendarListItem extends RecyclerView.ViewHolder {
     TextView date;
@@ -23,7 +23,6 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
     TextView plant_desc;
     ImageView icon;
     RadioButton check_button;
-
 
     public CalendarListItem(@NonNull View itemView) {
         super(itemView);
@@ -33,22 +32,30 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
         check_button = itemView.findViewById(R.id.check_btn);
     }
 
-    public void bind(PlantWithSpecies plantWithSpecies, CalendarFragment calendarFragment){
-        LocalDate today = LocalDate.now();
-      //  LocalDate nextWateringDay = LocalDate.of(2020, 11, 02);
-        LocalDate nextWateringDay = plantWithSpecies.getNextWateringDate();
-        if(nextWateringDay.isAfter(today)){
+
+    public void bind(CalendarEvent calendarEvent, CalendarFragment calendarFragment) {
+        if (calendarEvent.getType() == CalendarEventType.WATER) {
+            // water plant
+            date.setBackgroundColor(Color.parseColor("#87CEFA"));
+        } else if (calendarEvent.getType() == CalendarEventType.PLANT) {
+            // plant future plant
+            date.setBackgroundColor(Color.parseColor("#90EE90"));
+        }
+
+        LocalDate nextWateringDay = calendarEvent.getDate();
+        if (nextWateringDay.isAfter(LocalDate.now())) {
             check_button.setVisibility(View.INVISIBLE);
         }
-        date.setText("" + nextWateringDay.getDayOfMonth());
-        plant_name.setText(plantWithSpecies.getSpecies().getName());
-        plant_desc.setText(plantWithSpecies.getPlant().getDescription());
+        date.setText("" + nextWateringDay.toString());
+        plant_name.setText(calendarEvent.getSpecies().getName());
+        plant_desc.setText(calendarEvent.getSourceDescription());
+        /*
         check_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calendarFragment.waterPlant(plantWithSpecies.getPlant().getId());
+                calendarFragment.waterPlant(calendarEvent.getPlant().getId());
             }
-        });
+        });*/
     }
 
     public static CalendarListItem create(ViewGroup parent){

@@ -33,7 +33,7 @@ public interface CategoryManager {
      * @param id The id of the species category to look up.
      * @return The species category with the given id.
      */
-    @Query("SELECT * FROM species_category WHERE id = :id LIMIT 1")
+    @Query("SELECT * FROM species_category WHERE category_id = :id LIMIT 1")
     LiveData<SpeciesCategory> findById(long id);
 
     /**

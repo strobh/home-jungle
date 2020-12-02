@@ -10,12 +10,14 @@ import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.calendar.CalendarFragment;
+
+import se.bth.homejungle.storage.entity.view.CalendarEvent;
 import se.bth.homejungle.ui.calendar.CalendarListItem;
 
-public class CalendarAdapter extends ListAdapter<PlantWithSpecies, CalendarListItem> {
+public class CalendarAdapter extends ListAdapter<CalendarEvent, CalendarListItem> {
     CalendarFragment calendarFragment;
 
-    public CalendarAdapter(DiffUtil.ItemCallback<PlantWithSpecies> diffCallback, CalendarFragment calendarFragment){
+    public CalendarAdapter(DiffUtil.ItemCallback<CalendarEvent> diffCallback, CalendarFragment calendarFragment){
         super(diffCallback);
         this.calendarFragment = calendarFragment;
     }
@@ -28,18 +30,18 @@ public class CalendarAdapter extends ListAdapter<PlantWithSpecies, CalendarListI
 
     @Override
     public void onBindViewHolder(@NonNull CalendarListItem holder, int position) {
-        PlantWithSpecies currentPlant = getItem(position);
-        holder.bind(currentPlant, calendarFragment);
+        CalendarEvent currentCalendarEvent = getItem(position);
+        holder.bind(currentCalendarEvent, calendarFragment);
     }
 
-    public static class PlantDiff extends DiffUtil.ItemCallback<PlantWithSpecies> {
+    public static class PlantDiff extends DiffUtil.ItemCallback<CalendarEvent> {
         @Override
-        public boolean areItemsTheSame(@NonNull PlantWithSpecies oldItem, @NonNull PlantWithSpecies newItem) {
+        public boolean areItemsTheSame(@NonNull CalendarEvent oldItem, @NonNull CalendarEvent newItem) {
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull PlantWithSpecies oldItem, @NonNull PlantWithSpecies newItem) {
+        public boolean areContentsTheSame(@NonNull CalendarEvent oldItem, @NonNull CalendarEvent newItem) {
             return Objects.equals(oldItem, newItem);
         }
     }

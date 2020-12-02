@@ -44,19 +44,8 @@ public interface PlantManager {
      * @param id The id of the plant to look up.
      * @return The plant with the given id.
      */
-    @Query("SELECT * FROM plant WHERE id = :id LIMIT 1")
+    @Query("SELECT * FROM plant WHERE plant_id = :id LIMIT 1")
     LiveData<Plant> findById(long id);
-
-    /**
-     * Returns a list of all plants in the order when they need to be watered next with their
-     * corresponding species.
-     *
-     * @return List of all plants in the order when they need to be watered next with their
-     * corresponding species.
-     */
-    @Transaction
-    @Query("SELECT plant.* FROM plant INNER JOIN species ON plant.species_id = species.id ORDER BY datetime(plant.last_watered, '+'||species.water_period||' days')")
-    LiveData<List<PlantWithSpecies>> getNextWateredPlants();
 
     /**
      * Creates a new plant in the database.

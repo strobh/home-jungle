@@ -27,6 +27,7 @@ public class FuturePlant {
      * The id of the plant in the local database.
      */
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "future_plant_id")
     public long id;
 
     /**
