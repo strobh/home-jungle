@@ -63,6 +63,10 @@ public class SpeciesRepository {
         return speciesManager.getSpeciesByCategory(categoryId);
     }
 
+    public LiveData<List<Species>> getSpeciesByNameAndCategory(String name, long categoryId) {
+        return speciesManager.getSpeciesByNameAndCategory(name, categoryId);
+    }
+
     /**
      * Returns a list of all plant species with a given name.
      *
@@ -114,4 +118,6 @@ public class SpeciesRepository {
     public void delete(Species species) {
         AppDatabase.databaseWriteExecutor.execute(() -> speciesManager.delete(species));
     }
+
+
 }

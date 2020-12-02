@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,6 +24,7 @@ import se.bth.homejungle.ui.plants.yourplants.YourPlantsViewModel;
 public class DatabaseListFragment extends Fragment {
 
     RecyclerView recyclerView;
+    SearchView searchView;
     DatabaseListViewModel databaseListViewModel;
     Source source;
     long categoryId;
@@ -33,6 +35,7 @@ public class DatabaseListFragment extends Fragment {
         databaseListViewModel = new ViewModelProvider(this).get(DatabaseListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_database_list, container, false);
         recyclerView = root.findViewById(R.id.idRecyclerView);
+        searchView = root.findViewById(R.id.idSearchView);
         source = DatabaseListFragmentArgs.fromBundle(getArguments()).getSource();
         categoryId = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryId();
 
@@ -43,6 +46,23 @@ public class DatabaseListFragment extends Fragment {
         databaseListViewModel.getSpeciesByCategory(categoryId).observe(getViewLifecycleOwner(), species -> {
             Log.v("Database:", "Species: " + species.size());
             adapter.submitList(species);
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                databaseListViewModel.getSpeciesByNameAndCategory(s, categoryId).observe(getViewLifecycleOwner(), species -> {
+                    Log.v("Database:", "Species: " + species.size());
+                    adapter.submitList(species);
+                });
+                System.out.println(s);
+                return false;
+            }
         });
         return root;
     }

@@ -55,6 +55,10 @@ public interface SpeciesManager {
     @Query("SELECT * FROM species WHERE name LIKE '%'||:name||'%' ORDER BY name")
     LiveData<List<Species>> getSpeciesByName(String name);
 
+
+    @Query("SELECT * FROM species WHERE name LIKE '%'||:name||'%' and category_id = :categoryId ORDER BY name")
+    LiveData<List<Species>> getSpeciesByNameAndCategory(String name, long categoryId);
+
     /**
      * Searches and returns the plant species with the given id.
      *
@@ -90,4 +94,5 @@ public interface SpeciesManager {
      */
     @Delete
     void delete(Species species);
+
 }

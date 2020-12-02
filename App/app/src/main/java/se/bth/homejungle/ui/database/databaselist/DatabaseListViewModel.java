@@ -38,6 +38,14 @@ public class DatabaseListViewModel extends AndroidViewModel {
         return speciesRepository.getSpeciesByCategory(categoryId);
     }
 
+    public LiveData<List<Species>> getSpeciesByName(String searchTerm){
+        return speciesRepository.getSpeciesByName(searchTerm);
+    }
+
+    public LiveData<List<Species>> getSpeciesByNameAndCategory(String name, long categoryId){
+        return speciesRepository.getSpeciesByNameAndCategory(name, categoryId);
+    }
+
     public void insert(Species species){
         speciesRepository.insert(species);
     }

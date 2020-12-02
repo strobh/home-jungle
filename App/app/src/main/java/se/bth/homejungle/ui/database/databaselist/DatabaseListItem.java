@@ -3,6 +3,7 @@ package se.bth.homejungle.ui.database.databaselist;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +103,9 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                     public void onClick(DialogInterface dialog, int which) {
                         String description = input.getText().toString();
                         databaseListFragment.insertToOwnPlants(plant_id, description);
-                        Toast.makeText(databaseListFragment.getActivity(), "Added to your plants", Toast.LENGTH_SHORT).show();
+                        Toast toast = Toast.makeText(databaseListFragment.getActivity(), R.string.toast_your_plants, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
                     }
                 })
                 .show();
@@ -123,6 +126,9 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                         // Continue with delete operation
                         String description = input.getText().toString();
                         databaseListFragment.insertToFuturePlants(plant_id, description, LocalDate.now().plusMonths(5));
+                        Toast toast = Toast.makeText(databaseListFragment.getActivity(), R.string.toast_future_plants, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
                     }
                 })
                 .show();
@@ -137,7 +143,6 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
     @Override
     public void onClick(View view) {
         Log.v("Click", "");
-      //  view.getContext();
         NavDirections action = DatabaseListFragmentDirections.databaseToPlantpage(plant_id);
         Navigation.findNavController(view).navigate(action);
     }

@@ -12,6 +12,8 @@
     <string name="add_futureplant_pop_up">Add a plant in future</string>
     <string name="add_description_pop_up">Please add a description for this plant:</string>
     <string name="add_destination_pop_up">Add plant to:</string>
+    <string name="toast_your_plants">Added to your plants</string>
+    <string name="toast_future_plants">Added to future plants</string>
     <string name="description_edittext">Description</string>
     <string name="snack_bar_text">Plant deleted</string>
     <string name="snack_bar_undo">Undo</string>
