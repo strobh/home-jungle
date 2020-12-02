@@ -50,7 +50,7 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
                 if(calendarEvent.getType() == CalendarEventType.PLANT){
 
                 } else if (calendarEvent.getType() == CalendarEventType.WATER){
-                    calendarFragment.waterPlant(calendarEvent.getSpecies().getId());
+                    calendarFragment.waterPlant(calendarEvent.getSourceId());
                 }
             }
         });

@@ -1,6 +1,7 @@
 package se.bth.homejungle.storage.repository;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Query;
@@ -72,7 +73,10 @@ public class PlantRepository {
      * @param id The id of the plant.
      */
     public void setLastWateredOfPlantToToday(long id) {
-        AppDatabase.databaseWriteExecutor.execute(() -> plantManager.setLastWateredOfPlantToToday(id));
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            System.out.println("Plant with id=" + id + " was watered");
+            plantManager.setLastWateredOfPlantToToday(id);
+        });
     }
 
     /**
