@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_database"
-        android:name="se.bth.homejungle.ui.database.categories.DatabaseFragment"
+        android:name="se.bth.homejungle.ui.database.categories.DatabaseCategoriesFragment"
         android:label="@string/title_database"
         tools:layout="@layout/fragment_dashboard" >
         <action
@@ -29,11 +29,17 @@
         android:name="se.bth.homejungle.ui.calendar.CalendarFragment"
         android:label="@string/title_calendar"
         tools:layout="@layout/fragment_calendar" />
+
     <fragment
         android:id="@+id/navigation_giveaways"
         android:name="se.bth.homejungle.ui.giveaways.GiveawaysFragment"
         android:label="@string/title_giveaways"
-        tools:layout="@layout/fragment_giveaways" />
+        tools:layout="@layout/fragment_giveaways" >
+        <action
+            android:id="@+id/giveaways_to_database"
+            app:destination="@id/navigation_database" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_marketplace"
         android:name="se.bth.homejungle.ui.marketplace.Marketplace"
@@ -77,5 +83,13 @@
         <argument
             android:name="Source"
             app:argType="se.bth.homejungle.ui.Source" />
+        <action
+            android:id="@+id/add_plant_to_giveaway"
+            app:destination="@id/addGiveawayFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addGiveawayFragment"
+        android:name="se.bth.homejungle.ui.giveaways.add_giveaway.AddGiveawayFragment"
+        android:label="fragment_add_giveaway"
+        tools:layout="@layout/fragment_add_giveaway" />
 </navigation>

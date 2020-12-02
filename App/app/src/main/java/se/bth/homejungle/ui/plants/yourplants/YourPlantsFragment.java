@@ -97,10 +97,4 @@ public class YourPlantsFragment extends Fragment {
         return root;
     }
 
-
-
-
-
-
-
 }

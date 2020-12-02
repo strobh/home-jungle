@@ -34,6 +34,10 @@ public class DatabaseListViewModel extends AndroidViewModel {
         return species;
     }
 
+    public LiveData<List<Species>> getSpeciesByCategory(long categoryId){
+        return speciesRepository.getSpeciesByCategory(categoryId);
+    }
+
     public void insert(Species species){
         speciesRepository.insert(species);
     }
@@ -46,6 +50,10 @@ public class DatabaseListViewModel extends AndroidViewModel {
     public void insertToFuturePlants(long speciesId, String description, LocalDate plantDay){
         FuturePlant newPlant = new FuturePlant(speciesId, description, plantDay);
         futurePlantRepository.insert(newPlant);
+    }
+
+    public void insertToGiveaways(long speciesId, String description){
+        //TODO: insert to database + image
     }
 
 }

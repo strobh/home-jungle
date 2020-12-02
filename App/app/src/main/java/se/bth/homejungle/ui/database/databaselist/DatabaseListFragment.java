@@ -40,7 +40,7 @@ public class DatabaseListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        databaseListViewModel.getSpecies().observe(getViewLifecycleOwner(), species -> {
+        databaseListViewModel.getSpeciesByCategory(categoryId).observe(getViewLifecycleOwner(), species -> {
             Log.v("Database:", "Species: " + species.size());
             adapter.submitList(species);
         });

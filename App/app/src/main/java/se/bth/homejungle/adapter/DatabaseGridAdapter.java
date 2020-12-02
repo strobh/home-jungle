@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.ListAdapter;
 import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.SpeciesCategory;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.database.categories.DatabaseGridItem;
 
-public class DatabaseGridAdapter extends ListAdapter<Species, DatabaseGridItem>{
+public class DatabaseGridAdapter extends ListAdapter<SpeciesCategory, DatabaseGridItem>{
     Source source;
 
-    public DatabaseGridAdapter(@NonNull DiffUtil.ItemCallback<Species> diffCallback, Source source) {
+    public DatabaseGridAdapter(@NonNull DiffUtil.ItemCallback<SpeciesCategory> diffCallback, Source source) {
         super(diffCallback);
         this.source = source;
     }
@@ -28,19 +29,19 @@ public class DatabaseGridAdapter extends ListAdapter<Species, DatabaseGridItem>{
 
     @Override
     public void onBindViewHolder(@NonNull DatabaseGridItem holder, int position) {
-        Species currentPlant = getItem(position);
-        holder.bind(currentPlant, source);
+        SpeciesCategory currentCategory = getItem(position);
+        holder.bind(currentCategory, source);
     }
 
-    public static class PlantDiff extends DiffUtil.ItemCallback<Species>{
+    public static class PlantDiff extends DiffUtil.ItemCallback<SpeciesCategory>{
 
         @Override
-        public boolean areItemsTheSame(@NonNull Species oldItem, @NonNull Species newItem) {
+        public boolean areItemsTheSame(@NonNull SpeciesCategory oldItem, @NonNull SpeciesCategory newItem) {
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Species oldItem, @NonNull Species newItem) {
+        public boolean areContentsTheSame(@NonNull SpeciesCategory oldItem, @NonNull SpeciesCategory newItem) {
             return Objects.equals(oldItem, newItem);
         }
     }

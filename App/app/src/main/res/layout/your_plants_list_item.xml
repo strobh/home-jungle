@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/category_img"
+        android:id="@+id/giveaway_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -28,13 +28,13 @@
         app:srcCompat="@drawable/plant3" />
 
     <TextView
-        android:id="@+id/category_name"
+        android:id="@+id/giveaway_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/category_img"
+        app:layout_constraintStart_toEndOf="@+id/giveaway_img"
         app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
 
     <TextView
@@ -44,8 +44,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/category_img"
-        app:layout_constraintTop_toBottomOf="@+id/category_name" />
+        app:layout_constraintStart_toEndOf="@+id/giveaway_img"
+        app:layout_constraintTop_toBottomOf="@+id/giveaway_name" />
 
     <View
         android:id="@+id/drop_icon"
@@ -54,7 +54,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/ic_baseline_clock"
-        app:layout_constraintStart_toEndOf="@+id/category_img"
+        app:layout_constraintStart_toEndOf="@+id/giveaway_img"
         app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
     <TextView

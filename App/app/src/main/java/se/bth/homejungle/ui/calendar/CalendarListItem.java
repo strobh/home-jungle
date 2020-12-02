@@ -33,16 +33,22 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
         check_button = itemView.findViewById(R.id.check_btn);
     }
 
-    public void bind(PlantWithSpecies plantWithSpecies){
+    public void bind(PlantWithSpecies plantWithSpecies, CalendarFragment calendarFragment){
         LocalDate today = LocalDate.now();
       //  LocalDate nextWateringDay = LocalDate.of(2020, 11, 02);
         LocalDate nextWateringDay = plantWithSpecies.getNextWateringDate();
-        if(today.isAfter(nextWateringDay)){
+        if(nextWateringDay.isAfter(today)){
             check_button.setVisibility(View.INVISIBLE);
         }
         date.setText("" + nextWateringDay.getDayOfMonth());
         plant_name.setText(plantWithSpecies.getSpecies().getName());
         plant_desc.setText(plantWithSpecies.getPlant().getDescription());
+        check_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarFragment.waterPlant(plantWithSpecies.getPlant().getId());
+            }
+        });
     }
 
     public static CalendarListItem create(ViewGroup parent){

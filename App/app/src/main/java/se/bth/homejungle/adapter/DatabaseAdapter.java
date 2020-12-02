@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter;
 import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.Species;
-import se.bth.homejungle.ui.database.categories.DatabaseFragment;
 import se.bth.homejungle.ui.database.databaselist.DatabaseListFragment;
 import se.bth.homejungle.ui.database.databaselist.DatabaseListItem;
 
