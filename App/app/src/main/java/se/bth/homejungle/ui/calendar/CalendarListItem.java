@@ -41,6 +41,7 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
             date.setBackgroundColor(Color.parseColor("#90EE90"));
         }
 
+
         LocalDate nextWateringDay = calendarEvent.getDate();
         if (nextWateringDay.isAfter(LocalDate.now())) {
             check_button.setVisibility(View.INVISIBLE);

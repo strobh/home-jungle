@@ -48,6 +48,14 @@ public interface PlantManager {
     LiveData<Plant> findById(long id);
 
     /**
+     * Sets the date when the plant was last watered to today.
+     *
+     * @param id The id of the plant.
+     */
+    @Query("UPDATE plant SET last_watered = date('now') WHERE plant_id = :id")
+    void setLastWateredOfPlantToToday(long id);
+
+    /**
      * Creates a new plant in the database.
      *
      * @param plant The plant entity object to store in the database.

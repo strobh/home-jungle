@@ -3,6 +3,7 @@ package se.bth.homejungle.storage.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Query;
 
 import java.util.List;
 
@@ -61,6 +62,17 @@ public class PlantRepository {
      */
     public LiveData<Plant> findById(long id) {
         return plantManager.findById(id);
+    }
+
+    /**
+     * Sets the date when the plant was last watered to today.
+     *
+     * This task is executed in another thread in order to be able to call this inside of the UI.
+     *
+     * @param id The id of the plant.
+     */
+    public void setLastWateredOfPlantToToday(long id) {
+        AppDatabase.databaseWriteExecutor.execute(() -> plantManager.setLastWateredOfPlantToToday(id));
     }
 
     /**
