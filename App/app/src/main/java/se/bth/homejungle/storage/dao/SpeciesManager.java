@@ -61,7 +61,7 @@ public interface SpeciesManager {
      * @param id The id of the plant species to look up.
      * @return The plant species with the given id.
      */
-    @Query("SELECT * FROM species WHERE id = :id LIMIT 1")
+    @Query("SELECT * FROM species WHERE species_id = :id LIMIT 1")
     LiveData<Species> findById(long id);
 
     /**
@@ -71,7 +71,7 @@ public interface SpeciesManager {
      * @return The plant species with the given id and its corresponding category.
      */
     @Transaction
-    @Query("SELECT * FROM species WHERE id = :id LIMIT 1")
+    @Query("SELECT * FROM species WHERE species_id = :id LIMIT 1")
     LiveData<SpeciesWithCategory> findSpeciesWithCategoryById(long id);
 
     /**

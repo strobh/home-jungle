@@ -23,7 +23,7 @@ public class SpeciesWithCategory {
      */
     @Relation(
             parentColumn = "category_id",
-            entityColumn = "id"
+            entityColumn = "category_id"
     )
     public SpeciesCategory category;
 

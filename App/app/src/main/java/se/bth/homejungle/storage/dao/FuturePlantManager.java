@@ -45,7 +45,7 @@ public interface FuturePlantManager {
      * @param id The id of the future plant to look up.
      * @return The future plant with the given id.
      */
-    @Query("SELECT * FROM future_plant WHERE id = :id LIMIT 1")
+    @Query("SELECT * FROM future_plant WHERE future_plant_id = :id LIMIT 1")
     LiveData<FuturePlant> findById(long id);
 
     /**

@@ -29,6 +29,7 @@ public class Species {
      * The id of the plant species.
      */
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "species_id")
     public long id;
 
     /**

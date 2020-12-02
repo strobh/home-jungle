@@ -27,7 +27,7 @@ public class PlantWithSpecies {
      */
     @Relation(
             parentColumn = "species_id",
-            entityColumn = "id"
+            entityColumn = "species_id"
     )
     public Species species;
 

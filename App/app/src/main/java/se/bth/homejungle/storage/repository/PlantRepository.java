@@ -64,17 +64,6 @@ public class PlantRepository {
     }
 
     /**
-     * Returns a list of all plants in the order when they need to be watered next with their
-     * corresponding species.
-     *
-     * @return List of all plants in the order when they need to be watered next with their
-     * corresponding species.
-     */
-    public LiveData<List<PlantWithSpecies>> getNextWateredPlants() {
-        return plantManager.getNextWateredPlants();
-    }
-
-    /**
      * Creates a new plant in the database.
      *
      * This task is executed in another thread in order to be able to call this inside of the UI.
