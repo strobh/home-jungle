@@ -5,10 +5,22 @@ import androidx.room.Relation;
 
 import java.util.Objects;
 
+/**
+ * FuturePlantWithSpecies models the relationship between a future plant and its species.
+ *
+ * The class can be used to get the information about a future plant and its species at the same
+ * time, e.g., for displaying these information in a list item.
+ */
 public class FuturePlantWithSpecies {
+    /**
+     * The future plant.
+     */
     @Embedded
     public FuturePlant futurePlant;
 
+    /**
+     * The species of the future plant.
+     */
     @Relation(
             parentColumn = "species_id",
             entityColumn = "id"

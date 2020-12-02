@@ -5,10 +5,22 @@ import androidx.room.Relation;
 
 import java.util.Objects;
 
+/**
+ * SpeciesWithCategory models the relationship between a species and its category.
+ *
+ * The class can be used to get the information about a plant species and its category at the same
+ * time.
+ */
 public class SpeciesWithCategory {
+    /**
+     * The species.
+     */
     @Embedded
     public Species species;
 
+    /**
+     * The category of the species.
+     */
     @Relation(
             parentColumn = "category_id",
             entityColumn = "id"

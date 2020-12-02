@@ -18,7 +18,7 @@ import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.entity.SpeciesCategory;
 
-@Database(entities = {Plant.class, FuturePlant.class, Species.class, SpeciesCategory.class}, version = 4, exportSchema = false)
+@Database(entities = {Plant.class, FuturePlant.class, Species.class, SpeciesCategory.class}, version = 6, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     /**

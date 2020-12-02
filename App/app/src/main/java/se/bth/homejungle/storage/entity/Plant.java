@@ -10,26 +10,65 @@ import java.util.Objects;
 
 import se.bth.homejungle.storage.converter.DateConverter;
 
+/**
+ * The Plant entity class encapsulates a plant that a user wants to manage in the app.
+ *
+ * We store the species of the plant, its description by which the user identifies it
+ * and when it was last watered by the user.
+ *
+ * The Android Room Persistence Library automatically creates a database table for this entity.
+ */
 @Entity(tableName = "plant")
 @TypeConverters(DateConverter.class)
 public class Plant {
 
+    /**
+     * The id of the plant in the local database.
+     */
     @PrimaryKey(autoGenerate = true)
     public long id;
 
+    /**
+     * The id of the species of the plant in the local database.
+     */
     @ColumnInfo(name = "species_id")
     public long speciesId;
 
+    /**
+     * The description of the plant by which the user can identify it.
+     */
     @ColumnInfo(name = "description")
     public String description;
 
+    /**
+     * The date when the plant was last watered by the user. Based on this we can calculate
+     * when the plant has to be watered next.
+     */
     @ColumnInfo(name = "last_watered")
     public LocalDate lastWatered;
 
+    /**
+     * Creates a new plant.
+     *
+     * The date when the plant was last watered is set to the current date.
+     *
+     * @param speciesId The id of the species of the plant.
+     * @param description The description of the plant by which the user can identify it.
+     */
     public Plant(long speciesId, String description) {
         this.speciesId = speciesId;
         this.description = description;
         this.lastWatered = LocalDate.now();
+    }
+
+    /**
+     * Creates a new plant based on the information of a future plant.
+     *
+     * @param futurePlant The future plant that was now planted.
+     * @return The plant created base on the information of a future plant.
+     */
+    public static Plant createFromFuturePlant(FuturePlant futurePlant) {
+        return new Plant(futurePlant.getSpeciesId(), futurePlant.getDescription());
     }
 
     public long getId() {
@@ -60,7 +99,10 @@ public class Plant {
         this.lastWatered = lastWatered;
     }
 
-    public void waterPlantToday() {
+    /**
+     * Sets the date when the plant was last watered to today.
+     */
+    public void setLastWateredToToday() {
         this.lastWatered = LocalDate.now();
     }
 
