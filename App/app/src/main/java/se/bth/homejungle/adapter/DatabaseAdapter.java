@@ -9,12 +9,16 @@ import androidx.recyclerview.widget.ListAdapter;
 import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.ui.database.databaselist.DatabaseListFragment;
 import se.bth.homejungle.ui.database.databaselist.DatabaseListItem;
 
 public class DatabaseAdapter extends ListAdapter<Species, DatabaseListItem> {
+    DatabaseListFragment databaseListFragment;
 
-    public DatabaseAdapter(DiffUtil.ItemCallback<Species> diffCallback){
+
+    public DatabaseAdapter(DiffUtil.ItemCallback<Species> diffCallback, DatabaseListFragment databaseListFragment){
         super(diffCallback);
+        this.databaseListFragment = databaseListFragment;
     }
 
     @NonNull
@@ -26,7 +30,7 @@ public class DatabaseAdapter extends ListAdapter<Species, DatabaseListItem> {
     @Override
     public void onBindViewHolder(@NonNull DatabaseListItem holder, int position) {
         Species currentPlant = getItem(position);
-        holder.bind(currentPlant);
+        holder.bind(currentPlant, databaseListFragment);
     }
 
     public static class PlantDiff extends DiffUtil.ItemCallback<Species>{

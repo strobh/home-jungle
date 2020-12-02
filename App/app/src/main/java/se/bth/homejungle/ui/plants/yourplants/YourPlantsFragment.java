@@ -24,6 +24,7 @@ import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.YourPlantsAdapter;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
+import se.bth.homejungle.ui.Source;
 
 public class YourPlantsFragment extends Fragment {
 
@@ -48,7 +49,7 @@ public class YourPlantsFragment extends Fragment {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = HomeFragmentDirections.homeToDatabase(1);
+                NavDirections action = HomeFragmentDirections.homeToDatabase(Source.YOURPLANTS);
                 Navigation.findNavController(root).navigate(action);
             }
         });
@@ -95,11 +96,5 @@ public class YourPlantsFragment extends Fragment {
         itemTouchHelper.attachToRecyclerView(recyclerView);
         return root;
     }
-
-
-
-
-
-
 
 }

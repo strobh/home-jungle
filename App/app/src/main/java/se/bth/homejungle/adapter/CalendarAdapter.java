@@ -9,13 +9,17 @@ import androidx.recyclerview.widget.ListAdapter;
 import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.ui.calendar.CalendarFragment;
+
 import se.bth.homejungle.storage.entity.view.CalendarEvent;
 import se.bth.homejungle.ui.calendar.CalendarListItem;
 
 public class CalendarAdapter extends ListAdapter<CalendarEvent, CalendarListItem> {
+    CalendarFragment calendarFragment;
 
-    public CalendarAdapter(DiffUtil.ItemCallback<CalendarEvent> diffCallback){
+    public CalendarAdapter(DiffUtil.ItemCallback<CalendarEvent> diffCallback, CalendarFragment calendarFragment){
         super(diffCallback);
+        this.calendarFragment = calendarFragment;
     }
 
     @NonNull
@@ -27,7 +31,7 @@ public class CalendarAdapter extends ListAdapter<CalendarEvent, CalendarListItem
     @Override
     public void onBindViewHolder(@NonNull CalendarListItem holder, int position) {
         CalendarEvent currentCalendarEvent = getItem(position);
-        holder.bind(currentCalendarEvent);
+        holder.bind(currentCalendarEvent, calendarFragment);
     }
 
     public static class PlantDiff extends DiffUtil.ItemCallback<CalendarEvent> {

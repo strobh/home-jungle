@@ -10,26 +10,24 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.SpeciesCategory;
+import se.bth.homejungle.storage.entity.SpeciesWithCategory;
+import se.bth.homejungle.storage.repository.CategoryRepository;
 import se.bth.homejungle.storage.repository.SpeciesRepository;
 
 public class DatabaseViewModel extends AndroidViewModel {
 
-    private final SpeciesRepository speciesRepository;
-    private final LiveData<List<Species>> species;
+    private final CategoryRepository categoryRepository;
+    private final LiveData<List<SpeciesCategory>> speciesCategories;
 
     public DatabaseViewModel(Application application) {
         super(application);
-        speciesRepository = new SpeciesRepository(application);
-        species = speciesRepository.getSpecies();
+        categoryRepository = new CategoryRepository(application);
+        speciesCategories = categoryRepository.getCategories();
     }
 
-    public LiveData<List<Species>> getSpecies() {
-        return species;
+    public LiveData<List<SpeciesCategory>> getSpeciesCategories() {
+        return speciesCategories;
     }
-
-    public void insert(Species species){
-        speciesRepository.insert(species);
-    }
-
 
 }

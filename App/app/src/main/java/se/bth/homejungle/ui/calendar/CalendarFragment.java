@@ -26,7 +26,7 @@ public class CalendarFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
         recyclerView = root.findViewById(R.id.idRecyclerView);
 
-        final CalendarAdapter adapter = new CalendarAdapter(new CalendarAdapter.PlantDiff());
+        final CalendarAdapter adapter = new CalendarAdapter(new CalendarAdapter.PlantDiff(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -37,4 +37,9 @@ public class CalendarFragment extends Fragment {
 
         return root;
     }
+
+    public void waterPlant(long plantId){
+        calendarViewModel.waterPlant(plantId);
+    }
 }
+

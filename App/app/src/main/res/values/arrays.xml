@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="destinationChoices">
+        <item>Your plants</item>
+        <item>Future plants</item>
+        <item>Your giveaways</item>
+    </string-array>
+</resources>

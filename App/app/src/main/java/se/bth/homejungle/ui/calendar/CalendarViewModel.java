@@ -25,4 +25,10 @@ public class CalendarViewModel extends AndroidViewModel {
     public LiveData<List<CalendarEvent>> getCalendarEvents() {
         return calendarEvents;
     }
+
+
+    public void waterPlant(long plantId){
+        //TODO: water plant in database and update list
+    }
 }
+

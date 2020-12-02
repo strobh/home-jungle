@@ -7,14 +7,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.database.DatabaseUtilsCompat;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import se.bth.homejungle.R;
-import se.bth.homejungle.adapter.DatabaseAdapter;
-import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.SpeciesCategory;
+import se.bth.homejungle.ui.Source;
 
 
 public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -22,16 +21,16 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
     ImageView category_img;
     TextView category_name;
     long category_id;
-    int source;
+    Source source;
 
     public DatabaseGridItem(@NonNull View itemView) {
         super(itemView);
-        category_img = itemView.findViewById(R.id.category_img);
-        category_name = itemView.findViewById(R.id.category_name);
+        category_img = itemView.findViewById(R.id.giveaway_img);
+        category_name = itemView.findViewById(R.id.giveaway_name);
         itemView.setOnClickListener(this);
     }
 
-    public void bind(Species currentCategory, int source){
+    public void bind(SpeciesCategory currentCategory, Source source){
         category_name.setText(currentCategory.getName());
         category_id = currentCategory.getId();
         this.source = source;
@@ -44,10 +43,8 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
     }
 
     @Override
-    //TODO: implement category ID
     public void onClick(View view) {
-        long category_id = 1;
-        NavDirections action = DatabaseFragmentDirections.openCategory(category_id, source);
+        NavDirections action = DatabaseCategoriesFragmentDirections.openCategory(category_id, source);
         Navigation.findNavController(view).navigate(action);
     }
 }

@@ -1,6 +1,5 @@
 package se.bth.homejungle.ui.calendar;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,26 +28,32 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
         date = itemView.findViewById(R.id.date);
         plant_name = itemView.findViewById(R.id.plant_name);
         plant_desc = itemView.findViewById(R.id.plant_desc);
+        icon = itemView.findViewById(R.id.icon);
         check_button = itemView.findViewById(R.id.check_btn);
     }
 
-    public void bind(CalendarEvent calendarEvent) {
-        if (calendarEvent.getType() == CalendarEventType.WATER) {
-            // water plant
-            date.setBackgroundColor(Color.parseColor("#87CEFA"));
-        } else if (calendarEvent.getType() == CalendarEventType.PLANT) {
-            // plant future plant
-            date.setBackgroundColor(Color.parseColor("#90EE90"));
+    public void bind(CalendarEvent calendarEvent, CalendarFragment calendarFragment) {
+        if (calendarEvent.getType() == CalendarEventType.PLANT) {
+            icon.setImageResource(R.drawable.ic_flower);
         }
-
 
         LocalDate nextWateringDay = calendarEvent.getDate();
         if (nextWateringDay.isAfter(LocalDate.now())) {
             check_button.setVisibility(View.INVISIBLE);
         }
-        date.setText("" + nextWateringDay.toString());
+        date.setText("" + nextWateringDay.getDayOfMonth());
         plant_name.setText(calendarEvent.getSpecies().getName());
         plant_desc.setText(calendarEvent.getSourceDescription());
+        check_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(calendarEvent.getType() == CalendarEventType.PLANT){
+
+                } else if (calendarEvent.getType() == CalendarEventType.WATER){
+                    calendarFragment.waterPlant(calendarEvent.getSpecies().getId());
+                }
+            }
+        });
     }
 
     public static CalendarListItem create(ViewGroup parent){
