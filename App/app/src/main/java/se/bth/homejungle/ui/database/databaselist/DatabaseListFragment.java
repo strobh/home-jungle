@@ -27,6 +27,7 @@ public class DatabaseListFragment extends Fragment {
     SearchView searchView;
     DatabaseListViewModel databaseListViewModel;
     Source source;
+    String categoryName;
     long categoryId;
 
     @Override
@@ -37,17 +38,23 @@ public class DatabaseListFragment extends Fragment {
         recyclerView = root.findViewById(R.id.idRecyclerView);
         searchView = root.findViewById(R.id.idSearchView);
         source = DatabaseListFragmentArgs.fromBundle(getArguments()).getSource();
-        categoryId = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryId();
+        categoryName = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryName();
 
         final DatabaseAdapter adapter = new DatabaseAdapter(new DatabaseAdapter.PlantDiff(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if(categoryName.equals("All")){
+            databaseListViewModel.getSpecies().observe(getViewLifecycleOwner(), species -> {
+                Log.v("Database:", "Species: " + species.size());
+                adapter.submitList(species);
+            });
 
-        databaseListViewModel.getSpeciesByCategory(categoryId).observe(getViewLifecycleOwner(), species -> {
-            Log.v("Database:", "Species: " + species.size());
-            adapter.submitList(species);
-        });
-
+        } else{
+            databaseListViewModel.getSpeciesByName(categoryName).observe(getViewLifecycleOwner(), species -> {
+                Log.v("Database:", "Species: " + species.size());
+                adapter.submitList(species);
+            });
+        }
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

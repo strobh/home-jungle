@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.DatabaseGridAdapter;
+import se.bth.homejungle.storage.entity.SpeciesCategory;
 import se.bth.homejungle.ui.Source;
 
 public class DatabaseCategoriesFragment extends Fragment {
@@ -42,11 +43,12 @@ public class DatabaseCategoriesFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         databaseViewModel.getSpeciesCategories().observe(getViewLifecycleOwner(), speciesCategories -> {
+            SpeciesCategory speciesCategoryAll = new SpeciesCategory("All");
+            speciesCategories.add(0, speciesCategoryAll);
             Log.v("Database:", "Grid-Species: " + speciesCategories.size());
             adapter.submitList(speciesCategories);
         });
 
         return root;
     }
-
 }

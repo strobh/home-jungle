@@ -78,14 +78,14 @@
             android:id="@+id/database_to_plantpage"
             app:destination="@id/testPlantFragment" />
         <argument
-            android:name="category_id"
-            app:argType="long" />
-        <argument
             android:name="Source"
             app:argType="se.bth.homejungle.ui.Source" />
         <action
             android:id="@+id/add_plant_to_giveaway"
             app:destination="@id/addGiveawayFragment" />
+        <argument
+            android:name="category_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/addGiveawayFragment"
