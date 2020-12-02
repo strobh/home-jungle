@@ -1,6 +1,7 @@
 package se.bth.homejungle.ui.database.databaselist;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.time.LocalDate;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.storage.entity.Species;
@@ -43,31 +46,54 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final EditText input = new EditText(databaseListFragment.getContext());
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                input.setLayoutParams(lp);
                 switch(databaseListFragment.getSource()){
-                    case 0:
-                        //show popupwindow
-                        break;
-                    case 1:
-                        final EditText input = new EditText(databaseListFragment.getContext());
-                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT);
-                     //   lp.leftMargin = 20;
-                        input.setLayoutParams(lp);
+                    case BOTTOMBAR:
+                        String[] destinations = {"Giveaways", "Your plants", "Future plants"};
                         new AlertDialog.Builder(databaseListFragment.getContext(), R.style.AlertDialogStyle)
                                 .setTitle(R.string.add_pop_up)
                                 .setMessage(R.string.add_description_pop_up)
                                 .setView(input)
-                                // Specifying a listener allows you to take an action before dismissing the dialog.
-                                // The dialog is automatically dismissed when a dialog button is clicked.
+                                .setItems(destinations, new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                })
+                                .show();
+                        //show popupwindow
+                        break;
+                    case YOURPLANTS:
+                        new AlertDialog.Builder(databaseListFragment.getContext(), R.style.AlertDialogStyle)
+                                .setTitle(R.string.add_pop_up)
+                                .setMessage(R.string.add_description_pop_up)
+                                .setView(input)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         // Continue with delete operation
+                                        String description = input.getText().toString();
+                                        databaseListFragment.insertToOwnPlants(plant_id, description);
                                     }
                                 })
-                                // A null listener allows the button to dismiss the dialog and take no further action.
                                 .show();
-                     //   databaseListFragment.insertToOwnPlants(plant_id);
+                        break;
+                    case FUTUREPLANTS:
+                        new AlertDialog.Builder(databaseListFragment.getContext(), R.style.AlertDialogStyle)
+                                .setTitle(R.string.add_futureplant_pop_up)
+                                .setMessage(R.string.add_description_pop_up)
+                                .setView(input)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Continue with delete operation
+                                        String description = input.getText().toString();
+                                        databaseListFragment.insertToFuturePlants(plant_id, description, LocalDate.now().plusMonths(5));
+                                    }
+                                })
+                                .show();
                         break;
                     default:
                 }

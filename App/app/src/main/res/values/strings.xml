@@ -11,6 +11,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="add_pop_up">Add a plant</string>
+    <string name="add_futureplant_pop_up">Add a plant in future</string>
     <string name="add_description_pop_up">Please add a description for this plant:</string>
     <string name="description_edittext">Description</string>
     <string name="snack_bar_text">Plant deleted</string>

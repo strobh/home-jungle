@@ -11,9 +11,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
+
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.DatabaseAdapter;
 import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.yourplants.YourPlantsViewModel;
 
 
@@ -21,20 +24,17 @@ public class DatabaseListFragment extends Fragment {
 
     RecyclerView recyclerView;
     DatabaseListViewModel databaseListViewModel;
-    YourPlantsViewModel yourPlantsViewModel;
-    int source;
+    Source source;
+    long categoryId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         databaseListViewModel = new ViewModelProvider(this).get(DatabaseListViewModel.class);
-
-        //TODO: check if this works the correct way
-        yourPlantsViewModel = new ViewModelProvider(this).get(YourPlantsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_database_list, container, false);
-
         recyclerView = root.findViewById(R.id.idRecyclerView);
         source = DatabaseListFragmentArgs.fromBundle(getArguments()).getSource();
+        categoryId = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryId();
 
         final DatabaseAdapter adapter = new DatabaseAdapter(new DatabaseAdapter.PlantDiff(), this);
         recyclerView.setAdapter(adapter);
@@ -47,11 +47,15 @@ public class DatabaseListFragment extends Fragment {
         return root;
     }
 
-    public int getSource(){
+    public Source getSource(){
         return this.source;
     }
 
-    public void insertToOwnPlants(long categoryId, String description){
-        databaseListViewModel.insertToOwnPlants(categoryId, description);
+    public void insertToOwnPlants(long speciesId, String description){
+        databaseListViewModel.insertToOwnPlants(speciesId, description);
+    }
+
+    public void insertToFuturePlants(long speciesId, String description, LocalDate plantDay){
+        databaseListViewModel.insertToFuturePlants(speciesId, description, plantDay);
     }
 }

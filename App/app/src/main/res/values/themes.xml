@@ -18,10 +18,11 @@
         <!-- Used for the buttons -->
         <item name="colorAccent">#FFC107</item>
         <!-- Used for the title and text -->
-        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorPrimary">#569A59</item>
         <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
         <!-- Used for the background -->
-        <item name="android:background">#569A59</item>
+       <!-- <item name="android:background">#FFFFFF</item> -->
     </style>
 
 </resources>

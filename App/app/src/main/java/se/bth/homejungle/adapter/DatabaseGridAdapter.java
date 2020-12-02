@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.ListAdapter;
 import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.database.categories.DatabaseGridItem;
 
 public class DatabaseGridAdapter extends ListAdapter<Species, DatabaseGridItem>{
-    int source;
+    Source source;
 
-    public DatabaseGridAdapter(@NonNull DiffUtil.ItemCallback<Species> diffCallback, int source) {
+    public DatabaseGridAdapter(@NonNull DiffUtil.ItemCallback<Species> diffCallback, Source source) {
         super(diffCallback);
         this.source = source;
     }

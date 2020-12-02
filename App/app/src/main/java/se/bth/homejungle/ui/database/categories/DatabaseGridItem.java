@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.DatabaseAdapter;
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.ui.Source;
 
 
 public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -22,7 +23,7 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
     ImageView category_img;
     TextView category_name;
     long category_id;
-    int source;
+    Source source;
 
     public DatabaseGridItem(@NonNull View itemView) {
         super(itemView);
@@ -31,7 +32,7 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
         itemView.setOnClickListener(this);
     }
 
-    public void bind(Species currentCategory, int source){
+    public void bind(Species currentCategory, Source source){
         category_name.setText(currentCategory.getName());
         category_id = currentCategory.getId();
         this.source = source;

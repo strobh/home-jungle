@@ -20,8 +20,8 @@
             android:id="@+id/open_category"
             app:destination="@id/databaseListFragment" />
         <argument
-            android:name="source"
-            app:argType="integer" />
+            android:name="Source"
+            app:argType="se.bth.homejungle.ui.Source" />
     </fragment>
 
     <fragment
@@ -75,7 +75,7 @@
             android:name="category_id"
             app:argType="long" />
         <argument
-            android:name="source"
-            app:argType="integer" />
+            android:name="Source"
+            app:argType="se.bth.homejungle.ui.Source" />
     </fragment>
 </navigation>

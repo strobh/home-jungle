@@ -23,6 +23,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.FuturePlantsAdapter;
 import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
+import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
 public class FuturePlantsFragment extends Fragment {
@@ -52,7 +53,7 @@ public class FuturePlantsFragment extends Fragment {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = HomeFragmentDirections.homeToDatabase(2);
+                NavDirections action = HomeFragmentDirections.homeToDatabase(Source.FUTUREPLANTS);
                 Navigation.findNavController(root).navigate(action);
             }
         });

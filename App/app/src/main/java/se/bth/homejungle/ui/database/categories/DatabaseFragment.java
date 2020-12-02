@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.DatabaseGridAdapter;
+import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.database.categories.DatabaseFragmentArgs;
 
 public class DatabaseFragment extends Fragment {
@@ -33,17 +34,17 @@ public class DatabaseFragment extends Fragment {
 
 
         //TODO try catch not the best way to handle this!
-        int source = 0;
+        Source source = Source.BOTTOMBAR;
         try {
             source = DatabaseFragmentArgs.fromBundle(getArguments()).getSource();
         }  catch (Exception e) {
-            source = 0;
+            source = Source.BOTTOMBAR;
         }
         switch (source){
-            case 1:
+            case YOURPLANTS:
                 direction.setText("From YourPlants");
                 break;
-            case 2:
+            case FUTUREPLANTS:
                 direction.setText("From FuturePlants");
                 break;
             default:
@@ -59,13 +60,7 @@ public class DatabaseFragment extends Fragment {
             adapter.submitList(species);
         });
 
-
-
-
         return root;
     }
 
-    public void testMethod(){
-
-    }
 }
