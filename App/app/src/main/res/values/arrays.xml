@@ -5,4 +5,9 @@
         <item>Future plants</item>
         <item>Your giveaways</item>
     </string-array>
+    <string-array name="imageSources">
+        <item>Take a photo</item>
+        <item>Choose from gallery</item>
+        <item>Display default image</item>
+    </string-array>
 </resources>
