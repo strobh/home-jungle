@@ -32,6 +32,8 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
         check_button = itemView.findViewById(R.id.check_btn);
     }
 
+
+
     public void bind(CalendarEvent calendarEvent, CalendarFragment calendarFragment) {
         if (calendarEvent.getType() == CalendarEventType.PLANT) {
             icon.setImageResource(R.drawable.ic_flower);
@@ -48,7 +50,8 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 if(calendarEvent.getType() == CalendarEventType.PLANT){
-
+                    calendarFragment.createFromFuturePlant(calendarEvent.getSourceId()
+                            , calendarEvent.getSourceDescription(), calendarEvent.getSpecies());
                 } else if (calendarEvent.getType() == CalendarEventType.WATER){
                     calendarFragment.waterPlant(calendarEvent.getSourceId());
                 }

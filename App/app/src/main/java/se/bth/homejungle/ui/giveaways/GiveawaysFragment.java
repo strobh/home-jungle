@@ -42,7 +42,7 @@ public class GiveawaysFragment extends Fragment {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = GiveawaysFragmentDirections.giveawaysToDatabase(Source.GIVEAWAYS);
+                NavDirections action = GiveawaysFragmentDirections.giveawaysToDatabase().setSource(Source.GIVEAWAYS);
                 Navigation.findNavController(root).navigate(action);
             }
         });

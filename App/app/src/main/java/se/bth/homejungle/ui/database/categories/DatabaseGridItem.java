@@ -44,7 +44,7 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
 
     @Override
     public void onClick(View view) {
-        NavDirections action = DatabaseCategoriesFragmentDirections.openCategory(source, category_name.getText().toString());
+        NavDirections action = DatabaseCategoriesFragmentDirections.openCategory(source).setCategoryName(category_name.getText().toString());
         Navigation.findNavController(view).navigate(action);
     }
 }

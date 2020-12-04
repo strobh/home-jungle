@@ -53,7 +53,7 @@ public class FuturePlantsFragment extends Fragment {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = HomeFragmentDirections.homeToDatabase(Source.FUTUREPLANTS);
+                NavDirections action = HomeFragmentDirections.homeToDatabase().setSource(Source.FUTUREPLANTS);
                 Navigation.findNavController(root).navigate(action);
             }
         });

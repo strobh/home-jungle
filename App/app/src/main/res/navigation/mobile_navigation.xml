@@ -21,7 +21,8 @@
             app:destination="@id/databaseListFragment" />
         <argument
             android:name="Source"
-            app:argType="se.bth.homejungle.ui.Source" />
+            app:argType="se.bth.homejungle.ui.Source"
+            android:defaultValue="BOTTOMBAR" />
     </fragment>
 
     <fragment
@@ -85,7 +86,8 @@
             app:destination="@id/addGiveawayFragment" />
         <argument
             android:name="category_name"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue='"All"' />
     </fragment>
     <fragment
         android:id="@+id/addGiveawayFragment"
