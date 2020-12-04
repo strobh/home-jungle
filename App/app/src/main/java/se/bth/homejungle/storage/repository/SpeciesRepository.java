@@ -63,6 +63,13 @@ public class SpeciesRepository {
         return speciesManager.getSpeciesByCategory(categoryId);
     }
 
+    /**
+     * Returns a list of all plant species with a given name in a given category.
+     *
+     * @param name The name (or part of it) to search for.
+     * @param categoryId The id of the category to filter for.
+     * @return List of all plant species with a given name in a given category.
+     */
     public LiveData<List<Species>> getSpeciesByNameAndCategory(String name, long categoryId) {
         return speciesManager.getSpeciesByNameAndCategory(name, categoryId);
     }
@@ -118,6 +125,4 @@ public class SpeciesRepository {
     public void delete(Species species) {
         AppDatabase.databaseWriteExecutor.execute(() -> speciesManager.delete(species));
     }
-
-
 }

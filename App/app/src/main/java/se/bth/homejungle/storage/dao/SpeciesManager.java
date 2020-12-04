@@ -55,7 +55,13 @@ public interface SpeciesManager {
     @Query("SELECT * FROM species WHERE name LIKE '%'||:name||'%' ORDER BY name")
     LiveData<List<Species>> getSpeciesByName(String name);
 
-
+    /**
+     * Returns a list of all plant species with a given name in a given category.
+     *
+     * @param name The name (or part of it) to search for.
+     * @param categoryId The id of the category to filter for.
+     * @return List of all plant species with a given name in a given category.
+     */
     @Query("SELECT * FROM species WHERE name LIKE '%'||:name||'%' and category_id = :categoryId ORDER BY name")
     LiveData<List<Species>> getSpeciesByNameAndCategory(String name, long categoryId);
 

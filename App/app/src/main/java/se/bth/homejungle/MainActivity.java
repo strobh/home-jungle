@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
             long orchidId = speciesManager.insert(species2);
             Plant newPlant4 = new Plant(orchidId,  "Living room");
             plantManager.insert(newPlant4);
+
+            Species species3 = new Species(categoryFlower, "Nasturtium", "Edible flower", "Plant it", 0.5, 2, 4, LocalDate.of(0, 4, 1));
+            speciesManager.insert(species3);
         });
 
         setContentView(R.layout.activity_main);
