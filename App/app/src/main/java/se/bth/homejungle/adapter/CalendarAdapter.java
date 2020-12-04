@@ -5,33 +5,62 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.Month;
 import java.util.Objects;
 
+import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.calendar.CalendarFragment;
 
 import se.bth.homejungle.storage.entity.view.CalendarEvent;
 import se.bth.homejungle.ui.calendar.CalendarListItem;
+import se.bth.homejungle.ui.calendar.CalendarMonthListItem;
 
-public class CalendarAdapter extends ListAdapter<CalendarEvent, CalendarListItem> {
+public class CalendarAdapter extends ListAdapter<CalendarEvent, RecyclerView.ViewHolder> {
     CalendarFragment calendarFragment;
+    Month currentMonth = null;
+    private static int TYPE_MONTH = 0;
+    private static int TYPE_DAY = 1;
 
     public CalendarAdapter(DiffUtil.ItemCallback<CalendarEvent> diffCallback, CalendarFragment calendarFragment){
         super(diffCallback);
         this.calendarFragment = calendarFragment;
     }
 
+    public CalendarEvent getByPosition(int position) {
+        return getCurrentList().get(position);
+    }
+
     @NonNull
     @Override
-    public CalendarListItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return CalendarListItem.create(parent);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == TYPE_DAY){
+            return CalendarListItem.create(parent);
+        } else {
+            return CalendarMonthListItem.create(parent);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CalendarListItem holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         CalendarEvent currentCalendarEvent = getItem(position);
-        holder.bind(currentCalendarEvent, calendarFragment);
+        if(getItemViewType(position) == TYPE_DAY){
+            ((CalendarListItem)holder).bind(currentCalendarEvent, calendarFragment);
+        } else if (getItemViewType(position) == TYPE_MONTH){
+            ((CalendarMonthListItem)holder).bind(currentCalendarEvent);
+            currentMonth = getItem(position).getDate().getMonth();
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(getItem(position).getDate().getMonth() == currentMonth){
+            return TYPE_DAY;
+        } else {
+            return TYPE_MONTH;
+        }
     }
 
     public static class PlantDiff extends DiffUtil.ItemCallback<CalendarEvent> {

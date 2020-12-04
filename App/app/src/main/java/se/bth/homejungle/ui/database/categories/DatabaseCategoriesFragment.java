@@ -16,6 +16,7 @@ import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.DatabaseGridAdapter;
 import se.bth.homejungle.storage.entity.SpeciesCategory;
 import se.bth.homejungle.ui.Source;
+import se.bth.homejungle.ui.database.databaselist.DatabaseListFragmentArgs;
 
 public class DatabaseCategoriesFragment extends Fragment {
     RecyclerView recyclerView;
@@ -28,23 +29,16 @@ public class DatabaseCategoriesFragment extends Fragment {
                 new ViewModelProvider(this).get(DatabaseViewModel.class);
         View root = inflater.inflate(R.layout.fragment_database_categories, container, false);
         recyclerView = root.findViewById(R.id.idRecyclerView);
-
-
-        //TODO try catch not the best way to handle this!
-        Source source = Source.BOTTOMBAR;
-        try {
-            source = DatabaseCategoriesFragmentArgs.fromBundle(getArguments()).getSource();
-        }  catch (Exception e) {
-            source = Source.BOTTOMBAR;
-        }
-
+        Source source = DatabaseListFragmentArgs.fromBundle(getArguments()).getSource();
         final DatabaseGridAdapter adapter = new DatabaseGridAdapter(new DatabaseGridAdapter.PlantDiff(), source);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         databaseViewModel.getSpeciesCategories().observe(getViewLifecycleOwner(), speciesCategories -> {
-            SpeciesCategory speciesCategoryAll = new SpeciesCategory("All");
-            speciesCategories.add(0, speciesCategoryAll);
+            if(!speciesCategories.get(0).getName().equals("All")){
+                SpeciesCategory speciesCategoryAll = new SpeciesCategory("All");
+                speciesCategories.add(0, speciesCategoryAll);
+            }
             Log.v("Database:", "Grid-Species: " + speciesCategories.size());
             adapter.submitList(speciesCategories);
         });

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,6 +24,7 @@ import se.bth.homejungle.ui.plants.yourplants.YourPlantsViewModel;
 
 public class DatabaseListFragment extends Fragment {
 
+    TextView title;
     RecyclerView recyclerView;
     SearchView searchView;
     DatabaseListViewModel databaseListViewModel;
@@ -39,7 +41,8 @@ public class DatabaseListFragment extends Fragment {
         searchView = root.findViewById(R.id.idSearchView);
         source = DatabaseListFragmentArgs.fromBundle(getArguments()).getSource();
         categoryName = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryName();
-
+        title = root.findViewById(R.id.tv_title);
+        title.setText(categoryName);
         final DatabaseAdapter adapter = new DatabaseAdapter(new DatabaseAdapter.PlantDiff(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -85,4 +88,5 @@ public class DatabaseListFragment extends Fragment {
     public void insertToFuturePlants(long speciesId, String description, LocalDate plantDay){
         databaseListViewModel.insertToFuturePlants(speciesId, description, plantDay);
     }
+
 }

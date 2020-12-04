@@ -49,7 +49,7 @@ public class YourPlantsFragment extends Fragment {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = HomeFragmentDirections.homeToDatabase(Source.YOURPLANTS);
+                NavDirections action = HomeFragmentDirections.homeToDatabase().setSource(Source.YOURPLANTS);
                 Navigation.findNavController(root).navigate(action);
             }
         });

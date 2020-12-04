@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.CalendarAdapter;
+import se.bth.homejungle.storage.entity.Species;
 
 public class CalendarFragment extends Fragment {
 
@@ -40,6 +41,10 @@ public class CalendarFragment extends Fragment {
 
     public void waterPlant(long plantId){
         calendarViewModel.waterPlant(plantId);
+    }
+
+    public void createFromFuturePlant(long plantId, String description, Species species){
+        calendarViewModel.createFromFuturePlant(plantId, description, species);
     }
 }
 

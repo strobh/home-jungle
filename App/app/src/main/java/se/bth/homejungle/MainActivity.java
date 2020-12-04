@@ -1,7 +1,9 @@
 package se.bth.homejungle;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         SpeciesManager speciesManager = db.getSpeciesManager();
         PlantManager plantManager = db.getPlantManager();
         FuturePlantManager futurePlantManager = db.getFuturePlantManager();
+        /*
         AppDatabase.databaseWriteExecutor.execute(() -> {
             SpeciesCategory category1 = new SpeciesCategory("Trees");
             long categoryTree = categoryManager.insert(category1);
@@ -64,17 +67,28 @@ public class MainActivity extends AppCompatActivity {
             Plant newPlant4 = new Plant(orchidId,  "Living room");
             plantManager.insert(newPlant4);
         });
-
+*/
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_plant, R.id.navigation_database, R.id.navigation_calendar)
+                R.id.navigation_plant, R.id.navigation_database, R.id.navigation_calendar, R.id.navigation_giveaways)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    //https://stackoverflow.com/questions/5448653/how-to-implement-onbackpressed-in-fragments
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
 }

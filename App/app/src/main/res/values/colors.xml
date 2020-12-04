@@ -10,5 +10,8 @@
     <color name="red">#D65252</color>
     <color name="row_green">#7CBD7F</color>
     <color name="top_green">#39553B</color>
+    <color name="dark_green">#212E22</color>
+
+
 
 </resources>
