@@ -3,6 +3,7 @@ package se.bth.homejungle.storage.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Query;
 
 import java.util.List;
 
@@ -94,5 +95,14 @@ public class FuturePlantRepository {
      */
     public void delete(FuturePlant futurePlant) {
         AppDatabase.databaseWriteExecutor.execute(() -> futurePlantManager.delete(futurePlant));
+    }
+
+    /**
+     * Deletes a future plant from the database.
+     *
+     * @param id The id of the future plant entity to delete from the database.
+     */
+    public void deleteById(long id) {
+        AppDatabase.databaseWriteExecutor.execute(() -> futurePlantManager.deleteById(id));
     }
 }

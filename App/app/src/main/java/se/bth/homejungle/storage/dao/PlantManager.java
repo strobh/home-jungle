@@ -48,12 +48,12 @@ public interface PlantManager {
     LiveData<Plant> findById(long id);
 
     /**
-     * Sets the date when the plant was last watered to today.
+     * Sets the date when the plant was last watered to the given date.
      *
      * @param id The id of the plant.
      */
-    @Query("UPDATE plant SET last_watered = date('now') WHERE plant_id = :id")
-    void setLastWateredOfPlantToToday(long id);
+    @Query("UPDATE plant SET last_watered = :lastWatered WHERE plant_id = :id")
+    void updateLastWatered(long id, String lastWatered);
 
     /**
      * Creates a new plant in the database.
@@ -79,4 +79,12 @@ public interface PlantManager {
      */
     @Delete
     void delete(Plant plant);
+
+    /**
+     * Deletes a plant from the database.
+     *
+     * @param id The id of the plant entity to delete from the database.
+     */
+    @Query("DELETE FROM plant WHERE plant_id = :id")
+    void deleteById(long id);
 }

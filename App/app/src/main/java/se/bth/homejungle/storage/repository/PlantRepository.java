@@ -1,14 +1,15 @@
 package se.bth.homejungle.storage.repository;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Query;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import se.bth.homejungle.storage.AppDatabase;
+import se.bth.homejungle.storage.converter.DateConverter;
 import se.bth.homejungle.storage.dao.PlantManager;
 import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
@@ -72,10 +73,10 @@ public class PlantRepository {
      *
      * @param id The id of the plant.
      */
-    public void setLastWateredOfPlantToToday(long id) {
+    public void updateLastWatered(long id, LocalDate lastWatered) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             System.out.println("Plant with id=" + id + " was watered");
-            plantManager.setLastWateredOfPlantToToday(id);
+            plantManager.updateLastWatered(id, DateConverter.fromLocalDate(lastWatered));
         });
     }
 
@@ -110,5 +111,16 @@ public class PlantRepository {
      */
     public void delete(Plant plant) {
         AppDatabase.databaseWriteExecutor.execute(() -> plantManager.delete(plant));
+    }
+
+    /**
+     * Deletes a plant from the database.
+     *
+     * This task is executed in another thread in order to be able to call this inside of the UI.
+     *
+     * @param id The id of the plant entity to delete from the database.
+     */
+    public void deleteById(long id) {
+        AppDatabase.databaseWriteExecutor.execute(() -> plantManager.deleteById(id));
     }
 }
