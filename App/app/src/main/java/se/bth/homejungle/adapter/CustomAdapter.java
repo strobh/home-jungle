@@ -29,7 +29,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-            plant_name = view.findViewById(R.id.giveaway_name);
+            plant_name = view.findViewById(R.id.species_name);
             plant_date = view.findViewById(R.id.plant_date);
             plant_img = view.findViewById(R.id.giveaway_img);
         }

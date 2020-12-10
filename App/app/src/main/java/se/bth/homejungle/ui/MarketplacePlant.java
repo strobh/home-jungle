@@ -9,7 +9,7 @@ public class MarketplacePlant implements Serializable {
     private String username;
     private String contact;
     private String speciesName;
-    private int id;
+    private String id;
     private int speciesid;
     private double latitude;
     private double longitude;
@@ -18,19 +18,17 @@ public class MarketplacePlant implements Serializable {
 
     }
 
-  /*  public MarketplacePlant(String username, String contactInformation, String speciesName, double latitude, double longitude, int id){
+   public MarketplacePlant(String username, String contact, String speciesName, double latitude, double longitude){
         this.username = username;
-        this.contactInformation = contactInformation;
+        this.contact = contact;
         this.speciesName = speciesName;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.id = id;
-    }*/
+   }
 
-    public MarketplacePlant(String contact, String username){
-        this.username = username;
-        this.contact = contact;
-    }
+   public void setId(String id){
+        this.id = id;
+   }
 
     public String getUsername(){ return this.username; }
 
@@ -38,16 +36,12 @@ public class MarketplacePlant implements Serializable {
 
     public String getSpeciesName(){ return this.speciesName; }
 
-    public int getDistance(){
+    public int getDistance() {
         int distance = 0;
         //TODO: calculation of distance to current GPS
         return distance;
     }
 
-    public int getSpeciesid(){
-        return this.speciesid;
-    }
-
-    public int getId(){ return this.id; }
+    public String getId(){ return this.id; }
 
 }

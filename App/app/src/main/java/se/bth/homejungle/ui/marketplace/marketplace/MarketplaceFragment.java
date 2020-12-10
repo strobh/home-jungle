@@ -1,4 +1,4 @@
-package se.bth.homejungle.ui.marketplace;
+package se.bth.homejungle.ui.marketplace.marketplace;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,9 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-import java.util.Observable;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.MarketplaceAdapter;
@@ -32,10 +29,10 @@ public class MarketplaceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        marketplaceViewModel = new ViewModelProvider(this).get(MarketplaceViewModel.class);
+        marketplaceViewModel = new ViewModelProvider(requireActivity()).get(MarketplaceViewModel.class);
         View root = inflater.inflate(R.layout.fragment_marketplace, container, false);
 
-        final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff());
+        final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this);
         recyclerView = root.findViewById(R.id.idRecyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -47,5 +44,9 @@ public class MarketplaceFragment extends Fragment {
         });
 
         return root;
+    }
+
+    public void setCurrentPlant(MarketplacePlant currentPlant){
+        marketplaceViewModel.setCurrentPlant(currentPlant);
     }
 }

@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +35,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
 
     public DatabaseListItem(@NonNull View itemView) {
         super(itemView);
-        plant_name = itemView.findViewById(R.id.giveaway_name);
+        plant_name = itemView.findViewById(R.id.species_name);
         plant_img = itemView.findViewById(R.id.giveaway_img);
         itemView.setOnClickListener(this);
         add_button = itemView.findViewById(R.id.btn_add);
@@ -64,7 +63,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                                                 showFuturePlantsAlertDialog(databaseListFragment);
                                                 break;
                                             case 2:
-                                                NavDirections action = DatabaseListFragmentDirections.addPlantToGiveaway();
+                                                NavDirections action = DatabaseListFragmentDirections.addPlantToGiveaway(plant_name.getText().toString());
                                                 Navigation.findNavController(view).navigate(action);
                                                 break;
                                         }
@@ -79,7 +78,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                         showFuturePlantsAlertDialog(databaseListFragment);
                         break;
                     case GIVEAWAYS:
-                        NavDirections action = DatabaseListFragmentDirections.addPlantToGiveaway();
+                        NavDirections action = DatabaseListFragmentDirections.addPlantToGiveaway(plant_name.getText().toString());
                         Navigation.findNavController(view).navigate(action);
                         break;
                 }

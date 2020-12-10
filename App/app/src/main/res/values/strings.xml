@@ -8,6 +8,9 @@
     <string name="title_marketplace">Marketplace</string>
     <string name="title_giveaways">Give-aways</string>
 
+    <string name="tv_username">username</string>
+    <string name="tv_contact">username</string>
+
     <string name="add_pop_up">Add a plant</string>
     <string name="add_futureplant_pop_up">Add a plant in future</string>
     <string name="add_description_pop_up">Please add a description for this plant:</string>
@@ -15,6 +18,7 @@
     <string name="add_image_pop_up">Choose an image for your giveaway:</string>
     <string name="toast_your_plants">Added to your plants</string>
     <string name="toast_future_plants">Added to future plants</string>
+    <string name="toast_add_giveaway">Added to Marketplace</string>
     <string name="description_edittext">Description</string>
     <string name="snack_bar_text">Plant deleted</string>
     <string name="snack_bar_undo">Undo</string>

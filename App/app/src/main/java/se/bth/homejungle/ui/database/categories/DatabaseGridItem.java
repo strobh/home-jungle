@@ -26,7 +26,7 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
     public DatabaseGridItem(@NonNull View itemView) {
         super(itemView);
         category_img = itemView.findViewById(R.id.giveaway_img);
-        category_name = itemView.findViewById(R.id.giveaway_name);
+        category_name = itemView.findViewById(R.id.species_name);
         itemView.setOnClickListener(this);
     }
 

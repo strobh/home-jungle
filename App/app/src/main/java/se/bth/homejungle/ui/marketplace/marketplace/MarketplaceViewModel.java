@@ -1,4 +1,4 @@
-package se.bth.homejungle.ui.marketplace;
+package se.bth.homejungle.ui.marketplace.marketplace;
 
 import android.util.Log;
 
@@ -25,6 +25,7 @@ import static android.content.ContentValues.TAG;
 public class MarketplaceViewModel extends ViewModel {
     MarketplacePlantRepository marketplacePlantRepository;
     MarketplacePlantLiveData liveData = new MarketplacePlantLiveData(null);
+    MarketplacePlant currentPlant;
 
     public MarketplaceViewModel(){
         marketplacePlantRepository = new MarketplacePlantRepository();
@@ -35,7 +36,24 @@ public class MarketplaceViewModel extends ViewModel {
         return liveData;
     }
 
-    public LiveData<List<MarketplacePlant>> getPlantList(){
+    public LiveData<List<MarketplacePlant>> getPlantList() {
         return liveData.marketplacePlantsList;
     }
+
+    public void setCurrentPlant(MarketplacePlant plant){
+        this.currentPlant = plant;
+    }
+
+    public MarketplacePlant getCurrentPlant(){
+        return this.currentPlant;
+    }
+/*
+    public LiveData<MarketplacePlant> getSinglePlant(String docName){
+        return marketplacePlantRepository.getSinglePlant(docname);
+    }
+
+    public MarketplacePlant getPlantByDocName(String docName){
+        marketplacePlantRepository.setPlantByDocName(docName);
+        return marketplacePlantRepository.getPlantByDocName();
+    }*/
 }

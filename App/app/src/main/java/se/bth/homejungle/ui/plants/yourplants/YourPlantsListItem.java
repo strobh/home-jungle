@@ -27,7 +27,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
 
     public YourPlantsListItem(View itemView) {
         super(itemView);
-        plant_name = itemView.findViewById(R.id.giveaway_name);
+        plant_name = itemView.findViewById(R.id.species_name);
         plant_desc = itemView.findViewById(R.id.user_name);
         water_amount = itemView.findViewById(R.id.distance);
         water_time = itemView.findViewById(R.id.tv_water_time);

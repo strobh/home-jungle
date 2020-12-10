@@ -18,7 +18,7 @@ public class GiveawaysListItem extends CustomAdapter.ViewHolder {
     public GiveawaysListItem(View view) {
         super(view);
         giveaways_img = view.findViewById(R.id.giveaway_img);
-        giveaways_name = view.findViewById(R.id.giveaway_name);
+        giveaways_name = view.findViewById(R.id.species_name);
     }
 
     //TODO: change to giveaway-entity and add img

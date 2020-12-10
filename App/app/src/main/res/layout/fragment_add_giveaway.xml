@@ -25,18 +25,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:src="@android:drawable/ic_dialog_map"
-        app:layout_constraintBottom_toTopOf="@+id/giveaway_name"
+        app:layout_constraintBottom_toTopOf="@+id/species_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/giveaway_name"
+        android:id="@+id/species_name"
         android:layout_width="137dp"
         android:layout_height="15dp"
         android:layout_marginEnd="72dp"
-        android:text="@string/hello_blank_fragment"
+        android:text="plant"
         app:layout_constraintBottom_toTopOf="@+id/edittext_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -54,24 +54,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_username"
-        app:layout_constraintTop_toBottomOf="@+id/giveaway_name" />
+        app:layout_constraintTop_toBottomOf="@+id/species_name" />
 
     <ImageButton
         android:id="@+id/add_image_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintBottom_toBottomOf="@+id/giveaway_name"
-        app:layout_constraintEnd_toStartOf="@+id/giveaway_name"
+        app:layout_constraintBottom_toBottomOf="@+id/species_name"
+        app:layout_constraintEnd_toStartOf="@+id/species_name"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/giveaway_name" />
+        app:layout_constraintTop_toTopOf="@+id/species_name" />
 
     <TextView
         android:id="@+id/tv_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/tv_contact"
         app:layout_constraintBottom_toBottomOf="@+id/edittext_contact"
         app:layout_constraintEnd_toStartOf="@+id/edittext_contact"
         app:layout_constraintHorizontal_bias="0.5"
@@ -83,7 +83,7 @@
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/tv_username"
         app:layout_constraintBottom_toBottomOf="@+id/edittext_username"
         app:layout_constraintEnd_toStartOf="@+id/edittext_username"
         app:layout_constraintHorizontal_bias="0.5"

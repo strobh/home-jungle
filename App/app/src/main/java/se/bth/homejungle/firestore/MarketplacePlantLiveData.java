@@ -52,6 +52,7 @@ public class MarketplacePlantLiveData extends LiveData<List<MarketplacePlant>> i
         List<DocumentSnapshot> list = querySnapshot.getDocuments();
         for(DocumentSnapshot doc : list){
             MarketplacePlant newPlant = doc.toObject(MarketplacePlant.class);
+            newPlant.setId(doc.getId());
             plantsListTemp.add(newPlant);
         }
         marketplacePlantsList.setValue(plantsListTemp);

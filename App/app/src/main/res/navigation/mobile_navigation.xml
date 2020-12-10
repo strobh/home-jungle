@@ -43,9 +43,13 @@
 
     <fragment
         android:id="@+id/navigation_marketplace"
-        android:name="se.bth.homejungle.ui.marketplace.MarketplaceFragment"
+        android:name="se.bth.homejungle.ui.marketplace.marketplace.MarketplaceFragment"
         android:label="@string/title_marketplace"
-        tools:layout="@layout/fragment_marketplace" />
+        tools:layout="@layout/fragment_marketplace" >
+        <action
+            android:id="@+id/open_giveaway"
+            app:destination="@id/singleGiveaway" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="se.bth.homejungle.ui.plants.HomeFragment"
@@ -93,5 +97,21 @@
         android:id="@+id/addGiveawayFragment"
         android:name="se.bth.homejungle.ui.giveaways.add_giveaway.AddGiveawayFragment"
         android:label="fragment_add_giveaway"
-        tools:layout="@layout/fragment_add_giveaway" />
+        tools:layout="@layout/fragment_add_giveaway" >
+        <action
+            android:id="@+id/giveaway_added"
+            app:destination="@id/navigation_giveaways" />
+        <argument
+            android:name="Speciesname"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleGiveaway"
+        android:name="se.bth.homejungle.ui.marketplace.single_giveaway.SingleGiveaway"
+        android:label="fragment_single_giveaway"
+        tools:layout="@layout/fragment_single_giveaway" >
+        <argument
+            android:name="DocName"
+            app:argType="string" />
+    </fragment>
 </navigation>

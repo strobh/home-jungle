@@ -11,11 +11,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
-import android.os.Environment;
-import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +24,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,41 +43,40 @@ import static android.content.ContentValues.TAG;
 public class AddGiveawayFragment extends Fragment {
     private static final String USERNAME_KEY = "username";
     private static final String CONTACT_KEY = "contact";
+    private static final String SPECIESNAME_KEY = "speciesname";
     EditText username;
     EditText contact;
+    TextView speciesName;
     ImageButton addImageButton;
     Button addButton;
     GiveawaysViewModel giveawaysViewModel;
+    View root;
+    String speciesNameString;
 
     ImageView imageView;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    //private DocumentReference doc = FirebaseFirestore.getInstance().document("marketplace/giveawaydocument1");
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         giveawaysViewModel = new ViewModelProvider(this).get(GiveawaysViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_add_giveaway, container, false);
+        speciesNameString = AddGiveawayFragmentArgs.fromBundle(getArguments()).getSpeciesname();
+
+        root = inflater.inflate(R.layout.fragment_add_giveaway, container, false);
         username = root.findViewById(R.id.edittext_username);
         contact = root.findViewById(R.id.edittext_contact);
+        speciesName = root.findViewById(R.id.species_name);
+        speciesName.setText(speciesNameString);
+
         addButton = root.findViewById(R.id.button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameInput = username.getText().toString();
-                String contactInput = contact.getText().toString();
+
                 saveData();
                 //TODO: create new giveaway with usernameInput, contactInput and Image
-                //TODO: call insert on giveawaysviewmodel
             }
         });
         addImageButton = root.findViewById(R.id.add_image_btn);
@@ -151,12 +148,10 @@ public class AddGiveawayFragment extends Fragment {
     }
 
     public void saveData(){
-        String usernameInput = username.getText().toString();
-        String contactInput = contact.getText().toString();
-
         Map<String, Object> giveawayData = new HashMap<String, Object>();
-        giveawayData.put(USERNAME_KEY, usernameInput);
-        giveawayData.put(CONTACT_KEY, contactInput);
+        giveawayData.put(USERNAME_KEY, username.getText().toString());
+        giveawayData.put(CONTACT_KEY, contact.getText().toString());
+        giveawayData.put(SPECIESNAME_KEY, speciesName);
 
         // Add a new document with a generated ID
         db.collection("user")
@@ -165,6 +160,11 @@ public class AddGiveawayFragment extends Fragment {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Toast toast = Toast.makeText(getContext(), R.string.toast_add_giveaway, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        NavDirections action = AddGiveawayFragmentDirections.giveawayAdded();
+                        Navigation.findNavController(root).navigate(action);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

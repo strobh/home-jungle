@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.ListAdapter;
 import java.util.Objects;
 
 import se.bth.homejungle.ui.MarketplacePlant;
-import se.bth.homejungle.ui.marketplace.MarketplaceListItem;
+import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceFragment;
+import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceListItem;
 
 public class MarketplaceAdapter extends ListAdapter<MarketplacePlant, MarketplaceListItem> {
+    MarketplaceFragment marketplaceFragment;
 
-    public MarketplaceAdapter(@NonNull DiffUtil.ItemCallback<MarketplacePlant> diffCallback) {
+    public MarketplaceAdapter(@NonNull DiffUtil.ItemCallback<MarketplacePlant> diffCallback, MarketplaceFragment marketplaceFragment) {
         super(diffCallback);
+        this.marketplaceFragment = marketplaceFragment;
     }
 
     @NonNull
@@ -26,7 +29,7 @@ public class MarketplaceAdapter extends ListAdapter<MarketplacePlant, Marketplac
     @Override
     public void onBindViewHolder(@NonNull MarketplaceListItem holder, int position) {
         MarketplacePlant currentMarketplacePlant = getItem(position);
-        holder.bind(currentMarketplacePlant);
+        holder.bind(currentMarketplacePlant, marketplaceFragment);
     }
 
 
