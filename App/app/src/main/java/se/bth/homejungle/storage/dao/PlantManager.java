@@ -55,6 +55,9 @@ public interface PlantManager {
     @Query("UPDATE plant SET last_watered = date('now') WHERE plant_id = :id")
     void setLastWateredOfPlantToToday(long id);
 
+
+    @Query("DELETE FROM plant")
+    void deletePlants();
     /**
      * Creates a new plant in the database.
      *

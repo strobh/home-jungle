@@ -27,6 +27,8 @@ public class YourPlantsViewModel extends AndroidViewModel {
         return plantsWithSpecies;
     }
 
+    public LiveData<List<Plant>> getPlants() { return plantRepository.getPlants(); }
+
     public void insert(Plant plant) {
         plantRepository.insert(plant);
     }

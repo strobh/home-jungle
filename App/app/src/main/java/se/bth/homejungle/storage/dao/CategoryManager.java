@@ -36,6 +36,9 @@ public interface CategoryManager {
     @Query("SELECT * FROM species_category WHERE category_id = :id LIMIT 1")
     LiveData<SpeciesCategory> findById(long id);
 
+    @Query("DELETE FROM species_category")
+    void deleteCategories();
+
     /**
      * Creates a new species category in the database.
      *

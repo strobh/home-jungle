@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/navigation_marketplace"
-        android:name="se.bth.homejungle.ui.marketplace.Marketplace"
+        android:name="se.bth.homejungle.ui.marketplace.MarketplaceFragment"
         android:label="@string/title_marketplace"
         tools:layout="@layout/fragment_marketplace" />
     <fragment

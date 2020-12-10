@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -23,16 +24,27 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.ui.giveaways.GiveawaysViewModel;
 
+import static android.content.ContentValues.TAG;
+
 public class AddGiveawayFragment extends Fragment {
+    private static final String USERNAME_KEY = "username";
+    private static final String CONTACT_KEY = "contact";
     EditText username;
     EditText contact;
     ImageButton addImageButton;
@@ -40,6 +52,10 @@ public class AddGiveawayFragment extends Fragment {
     GiveawaysViewModel giveawaysViewModel;
 
     ImageView imageView;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    //private DocumentReference doc = FirebaseFirestore.getInstance().document("marketplace/giveawaydocument1");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +77,7 @@ public class AddGiveawayFragment extends Fragment {
             public void onClick(View view) {
                 String usernameInput = username.getText().toString();
                 String contactInput = contact.getText().toString();
+                saveData();
                 //TODO: create new giveaway with usernameInput, contactInput and Image
                 //TODO: call insert on giveawaysviewmodel
             }
@@ -131,6 +148,31 @@ public class AddGiveawayFragment extends Fragment {
                 }
                */
         }
+    }
+
+    public void saveData(){
+        String usernameInput = username.getText().toString();
+        String contactInput = contact.getText().toString();
+
+        Map<String, Object> giveawayData = new HashMap<String, Object>();
+        giveawayData.put(USERNAME_KEY, usernameInput);
+        giveawayData.put(CONTACT_KEY, contactInput);
+
+        // Add a new document with a generated ID
+        db.collection("user")
+                .add(giveawayData)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 
 }

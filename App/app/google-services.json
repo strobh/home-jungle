@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "396017623834",
+    "project_id": "home-jungle",
+    "storage_bucket": "home-jungle.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396017623834:android:511ae7efeeb00064dac2a3",
+        "android_client_info": {
+          "package_name": "se.bth.homejungle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396017623834-p752tbmoaccfbj4ivpe657t2ohnnub5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFUWnYNPHOsRRdcHbZPXQrdMcQq09Eb4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "396017623834-p752tbmoaccfbj4ivpe657t2ohnnub5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

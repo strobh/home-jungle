@@ -20,13 +20,14 @@ import se.bth.homejungle.ui.calendar.CalendarMonthListItem;
 
 public class CalendarAdapter extends ListAdapter<CalendarEvent, RecyclerView.ViewHolder> {
     CalendarFragment calendarFragment;
-    Month currentMonth = null;
+    Month currentMonth;
     private static int TYPE_MONTH = 0;
     private static int TYPE_DAY = 1;
 
     public CalendarAdapter(DiffUtil.ItemCallback<CalendarEvent> diffCallback, CalendarFragment calendarFragment){
         super(diffCallback);
         this.calendarFragment = calendarFragment;
+        currentMonth = null;
     }
 
     public CalendarEvent getByPosition(int position) {
@@ -49,7 +50,7 @@ public class CalendarAdapter extends ListAdapter<CalendarEvent, RecyclerView.Vie
         if(getItemViewType(position) == TYPE_DAY){
             ((CalendarListItem)holder).bind(currentCalendarEvent, calendarFragment);
         } else if (getItemViewType(position) == TYPE_MONTH){
-            ((CalendarMonthListItem)holder).bind(currentCalendarEvent);
+            ((CalendarMonthListItem)holder).bind(currentCalendarEvent, calendarFragment);
             currentMonth = getItem(position).getDate().getMonth();
         }
     }
@@ -57,8 +58,10 @@ public class CalendarAdapter extends ListAdapter<CalendarEvent, RecyclerView.Vie
     @Override
     public int getItemViewType(int position) {
         if(getItem(position).getDate().getMonth() == currentMonth){
+            System.out.println("In type day, position: " + position);
             return TYPE_DAY;
         } else {
+            System.out.println("In type month, position: " + position);
             return TYPE_MONTH;
         }
     }

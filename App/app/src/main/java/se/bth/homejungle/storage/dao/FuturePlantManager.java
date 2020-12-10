@@ -48,6 +48,9 @@ public interface FuturePlantManager {
     @Query("SELECT * FROM future_plant WHERE future_plant_id = :id LIMIT 1")
     LiveData<FuturePlant> findById(long id);
 
+    @Query("DELETE FROM future_plant")
+    void deleteFuturePlants();
+
     /**
      * Creates a new future plant in the database.
      *

@@ -1,11 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'androidx.navigation.safeargs'
-
-/*
-plugins {
-    id 'com.android.application'
-}
-*/
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -69,4 +64,10 @@ dependencies {
 
     // Animation Swiping: https://github.com/xabaras/RecyclerViewSwipeDecorator
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
+
+    //import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:26.1.1')
+    implementation 'com.google.firebase:firebase-firestore'
+
+
 }

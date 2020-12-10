@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,7 +28,6 @@ public class CalendarFragment extends Fragment {
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
         recyclerView = root.findViewById(R.id.idRecyclerView);
-
         final CalendarAdapter adapter = new CalendarAdapter(new CalendarAdapter.PlantDiff(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

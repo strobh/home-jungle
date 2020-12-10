@@ -36,14 +36,22 @@ public class MainActivity extends AppCompatActivity {
         SpeciesManager speciesManager = db.getSpeciesManager();
         PlantManager plantManager = db.getPlantManager();
         FuturePlantManager futurePlantManager = db.getFuturePlantManager();
-        /*
+/*
         AppDatabase.databaseWriteExecutor.execute(() -> {
+
+            //These functions are for deleting the existing datasets, so that there won't be duplicates
+            categoryManager.deleteCategories();
+            plantManager.deletePlants();
+            futurePlantManager.deleteFuturePlants();
+            speciesManager.deleteSpecies();
+
             SpeciesCategory category1 = new SpeciesCategory("Trees");
-            long categoryTree = categoryManager.insert(category1);
-            SpeciesCategory category2 = new SpeciesCategory("Herbs");
-            categoryManager.insert(category2);
-            SpeciesCategory category3 = new SpeciesCategory("Flowers");
-            long categoryFlower = categoryManager.insert(category3);
+                    long categoryTree = categoryManager.insert(category1);
+                    SpeciesCategory category2 = new SpeciesCategory("Herbs");
+                    categoryManager.insert(category2);
+                    SpeciesCategory category3 = new SpeciesCategory("Flowers");
+                    long categoryFlower = categoryManager.insert(category3);
+
 
             Species species1 = new Species(categoryTree, "Ficus", "Nice tree for home", "Plant it", 0.5, 3, 5, LocalDate.of(0, 3, 1));
             long ficusId = speciesManager.insert(species1);

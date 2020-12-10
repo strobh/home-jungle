@@ -32,13 +32,10 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
         check_button = itemView.findViewById(R.id.check_btn);
     }
 
-
-
     public void bind(CalendarEvent calendarEvent, CalendarFragment calendarFragment) {
         if (calendarEvent.getType() == CalendarEventType.PLANT) {
             icon.setImageResource(R.drawable.ic_flower);
         }
-
         LocalDate nextWateringDay = calendarEvent.getDate();
         if (nextWateringDay.isAfter(LocalDate.now())) {
             check_button.setVisibility(View.INVISIBLE);

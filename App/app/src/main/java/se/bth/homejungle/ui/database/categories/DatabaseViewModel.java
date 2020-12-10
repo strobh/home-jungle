@@ -30,4 +30,7 @@ public class DatabaseViewModel extends AndroidViewModel {
         return speciesCategories;
     }
 
+    public void delete(SpeciesCategory speciesCategories) {
+        categoryRepository.delete(speciesCategories);
+    }
 }

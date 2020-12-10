@@ -16,7 +16,7 @@ import se.bth.homejungle.R;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
-public class PlantListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     TextView plant_name;
     TextView plant_desc;
@@ -25,7 +25,7 @@ public class PlantListItem extends RecyclerView.ViewHolder implements View.OnCli
     ImageView plant_img;
     long plant_id;
 
-    public PlantListItem(View itemView) {
+    public YourPlantsListItem(View itemView) {
         super(itemView);
         plant_name = itemView.findViewById(R.id.giveaway_name);
         plant_desc = itemView.findViewById(R.id.user_name);
@@ -44,10 +44,10 @@ public class PlantListItem extends RecyclerView.ViewHolder implements View.OnCli
         // TODO: finish
     }
 
-    public static PlantListItem create(ViewGroup parent) {
+    public static YourPlantsListItem create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.your_plants_list_item, parent, false);
-        return new PlantListItem(view);
+        return new YourPlantsListItem(view);
     }
 
     @Override

@@ -84,6 +84,8 @@ public interface SpeciesManager {
     @Query("SELECT * FROM species WHERE species_id = :id LIMIT 1")
     LiveData<SpeciesWithCategory> findSpeciesWithCategoryById(long id);
 
+    @Query("DELETE FROM species")
+    void deleteSpecies();
     /**
      * Creates a new plant species in the database.
      *
