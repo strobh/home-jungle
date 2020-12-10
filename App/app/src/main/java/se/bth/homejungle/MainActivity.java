@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         SpeciesManager speciesManager = db.getSpeciesManager();
         PlantManager plantManager = db.getPlantManager();
         FuturePlantManager futurePlantManager = db.getFuturePlantManager();
-/*
+
+
         AppDatabase.databaseWriteExecutor.execute(() -> {
 
             //These functions are for deleting the existing datasets, so that there won't be duplicates
@@ -59,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
             newPlant1.setLastWatered(LocalDate.now().plusDays(5));
             plantManager.insert(newPlant1);
             Plant newPlant2 = new Plant(ficusId,  "Kitchen");
-            newPlant2.setLastWatered(LocalDate.now().plusDays(-4));
+            newPlant2.setLastWatered(LocalDate.now().plusDays(-3));
             plantManager.insert(newPlant2);
             Plant newPlant3 = new Plant(ficusId,  "Bathroom");
             plantManager.insert(newPlant3);
-            FuturePlant futurePlant1 = new FuturePlant(ficusId, "For balcony", LocalDate.now().plusMonths(5));
+            FuturePlant futurePlant1 = new FuturePlant(ficusId, "For balcony", LocalDate.now().plusMonths(3));
             futurePlantManager.insert(futurePlant1);
-            FuturePlant futurePlant2 = new FuturePlant(ficusId, "For friends", LocalDate.now().plusMonths(5));
+            FuturePlant futurePlant2 = new FuturePlant(ficusId, "For friends", LocalDate.now());
             futurePlantManager.insert(futurePlant2);
             FuturePlant futurePlant3 = new FuturePlant(ficusId, "For test", LocalDate.now().plusDays(2));
             futurePlantManager.insert(futurePlant3);
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             Species species3 = new Species(categoryFlower, "Nasturtium", "Edible flower", "Plant it", 0.5, 2, 4, LocalDate.of(0, 4, 1));
             speciesManager.insert(species3);
         });
-*/
+
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

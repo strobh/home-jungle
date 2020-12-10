@@ -75,4 +75,12 @@ public interface FuturePlantManager {
      */
     @Delete
     void delete(FuturePlant futurePlant);
+
+    /**
+     * Deletes a future plant from the database.
+     *
+     * @param id The id of the future plant entity to delete from the database.
+     */
+    @Query("DELETE FROM future_plant WHERE future_plant_id = :id")
+    void deleteById(long id);
 }

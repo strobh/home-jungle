@@ -5,10 +5,10 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import se.bth.homejungle.storage.entity.Plant;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.entity.view.CalendarEvent;
 import se.bth.homejungle.storage.repository.CalendarRepository;
@@ -36,13 +36,13 @@ public class CalendarViewModel extends AndroidViewModel {
 
 
     public void waterPlant(long plantId) {
-        plantRepository.setLastWateredOfPlantToToday(plantId);
+        plantRepository.updateLastWatered(plantId, LocalDate.now());
     }
 
-    public void createFromFuturePlant(long plantId, String description, Species species){
-        //TODO: delete futureplant and add the plant to your plants
-        //problem: no futureplantobject available, only calendar event that contains description, future plant id and species
+    public void createFromFuturePlant(long futurePlantId, String description, Species species) {
+        futurePlantRepository.deleteById(futurePlantId);
 
+        Plant newPlant = new Plant(species.getId(),  description);
+        plantRepository.insert(newPlant);
     }
 }
-

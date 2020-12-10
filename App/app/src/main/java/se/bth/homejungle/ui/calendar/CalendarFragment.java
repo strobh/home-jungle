@@ -20,6 +20,7 @@ import se.bth.homejungle.storage.entity.Species;
 
 public class CalendarFragment extends Fragment {
 
+    private CalendarAdapter adapter;
     RecyclerView recyclerView;
     private CalendarViewModel calendarViewModel;
 
@@ -28,7 +29,7 @@ public class CalendarFragment extends Fragment {
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
         recyclerView = root.findViewById(R.id.idRecyclerView);
-        final CalendarAdapter adapter = new CalendarAdapter(new CalendarAdapter.PlantDiff(), this);
+        adapter = new CalendarAdapter(new CalendarAdapter.PlantDiff(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -42,10 +43,11 @@ public class CalendarFragment extends Fragment {
 
     public void waterPlant(long plantId){
         calendarViewModel.waterPlant(plantId);
+        adapter.notifyDataSetChanged();
     }
 
-    public void createFromFuturePlant(long plantId, String description, Species species){
-        calendarViewModel.createFromFuturePlant(plantId, description, species);
+    public void createFromFuturePlant(long futurePlantId, String description, Species species){
+        calendarViewModel.createFromFuturePlant(futurePlantId, description, species);
     }
 }
 
