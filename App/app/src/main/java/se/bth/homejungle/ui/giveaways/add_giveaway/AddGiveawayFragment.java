@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,11 +40,13 @@ import se.bth.homejungle.R;
 import se.bth.homejungle.ui.giveaways.GiveawaysViewModel;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 public class AddGiveawayFragment extends Fragment {
     private static final String USERNAME_KEY = "username";
     private static final String CONTACT_KEY = "contact";
     private static final String SPECIESNAME_KEY = "speciesname";
+    private static final String USERID = "userid";
     EditText username;
     EditText contact;
     TextView speciesName;
@@ -52,6 +55,7 @@ public class AddGiveawayFragment extends Fragment {
     GiveawaysViewModel giveawaysViewModel;
     View root;
     String speciesNameString;
+    String userid;
 
     ImageView imageView;
 
@@ -148,13 +152,38 @@ public class AddGiveawayFragment extends Fragment {
     }
 
     public void saveData(){
+        SharedPreferences sp = getActivity().getSharedPreferences("userdata", MODE_PRIVATE);
+        Map<String, Object> userData = new HashMap<String, Object>();
+
+        //for test purpose: if new to app
+        //sp.edit().remove("userid").commit();
+
+        if(sp.contains("userid")){
+            userid = sp.getString("userid", null);
+            save();
+        } else {
+            db.collection("user")
+                    .add(userData)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            userid = documentReference.getId();
+                            sp.edit().putString("userid", userid).commit();
+                            save();
+                        }
+                    });
+        }
+    }
+
+    public void save(){
         Map<String, Object> giveawayData = new HashMap<String, Object>();
         giveawayData.put(USERNAME_KEY, username.getText().toString());
         giveawayData.put(CONTACT_KEY, contact.getText().toString());
-        giveawayData.put(SPECIESNAME_KEY, speciesName);
+        giveawayData.put(SPECIESNAME_KEY, speciesNameString);
+        giveawayData.put(USERID, userid);
 
         // Add a new document with a generated ID
-        db.collection("user")
+        db.collection("giveaway")
                 .add(giveawayData)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

@@ -40,6 +40,11 @@ public class MarketplaceViewModel extends ViewModel {
         return liveData.marketplacePlantsList;
     }
 
+    public LiveData<List<MarketplacePlant>> getOtherGiveawaysLiveData(String userid){
+        liveData = marketplacePlantRepository.getOtherGiveawaysLiveData(userid);
+        return liveData;
+    }
+
     public void setCurrentPlant(MarketplacePlant plant){
         this.currentPlant = plant;
     }

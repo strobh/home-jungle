@@ -8,9 +8,10 @@ import java.io.Serializable;
 public class MarketplacePlant implements Serializable {
     private String username;
     private String contact;
-    private String speciesName;
+    private String speciesname;
     private String id;
-    private int speciesid;
+    private String userid;
+//    private int speciesid;
     private double latitude;
     private double longitude;
 
@@ -21,7 +22,7 @@ public class MarketplacePlant implements Serializable {
    public MarketplacePlant(String username, String contact, String speciesName, double latitude, double longitude){
         this.username = username;
         this.contact = contact;
-        this.speciesName = speciesName;
+        this.speciesname = speciesName;
         this.latitude = latitude;
         this.longitude = longitude;
    }
@@ -32,9 +33,11 @@ public class MarketplacePlant implements Serializable {
 
     public String getUsername(){ return this.username; }
 
+    public String getUserid(){ return this.userid; }
+
     public String getContact(){ return this.contact; }
 
-    public String getSpeciesName(){ return this.speciesName; }
+    public String getSpeciesname(){ return this.speciesname; }
 
     public int getDistance() {
         int distance = 0;

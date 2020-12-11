@@ -1,5 +1,6 @@
 package se.bth.homejungle.ui.marketplace.marketplace;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.MarketplaceAdapter;
 import se.bth.homejungle.ui.MarketplacePlant;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MarketplaceFragment extends Fragment {
     private static final String TAG = "Marketplace";
@@ -37,14 +40,27 @@ public class MarketplaceFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        marketplaceViewModel.getMarketplacePlantsLiveData().observe(getViewLifecycleOwner(), Observable -> {});
-        marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
-            Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
-            adapter.submitList(marketplacePlants);
-        });
+        SharedPreferences sp = getActivity().getSharedPreferences("userdata", MODE_PRIVATE);
+        if(sp.contains("userid")){
+            Log.v("MarketplaceFragment", "has userid: " + sp.getString("userid", null));
+            marketplaceViewModel.getOtherGiveawaysLiveData(sp.getString("userid", null)).observe(getViewLifecycleOwner(), Observable -> {});
+            marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
+             //   Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
+                adapter.submitList(marketplacePlants);
+            });
+        } else {
+            Log.v("MarketplaceFragment", "has no userid");
+            marketplaceViewModel.getMarketplacePlantsLiveData().observe(getViewLifecycleOwner(), Observable -> {});
+            marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
+             //   Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
+                adapter.submitList(marketplacePlants);
+            });
+        }
 
         return root;
     }
+
+
 
     public void setCurrentPlant(MarketplacePlant currentPlant){
         marketplaceViewModel.setCurrentPlant(currentPlant);

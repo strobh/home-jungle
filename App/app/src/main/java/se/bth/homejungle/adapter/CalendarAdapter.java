@@ -57,12 +57,10 @@ public class CalendarAdapter extends ListAdapter<CalendarEvent, RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        if(getItem(position).getDate().getMonth() == currentMonth){
-            System.out.println("In type day, position: " + position);
-            return TYPE_DAY;
-        } else {
-            System.out.println("In type month, position: " + position);
+        if(position == 0 || getItem(position).getDate().getMonth() != getItem(position-1).getDate().getMonth()){
             return TYPE_MONTH;
+        } else {
+            return TYPE_DAY;
         }
     }
 

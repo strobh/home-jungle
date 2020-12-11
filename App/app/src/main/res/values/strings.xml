@@ -9,7 +9,9 @@
     <string name="title_giveaways">Give-aways</string>
 
     <string name="tv_username">username</string>
-    <string name="tv_contact">username</string>
+    <string name="tv_contact">contact</string>
+
+    <string name="no_giveaways">You have no giveaways</string>
 
     <string name="add_pop_up">Add a plant</string>
     <string name="add_futureplant_pop_up">Add a plant in future</string>

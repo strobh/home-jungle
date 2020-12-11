@@ -9,6 +9,7 @@ import android.widget.TextView;
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.CustomAdapter;
 import se.bth.homejungle.storage.entity.Plant;
+import se.bth.homejungle.ui.MarketplacePlant;
 
 public class GiveawaysListItem extends CustomAdapter.ViewHolder {
 
@@ -21,9 +22,8 @@ public class GiveawaysListItem extends CustomAdapter.ViewHolder {
         giveaways_name = view.findViewById(R.id.species_name);
     }
 
-    //TODO: change to giveaway-entity and add img
-    public void bind(Plant plant){
-         giveaways_name.setText(plant.getDescription());
+    public void bind(MarketplacePlant giveaway){
+         giveaways_name.setText(giveaway.getSpeciesname());
     }
 
     public static GiveawaysListItem create(ViewGroup parent) {

@@ -31,7 +31,7 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     }
 
     public void bind(MarketplacePlant marketplacePlant, MarketplaceFragment marketplaceFragment){
-        speciesName.setText(marketplacePlant.getSpeciesName());
+        speciesName.setText(marketplacePlant.getSpeciesname());
         userName.setText(marketplacePlant.getUsername());
         distance.setText(marketplacePlant.getDistance() + "km away");
         id = marketplacePlant.getId();
@@ -48,7 +48,7 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     @Override
     public void onClick(View view) {
         marketplaceFragment.setCurrentPlant(currentPlant);
-        NavDirections action = MarketplaceFragmentDirections.openGiveaway(id);
+        NavDirections action = MarketplaceFragmentDirections.openGiveaway();
         Navigation.findNavController(view).navigate(action);
     }
 }

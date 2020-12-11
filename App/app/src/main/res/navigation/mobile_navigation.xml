@@ -92,6 +92,10 @@
             android:name="category_name"
             app:argType="string"
             android:defaultValue='"All"' />
+        <argument
+            android:name="category_id"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
     <fragment
         android:id="@+id/addGiveawayFragment"
@@ -109,9 +113,5 @@
         android:id="@+id/singleGiveaway"
         android:name="se.bth.homejungle.ui.marketplace.single_giveaway.SingleGiveaway"
         android:label="fragment_single_giveaway"
-        tools:layout="@layout/fragment_single_giveaway" >
-        <argument
-            android:name="DocName"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_single_giveaway" />
 </navigation>

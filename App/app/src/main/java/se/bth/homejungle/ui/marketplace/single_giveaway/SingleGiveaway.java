@@ -36,7 +36,6 @@ public class SingleGiveaway extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         marketplaceViewModel = new ViewModelProvider(requireActivity()).get(MarketplaceViewModel.class);
-        String docName = SingleGiveawayArgs.fromBundle(getArguments()).getDocName();
         currentPlant = marketplaceViewModel.getCurrentPlant();
         View root = inflater.inflate(R.layout.fragment_single_giveaway, container, false);
 
@@ -45,7 +44,7 @@ public class SingleGiveaway extends Fragment {
         distance = root.findViewById(R.id.tv_distance);
         contact = root.findViewById(R.id.tv_contact);
 
-        speciesName.setText(currentPlant.getSpeciesName());
+        speciesName.setText(currentPlant.getSpeciesname());
         userName.setText(currentPlant.getUsername());
         //     distance.setText(currentPlant.getDistance());
         contact.setText(currentPlant.getContact());

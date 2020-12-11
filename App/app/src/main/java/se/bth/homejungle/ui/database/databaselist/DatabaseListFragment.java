@@ -40,6 +40,7 @@ public class DatabaseListFragment extends Fragment {
         recyclerView = root.findViewById(R.id.idRecyclerView);
         searchView = root.findViewById(R.id.idSearchView);
         source = DatabaseListFragmentArgs.fromBundle(getArguments()).getSource();
+        categoryId = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryId();
         categoryName = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryName();
         title = root.findViewById(R.id.tv_title);
         title.setText(categoryName);
@@ -51,9 +52,8 @@ public class DatabaseListFragment extends Fragment {
                 Log.v("Database:", "Species: " + species.size());
                 adapter.submitList(species);
             });
-
-        } else{
-            databaseListViewModel.getSpeciesByName(categoryName).observe(getViewLifecycleOwner(), species -> {
+        } else {
+            databaseListViewModel.getSpeciesByCategory(categoryId).observe(getViewLifecycleOwner(), species -> {
                 Log.v("Database:", "Species: " + species.size());
                 adapter.submitList(species);
             });
@@ -66,11 +66,18 @@ public class DatabaseListFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                databaseListViewModel.getSpeciesByNameAndCategory(s, categoryId).observe(getViewLifecycleOwner(), species -> {
-                    Log.v("Database:", "Species: " + species.size());
-                    adapter.submitList(species);
-                });
-                System.out.println(s);
+                if (categoryName.equals("All")) {
+                    databaseListViewModel.getSpeciesByName(s).observe(getViewLifecycleOwner(), species -> {
+                        Log.v("Database:", "Species: " + species.size());
+                        adapter.submitList(species);
+                    });
+                } else {
+                    databaseListViewModel.getSpeciesByNameAndCategory(s, categoryId).observe(getViewLifecycleOwner(), species -> {
+                        Log.v("Database:", "Species: " + species.size());
+                        adapter.submitList(species);
+                    });
+                    System.out.println(s);
+                }
                 return false;
             }
         });

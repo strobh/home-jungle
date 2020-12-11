@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
-import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.ui.MarketplacePlant;
 import se.bth.homejungle.ui.giveaways.GiveawaysListItem;
 
-public class GiveawaysAdapter extends ListAdapter<Plant, GiveawaysListItem> {
+public class GiveawaysAdapter extends ListAdapter<MarketplacePlant, GiveawaysListItem> {
 
 
     public GiveawaysAdapter(@NonNull DiffUtil.ItemCallback diffCallback) {
@@ -29,20 +29,24 @@ public class GiveawaysAdapter extends ListAdapter<Plant, GiveawaysListItem> {
     @Override
     //TODO: change plant to giveaway
     public void onBindViewHolder(@NonNull GiveawaysListItem holder, int position) {
-        Plant currentPlant = (getItem(position));
-        holder.bind(currentPlant);
+        MarketplacePlant currentGiveaway = (getItem(position));
+        holder.bind(currentGiveaway);
+    }
+
+    public MarketplacePlant getByPosition(int position){
+        return getCurrentList().get(position);
     }
 
     //TODO: change plant to giveaway
-    public static class PlantDiff extends DiffUtil.ItemCallback<Plant>{
+    public static class PlantDiff extends DiffUtil.ItemCallback<MarketplacePlant>{
 
         @Override
-        public boolean areItemsTheSame(@NonNull Plant oldItem, @NonNull Plant newItem) {
+        public boolean areItemsTheSame(@NonNull MarketplacePlant oldItem, @NonNull MarketplacePlant newItem) {
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Plant oldItem, @NonNull Plant newItem) {
+        public boolean areContentsTheSame(@NonNull MarketplacePlant oldItem, @NonNull MarketplacePlant newItem) {
             return Objects.equals(oldItem, newItem);
         }
     }
