@@ -36,7 +36,11 @@ public class CalendarFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         calendarViewModel.getCalendarEvents().observe(getViewLifecycleOwner(), calendarEvent -> {
-            //Log.v("Database", "Calendar: " + plantWithSpecies.size());
+            /*
+            for(CalendarEvent event : calendarEvent){
+                System.out.println("Event: " + event.getType() + ", date: " + event.getDate());
+            }*/
+            //Log.v("Calendar", "CalendarEvents: " + calendarEvent.size());
             adapter.submitList(calendarEvent);
         });
 

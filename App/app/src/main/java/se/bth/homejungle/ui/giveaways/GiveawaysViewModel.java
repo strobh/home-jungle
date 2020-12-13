@@ -14,13 +14,12 @@ import se.bth.homejungle.firestore.MarketplacePlantRepository;
 import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.ui.MarketplacePlant;
 
-public class GiveawaysViewModel extends AndroidViewModel {
-    MarketplacePlantRepository marketplacePlantRepository;
-    MarketplacePlantLiveData liveData = new MarketplacePlantLiveData(null);
+public class GiveawaysViewModel extends ViewModel {
+    private MarketplacePlantRepository marketplacePlantRepository;
     public MutableLiveData<List<MarketplacePlant>> marketplacePlantsList = new MutableLiveData<List<MarketplacePlant>>();
+    MarketplacePlantLiveData liveData = new MarketplacePlantLiveData(null);
 
-    public GiveawaysViewModel(Application application){
-        super(application);
+    public GiveawaysViewModel(){
         marketplacePlantRepository = new MarketplacePlantRepository();
     }
 
@@ -33,13 +32,12 @@ public class GiveawaysViewModel extends AndroidViewModel {
         return liveData.marketplacePlantsList;
     }
 
-
-    public void insert(Plant plant){
-        //TODO: insert plant in database + change entity-import
-    }
-
     public void delete(String docid){
         System.out.println("docid: " + docid);
         marketplacePlantRepository.deleteGiveaway(docid);
+    }
+
+    public void insert(MarketplacePlant newItem) {
+        marketplacePlantRepository.insert(newItem);
     }
 }

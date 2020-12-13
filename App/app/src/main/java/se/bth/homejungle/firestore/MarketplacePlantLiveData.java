@@ -57,7 +57,6 @@ public class MarketplacePlantLiveData extends LiveData<List<MarketplacePlant>> i
 
     @Override
     public void onEvent(@Nullable QuerySnapshot querySnapshot, @Nullable FirebaseFirestoreException error) {
-        System.out.println("Something changed!");
         if(error != null){
             Log.w(TAG, "Listen to firestore failed", error);
             return;
@@ -74,7 +73,6 @@ public class MarketplacePlantLiveData extends LiveData<List<MarketplacePlant>> i
         }
         marketplacePlantsList.postValue(plantsListTemp);
         marketplacePlantsList.setValue(plantsListTemp);
-        System.out.println("Size giveaways list: " + plantsListTemp.size());
     }
 }
 

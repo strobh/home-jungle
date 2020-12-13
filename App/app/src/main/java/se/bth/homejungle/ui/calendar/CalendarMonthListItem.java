@@ -54,14 +54,8 @@ public class CalendarMonthListItem extends RecyclerView.ViewHolder {
         check_box.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("type: " + calendarEvent.getType());
-             //   calendarFragment.calendarEventChecked(calendarEvent);
-                if(calendarEvent.getType() == CalendarEventType.PLANT){
-                    calendarFragment.createFromFuturePlant(calendarEvent.getSourceId()
-                            , calendarEvent.getSourceDescription(), calendarEvent.getSpecies());
-                } else if (calendarEvent.getType() == CalendarEventType.WATER){
-                    calendarFragment.waterPlant(calendarEvent.getSourceId());
-                }
+           //     System.out.println("type: " + calendarEvent.getType());
+                calendarFragment.calendarEventChecked(calendarEvent);
             }
         });
     }

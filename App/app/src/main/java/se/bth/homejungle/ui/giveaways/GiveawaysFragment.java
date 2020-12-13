@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import se.bth.homejungle.R;
@@ -49,7 +51,7 @@ public class GiveawaysFragment extends Fragment {
         add_button = root.findViewById(R.id.btn_add);
         no_giveaway_button = root.findViewById(R.id.btn_no_giveaway);
         no_giveaway_tv = root.findViewById(R.id.tv_no_giveaway);
-        final GiveawaysAdapter adapter = new GiveawaysAdapter(new GiveawaysAdapter.PlantDiff());
+        final GiveawaysAdapter adapter = new GiveawaysAdapter(new GiveawaysAdapter.GiveawayDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -57,7 +59,6 @@ public class GiveawaysFragment extends Fragment {
         if (sp.contains("userid")) {
             userid = sp.getString("userid", null);
             giveawaysViewModel.getOwnGiveawaysLiveData(userid).observe(getViewLifecycleOwner(), Observable -> {
-                System.out.println("Changes in first method");
             });
             giveawaysViewModel.getOwnGiveaways().observe(getViewLifecycleOwner(), giveaways -> {
                 System.out.println("Changes detected");
@@ -65,11 +66,14 @@ public class GiveawaysFragment extends Fragment {
                 if (giveaways.size() > 0) {
                     no_giveaway_tv.setVisibility(View.INVISIBLE);
                     no_giveaway_button.setVisibility(View.INVISIBLE);
+                } else {
+                    no_giveaway_tv.setVisibility(View.VISIBLE);
+                    no_giveaway_button.setVisibility(View.VISIBLE);
                 }
                 adapter.submitList(giveaways);
+                adapter.notifyDataSetChanged();
             });
         }
-
         no_giveaway_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,23 +118,17 @@ public class GiveawaysFragment extends Fragment {
             }
 
             public void showUndoSnackbar(){
-                Snackbar snackbar = Snackbar.make(recyclerView, R.string.snack_bar_text, Snackbar.LENGTH_SHORT);
+                Snackbar snackbar = Snackbar.make(recyclerView, R.string.snack_bar_text, Snackbar.LENGTH_LONG);
                 snackbar.setAction(R.string.snack_bar_undo, v->undoDelete());
                 snackbar.show();
             }
 
             public void undoDelete(){
-         //       plantViewModel.insert(deleteItem.getPlant());
+                giveawaysViewModel.insert(deleteItem);
             }
         });
-
         itemTouchHelper.attachToRecyclerView(recyclerView);
-
         return root;
-    }
-
-    public void getData(){
-
     }
 
 }

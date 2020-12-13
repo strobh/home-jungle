@@ -83,7 +83,7 @@ public class YourPlantsFragment extends Fragment {
             }
 
             public void showUndoSnackbar(){
-                Snackbar snackbar = Snackbar.make(recyclerView, R.string.snack_bar_text, Snackbar.LENGTH_SHORT);
+                Snackbar snackbar = Snackbar.make(recyclerView, R.string.snack_bar_text, Snackbar.LENGTH_LONG);
                 snackbar.setAction(R.string.snack_bar_undo, v->undoDelete());
                 snackbar.show();
             }

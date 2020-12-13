@@ -27,7 +27,6 @@ public class GiveawaysAdapter extends ListAdapter<MarketplacePlant, GiveawaysLis
     }
 
     @Override
-    //TODO: change plant to giveaway
     public void onBindViewHolder(@NonNull GiveawaysListItem holder, int position) {
         MarketplacePlant currentGiveaway = (getItem(position));
         holder.bind(currentGiveaway);
@@ -37,8 +36,7 @@ public class GiveawaysAdapter extends ListAdapter<MarketplacePlant, GiveawaysLis
         return getCurrentList().get(position);
     }
 
-    //TODO: change plant to giveaway
-    public static class PlantDiff extends DiffUtil.ItemCallback<MarketplacePlant>{
+    public static class GiveawayDiff extends DiffUtil.ItemCallback<MarketplacePlant>{
 
         @Override
         public boolean areItemsTheSame(@NonNull MarketplacePlant oldItem, @NonNull MarketplacePlant newItem) {

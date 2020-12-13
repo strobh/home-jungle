@@ -53,31 +53,11 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
 
             @Override
             public void onClick(View view) {
-                //   calendarFragment.calendarEventChecked(calendarEvent);
-                if(calendarEvent.getType() == CalendarEventType.PLANT){
-                    calendarFragment.createFromFuturePlant(calendarEvent.getSourceId()
-                            , calendarEvent.getSourceDescription(), calendarEvent.getSpecies());
-                } else if (calendarEvent.getType() == CalendarEventType.WATER){
-                    calendarFragment.waterPlant(calendarEvent.getSourceId());
-                }
+         //       calendarFragment.calendarEventChecked(calendarEvent);
                 System.out.println("type: " + calendarEvent.getType());
             }
-
         });
-        /*
-        check_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("check radiobutton");
-                System.out.println("type: " + calendarEvent.getType());
-                if(calendarEvent.getType() == CalendarEventType.PLANT){
-                    calendarFragment.createFromFuturePlant(calendarEvent.getSourceId()
-                            , calendarEvent.getSourceDescription(), calendarEvent.getSpecies());
-                } else if (calendarEvent.getType() == CalendarEventType.WATER){
-                    calendarFragment.waterPlant(calendarEvent.getSourceId());
-                }
-            }
-        });*/
+
     }
 
     public static CalendarListItem create(ViewGroup parent){

@@ -1,9 +1,14 @@
 package se.bth.homejungle.firestore;
 
 import android.app.Application;
+import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -15,17 +20,24 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import se.bth.homejungle.R;
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.ui.MarketplacePlant;
+import se.bth.homejungle.ui.giveaways.add_giveaway.AddGiveawayFragmentDirections;
+
+import static android.content.ContentValues.TAG;
 
 public class MarketplacePlantRepository {
+    private static final String USERNAME_KEY = "username";
+    private static final String CONTACT_KEY = "contact";
+    private static final String SPECIESNAME_KEY = "speciesname";
+    private static final String USERID = "userid";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private MarketplacePlant currentPlant;
     private boolean deleted;
-
-    public MarketplacePlantRepository(){
-      //  AppDatabase db = AppDatabase.getDatabase(application);
-    }
 
     public MarketplacePlantLiveData getFirestoreLiveData() {
         CollectionReference collectionReference = db.collection("giveaway");
@@ -58,6 +70,23 @@ public class MarketplacePlantRepository {
                     }
                 });
         return deleted;
+    }
+
+    public void insert(MarketplacePlant newItem) {
+        Map<String, Object> giveawayData = new HashMap<String, Object>();
+        giveawayData.put(USERNAME_KEY, newItem.getUsername());
+        giveawayData.put(CONTACT_KEY, newItem.getContact());
+        giveawayData.put(SPECIESNAME_KEY, newItem.getSpeciesname());
+        giveawayData.put(USERID, newItem.getUserid());
+
+        db.collection("giveaway")
+                .add(giveawayData)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                });
     }
 
 

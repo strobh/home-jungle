@@ -91,8 +91,7 @@ public class FuturePlantsFragment extends Fragment {
 
             private void showUndoSnackbar() {
                 View view = getActivity().findViewById(R.id.idRecyclerView);
-                Snackbar snackbar = Snackbar.make(view, R.string.snack_bar_text,
-                        Snackbar.LENGTH_LONG);
+                Snackbar snackbar = Snackbar.make(view, R.string.snack_bar_text, Snackbar.LENGTH_LONG);
                 snackbar.setAction(R.string.snack_bar_undo, v -> undoDelete());
                 snackbar.show();
             }
