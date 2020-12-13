@@ -3,6 +3,7 @@ package se.bth.homejungle.ui.calendar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ public class CalendarMonthListItem extends RecyclerView.ViewHolder {
     TextView plant_name;
     TextView plant_desc;
     ImageView icon;
-    RadioButton check_button;
+    CheckBox check_box;
 
     public CalendarMonthListItem(@NonNull View itemView) {
         super(itemView);
@@ -31,24 +32,30 @@ public class CalendarMonthListItem extends RecyclerView.ViewHolder {
         plant_name = itemView.findViewById(R.id.plant_name);
         plant_desc = itemView.findViewById(R.id.plant_desc);
         icon = itemView.findViewById(R.id.icon);
-        check_button = itemView.findViewById(R.id.check_btn);
+        check_box = itemView.findViewById(R.id.checkBox);
     }
 
     public void bind(CalendarEvent calendarEvent, CalendarFragment calendarFragment) {
         month_name.setText(calendarEvent.getDate().getMonth().toString());
         if (calendarEvent.getType() == CalendarEventType.PLANT) {
             icon.setImageResource(R.drawable.ic_flower);
+        } else {
+            icon.setImageResource(R.drawable.ic_baseline_drop);
         }
         LocalDate nextWateringDay = calendarEvent.getDate();
         if (nextWateringDay.isAfter(LocalDate.now())) {
-            check_button.setVisibility(View.INVISIBLE);
+            check_box.setVisibility(View.INVISIBLE);
+        } else {
+            check_box.setVisibility(View.VISIBLE);
         }
         date.setText("" + nextWateringDay.getDayOfMonth());
         plant_name.setText(calendarEvent.getSpecies().getName());
         plant_desc.setText(calendarEvent.getSourceDescription());
-        check_button.setOnClickListener(new View.OnClickListener() {
+        check_box.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("type: " + calendarEvent.getType());
+             //   calendarFragment.calendarEventChecked(calendarEvent);
                 if(calendarEvent.getType() == CalendarEventType.PLANT){
                     calendarFragment.createFromFuturePlant(calendarEvent.getSourceId()
                             , calendarEvent.getSourceDescription(), calendarEvent.getSpecies());
@@ -64,6 +71,5 @@ public class CalendarMonthListItem extends RecyclerView.ViewHolder {
                 .inflate(R.layout.calendar_month_list_item, parent, false);
         return new CalendarMonthListItem(view);
     }
-
 
 }

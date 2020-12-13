@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.CalendarAdapter;
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.view.CalendarEvent;
+import se.bth.homejungle.storage.entity.view.CalendarEventType;
 
 public class CalendarFragment extends Fragment {
 
@@ -29,7 +31,7 @@ public class CalendarFragment extends Fragment {
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_calendar, container, false);
         recyclerView = root.findViewById(R.id.idRecyclerView);
-        adapter = new CalendarAdapter(new CalendarAdapter.PlantDiff(), this);
+        adapter = new CalendarAdapter(new CalendarAdapter.CalendarDiff(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -49,5 +51,15 @@ public class CalendarFragment extends Fragment {
     public void createFromFuturePlant(long futurePlantId, String description, Species species){
         calendarViewModel.createFromFuturePlant(futurePlantId, description, species);
     }
+
+    public void calendarEventChecked(CalendarEvent calendarEvent) {
+        if(calendarEvent.getType() == CalendarEventType.PLANT){
+            createFromFuturePlant(calendarEvent.getSourceId()
+                    , calendarEvent.getSourceDescription(), calendarEvent.getSpecies());
+        } else if (calendarEvent.getType() == CalendarEventType.WATER){
+            waterPlant(calendarEvent.getSourceId());
+        }
+    }
+
 }
 

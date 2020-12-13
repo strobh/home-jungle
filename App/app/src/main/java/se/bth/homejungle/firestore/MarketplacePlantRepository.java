@@ -1,5 +1,7 @@
 package se.bth.homejungle.firestore;
 
+import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
@@ -13,12 +15,17 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.ui.MarketplacePlant;
 
 public class MarketplacePlantRepository {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private MarketplacePlant currentPlant;
     private boolean deleted;
+
+    public MarketplacePlantRepository(){
+      //  AppDatabase db = AppDatabase.getDatabase(application);
+    }
 
     public MarketplacePlantLiveData getFirestoreLiveData() {
         CollectionReference collectionReference = db.collection("giveaway");
