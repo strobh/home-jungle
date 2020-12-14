@@ -54,8 +54,9 @@ public class SinglePlantFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager) {
         SwipeAdapter swipeAdapter = new SwipeAdapter(getChildFragmentManager());
-        swipeAdapter.addFragement(new PlantStartFragment(plantId));
         swipeAdapter.addFragement(new PlantInfoFragment(plantId));
+
+        swipeAdapter.addFragement(new PlantStartFragment(plantId));
 
         viewPager.setAdapter(swipeAdapter);
     }

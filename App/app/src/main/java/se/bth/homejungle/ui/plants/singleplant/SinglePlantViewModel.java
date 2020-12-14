@@ -10,30 +10,24 @@ import java.util.List;
 
 import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.repository.PlantRepository;
+import se.bth.homejungle.storage.repository.SpeciesRepository;
 
 public class SinglePlantViewModel extends AndroidViewModel {
-    private final PlantRepository plantRepository;
-    private final LiveData<List<PlantWithSpecies>> plantsWithSpecies;
+    private final SpeciesRepository speciesRepository;
 
     public SinglePlantViewModel(@NonNull Application application) {
         super(application);
-        plantRepository = new PlantRepository(application);
-        plantsWithSpecies = plantRepository.getPlantsWithSpecies();
+        speciesRepository = new SpeciesRepository(application);
     }
 
-    public LiveData<List<PlantWithSpecies>> getPlantsWithSpecies() {
-        return plantsWithSpecies;
+    public LiveData<Species> getSpeciesById(long speciesId){
+        return speciesRepository.findById(speciesId);
     }
 
-    public LiveData<List<Plant>> getPlants() { return plantRepository.getPlants(); }
-
-    public LiveData<Plant> getPlantById(long plantid){
-        return plantRepository.findById(plantid);
-    }
-
-    public void delete(Plant plant) {
+    /*public void delete(Plant plant) {
         plantRepository.delete(plant);
     }
-
+*/
 }

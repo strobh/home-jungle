@@ -19,27 +19,28 @@ public class PlantStartFragment extends Fragment
 {
     TextView title;
     ImageView plantImage;
+    TextView startDate;
+    TextView steps;
     SinglePlantViewModel singlePlantViewModel;
-    long plantId;
+    long speciesId;
 
-    public PlantStartFragment(long plantId){
-        this.plantId = plantId;
+    public PlantStartFragment(long speciesId){
+        this.speciesId = speciesId;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        System.out.println("plantid: " + plantId);
         singlePlantViewModel = new ViewModelProvider(requireActivity()).get(SinglePlantViewModel.class);
         View root = inflater.inflate(R.layout.fragment_plant_info, container, false);
         title = root.findViewById(R.id.title);
-
-        singlePlantViewModel.getPlantById(plantId).observe(getViewLifecycleOwner(), plant -> {
-            title.setText(plant.getId() + "");
+/*
+        singlePlantViewModel.getSpeciesById(speciesId).observe(getViewLifecycleOwner(), species -> {
+            title.setText(species.getName());
         });
 
-
+*/
    //     plantImage = root.findViewById(R.id.imageView2);
         return root;
     }

@@ -7,12 +7,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import se.bth.homejungle.R;
 
 public class PlantInfoFragment extends Fragment
 {
     long plantId;
+    TextView title;
+    ImageView plantImg;
+    TextView information;
 
     public PlantInfoFragment(long plantId){
         this.plantId = plantId;

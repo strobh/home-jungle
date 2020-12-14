@@ -23,7 +23,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
     TextView water_amount;
     TextView water_time;
     ImageView plant_img;
-    long plant_id;
+    long species_id;
 
     public YourPlantsListItem(View itemView) {
         super(itemView);
@@ -40,7 +40,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
         plant_desc.setText(plantWithSpecies.getPlant().getDescription());
         water_amount.setText(plantWithSpecies.getSpecies().getWater() + " l");
         water_time.setText(plantWithSpecies.getNextWateringDate().format(DateTimeFormatter.ISO_DATE));
-        plant_id = plantWithSpecies.getPlant().getId();
+        species_id = plantWithSpecies.getSpecies().getId();
         // TODO: finish
     }
 
@@ -52,7 +52,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View view) {
-        NavDirections action = HomeFragmentDirections.homeToPlantpage().setPlantid(plant_id);
+        NavDirections action = HomeFragmentDirections.homeToPlantpage().setPlantid(species_id);
         Navigation.findNavController(view).navigate(action);
     }
 
