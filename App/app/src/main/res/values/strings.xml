@@ -13,6 +13,8 @@
 
     <string name="no_giveaways">You have no giveaways</string>
 
+    <string name="add_btn">Add</string>
+
     <string name="add_pop_up">Add a plant</string>
     <string name="add_futureplant_pop_up">Add a plant in future</string>
     <string name="add_description_pop_up">Please add a description for this plant:</string>

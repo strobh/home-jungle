@@ -58,17 +58,20 @@ public class FuturePlant {
     public FuturePlant(long speciesId, String description, LocalDate plantDay) {
         this.speciesId = speciesId;
         this.description = description;
-        this.plantDay = calculatePlantDateFromSpecies(plantDay);
+        this.plantDay = plantDay;
     }
 
     /**
      * Calculates the plant day of a plant based on the generic plant day of a species,
      * which has 0 as year.
      *
-     * @param plantDayOfSpecies The generic plant day of a species which has 0 as year.
+     * @param species The plant species to calculate the plant date for.
      * @return The correct plant day with the current or next year depending on which day is next.
      */
-    private LocalDate calculatePlantDateFromSpecies(LocalDate plantDayOfSpecies) {
+    public static LocalDate calculatePlantDateFromSpecies(Species species) {
+        // get plant date of species
+        LocalDate plantDayOfSpecies = species.getPlantDate();
+
         // change the year of the date to the current year
         int currentYear = LocalDate.now().getYear();
         LocalDate plantDay = plantDayOfSpecies.withYear(currentYear);

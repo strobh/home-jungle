@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -32,7 +33,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +63,7 @@ public class AddGiveawayFragment extends Fragment {
     String userid;
 
     ImageView imageView;
-
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -189,11 +194,9 @@ public class AddGiveawayFragment extends Fragment {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Toast toast = Toast.makeText(getContext(), R.string.toast_add_giveaway, Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                        NavDirections action = AddGiveawayFragmentDirections.giveawayAdded();
-                        Navigation.findNavController(root).navigate(action);
+                        saveImage(documentReference.getId());
+
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -202,6 +205,36 @@ public class AddGiveawayFragment extends Fragment {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+
+
+    }
+
+    public void saveImage(String docId){
+        StorageReference imageRef = storage.getReference().child("images/" + docId);
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos =  new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = imageRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.v("Add Giveaway", "Image wasn't added");
+            }
+        });
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast toast = Toast.makeText(getContext(), R.string.toast_add_giveaway, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                NavDirections action = AddGiveawayFragmentDirections.giveawayAdded();
+                Navigation.findNavController(root).navigate(action);
+            }
+        });
     }
 
 }
