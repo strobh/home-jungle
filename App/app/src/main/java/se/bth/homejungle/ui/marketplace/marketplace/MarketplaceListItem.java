@@ -52,10 +52,12 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
 
         StorageReference storageReference = storage.getReference();
         StorageReference pathReference = storageReference.child("images/yBhFsX5KH4dBYpppmdRN");
-        Task pathReferencetask = storageReference.child("ficus.jpg").getDownloadUrl();
-        GlideApp.with(marketplaceFragment.getContext())
+  //      StorageReference gsReference = storage.getReferenceFromUrl("gs://home-jungle/images/yBhFsX5KH4dBYpppmdRN");
+        StorageReference httpsReference = storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/b/bucket/o/images%20stars.jpg");
+        Task pathReferencetask = storageReference.child("images/yBhFsX5KH4dBYpppmdRN").getDownloadUrl();
+        Glide.with(marketplaceFragment.getContext())
             //    .using(new FirebaseImageLoader())
-                .load(pathReference)
+                .load(pathReferencetask)
                 .into(img);
     }
 
