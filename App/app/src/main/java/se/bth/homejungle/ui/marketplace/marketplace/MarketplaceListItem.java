@@ -19,6 +19,7 @@ import com.google.firebase.storage.StorageReference;
 
 import se.bth.homejungle.FirebaseImageLoader;
 import se.bth.homejungle.R;
+import se.bth.homejungle.ui.GlideApp;
 import se.bth.homejungle.ui.MarketplacePlant;
 
 public class MarketplaceListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
