@@ -1,33 +1,32 @@
-package se.bth.homejungle.ui.plants;
+package se.bth.homejungle.ui.plants.singleplant;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.google.android.material.tabs.TabLayout;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.SwipeAdapter;
-import se.bth.homejungle.ui.plants.futureplants.FuturePlantsFragment;
-import se.bth.homejungle.ui.plants.yourplants.YourPlantsFragment;
 
-
-public class HomeFragment extends Fragment {
+public class SinglePlantFragment extends Fragment {
 
     View myFragment;
     ViewPager viewPager;
     TabLayout tabLayout;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        myFragment = inflater.inflate(R.layout.fragment_home, container, false);
+        myFragment =  inflater.inflate(R.layout.fragment_single_plant, container, false);
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tablayout);
 
@@ -43,12 +42,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpViewPager(ViewPager viewPager) {
-        SwipeAdapter adapter = new SwipeAdapter(getChildFragmentManager());
+        SwipeAdapter swipeAdapter = new SwipeAdapter(getChildFragmentManager());
+        swipeAdapter.addFragement(new PlantStartFragment());
+        swipeAdapter.addFragement(new PlantInfoFragment());
 
-        adapter.addFragement(new YourPlantsFragment());
-        adapter.addFragement(new FuturePlantsFragment());
-
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(swipeAdapter);
     }
-
 }

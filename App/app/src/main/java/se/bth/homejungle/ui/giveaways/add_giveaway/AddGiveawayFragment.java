@@ -210,7 +210,7 @@ public class AddGiveawayFragment extends Fragment {
     }
 
     public void saveImage(String docId){
-        StorageReference imageRef = storage.getReference().child("images/" + docId);
+        StorageReference imageRef = storage.getReference().child("images/" + docId + ".jpg");
         imageView.setDrawingCacheEnabled(true);
         imageView.buildDrawingCache();
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
