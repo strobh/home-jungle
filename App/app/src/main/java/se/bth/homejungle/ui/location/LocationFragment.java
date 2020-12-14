@@ -17,7 +17,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -48,7 +47,7 @@ public class LocationFragment extends Fragment {
             return false;
         }
 
-        if (!isLocationPermissionGranted()) {
+        if (isLocationPermissionDenied()) {
             Log.v("LocationActivity::checkLocationPermission", "Location permission is not granted. Requesting permission.");
             requestLocationPermission();
             return false;
@@ -63,9 +62,8 @@ public class LocationFragment extends Fragment {
      *
      * @return True if the location permission is granted, false otherwise.
      */
-    public boolean isLocationPermissionGranted() {
-        return ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED;
+    public boolean isLocationPermissionDenied() {
+        return ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED;
     }
 
     /**
@@ -102,14 +100,17 @@ public class LocationFragment extends Fragment {
             alertDialogBuilder.setTitle("Home Jungle needs your location");
             alertDialogBuilder
                     .setMessage("Home Jungle needs your location in order to find give-aways in your neighbourhood. " +
-                            "Click SETTINGS to manually grant the permission.")
+                            "Click 'Settings' to manually grant the permission.")
                     .setCancelable(false)
-                    .setPositiveButton("SETTINGS", (dialog, id) -> {
+                    .setPositiveButton("Settings", (dialog, id) -> {
                         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
                         intent.setData(uri);
                         startActivityForResult(intent, REQUEST_SETTINGS_LOCATION_PERMISSION);
                         settingsDialogIsShown = false;
+                    })
+                    .setNegativeButton("Cancel", (dialog, id) -> {
+                        displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
                     });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
@@ -118,8 +119,7 @@ public class LocationFragment extends Fragment {
         // Permission was denied
         else {
             Log.v("LocationActivity::result", "Location permission was denied.");
-            Toast.makeText(getActivity(), "Home Jungle needs your location in order to find give-aways in your neighbourhood.", Toast.LENGTH_LONG).show();
-            getActivity().onBackPressed();
+            displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
         }
     }
 
@@ -148,14 +148,17 @@ public class LocationFragment extends Fragment {
             alertDialogBuilder.setTitle("Enable GPS");
             alertDialogBuilder
                     .setMessage("Home Jungle needs your location in order to find give-aways in your neighbourhood. " +
-                            "Click SETTINGS to manually enable GPS.")
+                            "Click 'Settings' to manually enable GPS.")
                     .setCancelable(false)
-                    .setPositiveButton("SETTINGS", (dialog, id) -> {
+                    .setPositiveButton("Settings", (dialog, id) -> {
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                         //Uri uri = Uri.fromParts("package", getPackageName(), null);
                         //intent.setData(uri);
                         startActivityForResult(intent, REQUEST_SETTINGS_LOCATION_SERVICE);
                         settingsDialogIsShown = false;
+                    })
+                    .setNegativeButton("Cancel", (dialog, id) -> {
+                        displayErrorAndGoBack("Please enable GPS.");
                     });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
@@ -178,12 +181,17 @@ public class LocationFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_SETTINGS_LOCATION_PERMISSION && !isLocationPermissionGranted()) {
-            // TODO: callback
-            requestLocationPermission();
+        if (requestCode == REQUEST_SETTINGS_LOCATION_PERMISSION && isLocationPermissionDenied()) {
+            displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
         } else if (requestCode == REQUEST_SETTINGS_LOCATION_SERVICE) {
-            checkLocationService();
+            displayErrorAndGoBack("Please enable GPS.");
         }
+    }
+
+    private void displayErrorAndGoBack(String message) {
+        Log.v("LocationActivity::displayErrorAndGoBack", message);
+        Toast.makeText(getActivity(), "Home Jungle needs your location in order to find give-aways in your neighbourhood. " + message, Toast.LENGTH_LONG).show();
+        getActivity().onBackPressed();
     }
 
 
@@ -223,7 +231,7 @@ public class LocationFragment extends Fragment {
             return;
         }
 
-        if (!isLocationPermissionGranted()) {
+        if (isLocationPermissionDenied()) {
             Log.v("LocationActivity", "Location permission is denied.");
             callback.onLocationResult(LocationResult.PERMISSION_DENIED, null);
             return;

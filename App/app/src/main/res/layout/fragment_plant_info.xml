@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/fragment_plant_start_scene"
-    tools:context=".ui.plants.PlantStartFragment"
+    tools:context=".ui.plants.singleplant.PlantStartFragment"
     tools:ignore="MissingClass">
 
     <ImageView

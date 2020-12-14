@@ -61,7 +61,7 @@ public class PlantRepository {
      *
      * @param id The id of the plant to look up.
      * @return The plant with the given id.
-     */
+*/
     public LiveData<Plant> findById(long id) {
         return plantManager.findById(id);
     }
