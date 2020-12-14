@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -72,11 +73,7 @@ public class LocationFragment extends Fragment {
      * {@link #onRequestPermissionsResult(int, String[], int[])} is called with the result.
      */
     public void requestLocationPermission() {
-        ActivityCompat.requestPermissions(
-                getActivity(),
-                new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION},
-                REQUEST_LOCATION_PERMISSION);
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
     }
 
     /**
@@ -102,9 +99,9 @@ public class LocationFragment extends Fragment {
         else if (!shouldShowRequestPermissionRationale(permissions[0])) {
             Log.v("LocationActivity::result", "Location permission was denied and another attempt is not allowed. Show settings dialog.");
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-            alertDialogBuilder.setTitle("Project Densium needs your location");
+            alertDialogBuilder.setTitle("Home Jungle needs your location");
             alertDialogBuilder
-                    .setMessage("Project Densium needs your location in order to work. " +
+                    .setMessage("Home Jungle needs your location in order to find give-aways in your neighbourhood. " +
                             "Click SETTINGS to manually grant the permission.")
                     .setCancelable(false)
                     .setPositiveButton("SETTINGS", (dialog, id) -> {
@@ -121,9 +118,10 @@ public class LocationFragment extends Fragment {
         // Permission was denied
         else {
             Log.v("LocationActivity::result", "Location permission was denied.");
+            Toast.makeText(getActivity(), "Home Jungle needs your location in order to find give-aways in your neighbourhood.", Toast.LENGTH_LONG).show();
+            getActivity().onBackPressed();
         }
     }
-
 
     /**
      * Returns whether the GPS location service is enabled or not.
@@ -149,7 +147,7 @@ public class LocationFragment extends Fragment {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
             alertDialogBuilder.setTitle("Enable GPS");
             alertDialogBuilder
-                    .setMessage("Project Densium needs your GPS location in order to work. " +
+                    .setMessage("Home Jungle needs your location in order to find give-aways in your neighbourhood. " +
                             "Click SETTINGS to manually enable GPS.")
                     .setCancelable(false)
                     .setPositiveButton("SETTINGS", (dialog, id) -> {

@@ -85,11 +85,16 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_plant, R.id.navigation_database, R.id.navigation_calendar, R.id.navigation_giveaways)
+                R.id.homeFragment, R.id.navigation_database, R.id.navigation_calendar, R.id.navigation_marketplace, R.id.navigation_giveaways)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return navController.navigateUp() || super.onSupportNavigateUp();
     }
 
     //https://stackoverflow.com/questions/5448653/how-to-implement-onbackpressed-in-fragments
