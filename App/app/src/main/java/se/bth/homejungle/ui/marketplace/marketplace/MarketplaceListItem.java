@@ -51,13 +51,16 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
         this.currentPlant = marketplacePlant;
 
         StorageReference storageReference = storage.getReference();
-        StorageReference pathReference = storageReference.child("images/yBhFsX5KH4dBYpppmdRN");
-  //      StorageReference gsReference = storage.getReferenceFromUrl("gs://home-jungle/images/yBhFsX5KH4dBYpppmdRN");
-        StorageReference httpsReference = storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/b/bucket/o/images%20stars.jpg");
-        Task pathReferencetask = storageReference.child("images/yBhFsX5KH4dBYpppmdRN").getDownloadUrl();
+    //    StorageReference pathReference = storageReference.child("images/yBhFsX5KH4dBYpppmdRN");
+     //   StorageReference gsReference = storage.getReferenceFromUrl("gs://home-jungle.appspot.com/images/TbLKuO2e2ULvfR4uzvF7.jpg");
+        StorageReference httpsReference = storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/home-jungle.appspot.com/o/images%2FTbLKuO2e2ULvfR4uzvF7.jpg?alt=media&token=c3e09889-1b6f-4995-923d-cc30e411687f");
+     //   String url = "https://storage.googleapis.com/home-jungle/images/TbLKuO2e2ULvfR4uzvF7.jpg";
+ //       Task pathReferencetask = storageReference.child("images/TbLKuO2e2ULvfR4uzvF7.jpg").getDownloadUrl();
         Glide.with(marketplaceFragment.getContext())
+           //     .load()
+                .load(httpsReference)
             //    .using(new FirebaseImageLoader())
-                .load(pathReferencetask)
+            //    .load(pathReferencetask)
                 .into(img);
     }
 

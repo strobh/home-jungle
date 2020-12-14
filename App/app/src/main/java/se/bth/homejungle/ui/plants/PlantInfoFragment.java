@@ -68,5 +68,6 @@ public class PlantInfoFragment extends Fragment
     {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_plant_start2, container, false);
+
     }
 }
