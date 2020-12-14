@@ -22,14 +22,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDate;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.ui.Source;
 
 public class DatabaseListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+    Species species;
+
     TextView plant_name;
     ImageView plant_img;
-    long plant_id;
+    long species_id;
     ImageButton add_button;
     Source source;
 
@@ -41,9 +44,10 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
         add_button = itemView.findViewById(R.id.btn_add);
     }
 
-    public void bind(Species currentPlant, DatabaseListFragment databaseListFragment) {
-        plant_name.setText(currentPlant.getName());
-        plant_id = currentPlant.getId();
+    public void bind(Species currentSpecies, DatabaseListFragment databaseListFragment) {
+        species = currentSpecies;
+        plant_name.setText(currentSpecies.getName());
+        species_id = currentSpecies.getId();
         source = databaseListFragment.getSource();
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +105,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         String description = input.getText().toString();
-                        databaseListFragment.insertToOwnPlants(plant_id, description);
+                        databaseListFragment.insertToOwnPlants(species_id, description);
                         Toast toast = Toast.makeText(databaseListFragment.getActivity(), R.string.toast_your_plants, Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -124,7 +128,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                     public void onClick(DialogInterface dialog, int which) {
                         // Continue with delete operation
                         String description = input.getText().toString();
-                        databaseListFragment.insertToFuturePlants(plant_id, description, LocalDate.now().plusMonths(5));
+                        databaseListFragment.insertToFuturePlants(species_id, description, FuturePlant.calculatePlantDateFromSpecies(species));
                         Toast toast = Toast.makeText(databaseListFragment.getActivity(), R.string.toast_future_plants, Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -142,7 +146,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
     @Override
     public void onClick(View view) {
         Log.v("Click", "");
-        NavDirections action = DatabaseListFragmentDirections.databaseToPlantpage(plant_id);
+        NavDirections action = DatabaseListFragmentDirections.databaseToPlantpage(species_id);
         Navigation.findNavController(view).navigate(action);
     }
 
