@@ -47,6 +47,11 @@ public interface PlantManager {
     @Query("SELECT * FROM plant WHERE plant_id = :id LIMIT 1")
     LiveData<Plant> findById(long id);
 
+
+    @Transaction
+    @Query("SELECT * FROM plant WHERE plant_id = :id LIMIT 1")
+    LiveData<PlantWithSpecies> findByIdWithSpecies(long id);
+
     /**
      * Sets the date when the plant was last watered to the given date.
      *
@@ -90,4 +95,5 @@ public interface PlantManager {
      */
     @Query("DELETE FROM plant WHERE plant_id = :id")
     void deleteById(long id);
+
 }

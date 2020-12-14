@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -14,12 +15,15 @@ import com.google.android.material.tabs.TabLayout;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.SwipeAdapter;
+import se.bth.homejungle.storage.entity.PlantWithSpecies;
 
 public class SinglePlantFragment extends Fragment {
 
     View myFragment;
     ViewPager viewPager;
     TabLayout tabLayout;
+    SinglePlantViewModel singlePlantViewModel;
+    long plantId;
 
 
     @Override
@@ -29,6 +33,13 @@ public class SinglePlantFragment extends Fragment {
         myFragment =  inflater.inflate(R.layout.fragment_single_plant, container, false);
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tablayout);
+        singlePlantViewModel = new ViewModelProvider(requireActivity()).get(SinglePlantViewModel.class);
+
+        plantId = SinglePlantFragmentArgs.fromBundle(getArguments()).getPlantid();
+
+        /*singlePlantViewModel.getPlantById(plantId).observe(getViewLifecycleOwner(), plant -> {
+            singlePlantViewModel.setCurrentPlant(plant);
+        });*/
 
         return myFragment;
     }
@@ -43,8 +54,8 @@ public class SinglePlantFragment extends Fragment {
 
     private void setUpViewPager(ViewPager viewPager) {
         SwipeAdapter swipeAdapter = new SwipeAdapter(getChildFragmentManager());
-        swipeAdapter.addFragement(new PlantStartFragment());
-        swipeAdapter.addFragement(new PlantInfoFragment());
+        swipeAdapter.addFragement(new PlantStartFragment(plantId));
+        swipeAdapter.addFragement(new PlantInfoFragment(plantId));
 
         viewPager.setAdapter(swipeAdapter);
     }

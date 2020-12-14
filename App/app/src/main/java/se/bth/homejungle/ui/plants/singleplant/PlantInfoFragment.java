@@ -12,6 +12,12 @@ import se.bth.homejungle.R;
 
 public class PlantInfoFragment extends Fragment
 {
+    long plantId;
+
+    public PlantInfoFragment(long plantId){
+        this.plantId = plantId;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
