@@ -34,21 +34,14 @@ public class LocationFragment extends Fragment {
     private LocationListener locationListener;
 
     /**
-     * Whether the location permission should be requested until granted (indefinitely) or not (only once).
-     */
-    private boolean requestPermissionUntilGranted = false;
-
-    /**
      * Whether the user is currently presented with the advanced settings dialog for the location permission.
      */
     private boolean settingsDialogIsShown = false;
 
     /**
      * Checks whether the location permission is granted and requests permission if not.
-     *
-     * @return True if the location permission is granted, false otherwise.
      */
-    public boolean checkLocationPermission(boolean untilGranted) {
+    public boolean checkLocationPermission() {
         // If we are still waiting for an answer from the user, do not check
         if (settingsDialogIsShown) {
             return false;
@@ -56,7 +49,7 @@ public class LocationFragment extends Fragment {
 
         if (!isLocationPermissionGranted()) {
             Log.v("LocationActivity::checkLocationPermission", "Location permission is not granted. Requesting permission.");
-            requestLocationPermission(untilGranted);
+            requestLocationPermission();
             return false;
         } else {
             Log.v("LocationActivity::checkLocationPermission", "Location permission is granted.");
@@ -77,19 +70,8 @@ public class LocationFragment extends Fragment {
     /**
      * Requests the location permission.
      * {@link #onRequestPermissionsResult(int, String[], int[])} is called with the result.
-     *
-     * @param untilGranted True if the location permission should be requested until granted (indefinitely) or not (only once).
      */
-    public void requestLocationPermission(boolean untilGranted) {
-        this.requestPermissionUntilGranted = untilGranted;
-        this.requestLocationPermission();
-    }
-
-    /**
-     * Requests the location permission.
-     * {@link #onRequestPermissionsResult(int, String[], int[])} is called with the result.
-     */
-    private void requestLocationPermission() {
+    public void requestLocationPermission() {
         ActivityCompat.requestPermissions(
                 getActivity(),
                 new String[]{
@@ -139,9 +121,6 @@ public class LocationFragment extends Fragment {
         // Permission was denied
         else {
             Log.v("LocationActivity::result", "Location permission was denied.");
-            if (requestPermissionUntilGranted) {
-                this.requestLocationPermission();
-            }
         }
     }
 
@@ -201,7 +180,8 @@ public class LocationFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_SETTINGS_LOCATION_PERMISSION && requestPermissionUntilGranted && !isLocationPermissionGranted()) {
+        if (requestCode == REQUEST_SETTINGS_LOCATION_PERMISSION && !isLocationPermissionGranted()) {
+            // TODO: callback
             requestLocationPermission();
         } else if (requestCode == REQUEST_SETTINGS_LOCATION_SERVICE) {
             checkLocationService();
