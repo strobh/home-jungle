@@ -17,10 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.MarketplaceAdapter;
 import se.bth.homejungle.ui.MarketplacePlant;
+import se.bth.homejungle.ui.location.LocationFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class MarketplaceFragment extends Fragment {
+public class MarketplaceFragment extends LocationFragment {
     private static final String TAG = "Marketplace";
     RecyclerView recyclerView;
     private MarketplaceViewModel marketplaceViewModel;
@@ -34,6 +35,8 @@ public class MarketplaceFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         marketplaceViewModel = new ViewModelProvider(requireActivity()).get(MarketplaceViewModel.class);
         View root = inflater.inflate(R.layout.fragment_marketplace, container, false);
+
+        checkLocationPermission();
 
         final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this);
         recyclerView = root.findViewById(R.id.idRecyclerView);
