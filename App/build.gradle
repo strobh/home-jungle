@@ -3,6 +3,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.1"
@@ -12,6 +13,7 @@ buildscript {
         // in the individual module build.gradle files
         //for firebase
         classpath 'com.google.gms:google-services:4.3.4'
+
     }
 }
 
@@ -19,6 +21,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 }
 

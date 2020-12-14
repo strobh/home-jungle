@@ -1,8 +1,10 @@
 package se.bth.homejungle.ui.marketplace.marketplace;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,12 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import se.bth.homejungle.FirebaseImageLoader;
 import se.bth.homejungle.R;
 import se.bth.homejungle.ui.MarketplacePlant;
 
@@ -17,9 +25,12 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     TextView speciesName;
     TextView userName;
     TextView distance;
+    ImageView img;
     String id;
     MarketplaceFragment marketplaceFragment;
     MarketplacePlant currentPlant;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+
 
 
     public MarketplaceListItem(@NonNull View itemView) {
@@ -27,6 +38,7 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
         speciesName = itemView.findViewById(R.id.species_name);
         userName = itemView.findViewById(R.id.user_name);
         distance = itemView.findViewById(R.id.distance);
+        img = itemView.findViewById(R.id.giveaway_img);
         itemView.setOnClickListener(this);
     }
 
@@ -37,6 +49,14 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
         id = marketplacePlant.getId();
         this.marketplaceFragment = marketplaceFragment;
         this.currentPlant = marketplacePlant;
+
+        StorageReference storageReference = storage.getReference();
+        StorageReference pathReference = storageReference.child("images/yBhFsX5KH4dBYpppmdRN");
+        Task pathReferencetask = storageReference.child("ficus.jpg").getDownloadUrl();
+        GlideApp.with(marketplaceFragment.getContext())
+            //    .using(new FirebaseImageLoader())
+                .load(pathReference)
+                .into(img);
     }
 
     public static MarketplaceListItem create(ViewGroup parent) {
