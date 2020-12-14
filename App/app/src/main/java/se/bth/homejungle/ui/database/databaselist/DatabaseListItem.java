@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDate;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.ui.Source;
@@ -49,6 +50,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
         plant_name.setText(currentSpecies.getName());
         species_id = currentSpecies.getId();
         source = databaseListFragment.getSource();
+        plant_img.setImageURI(AppDatabase.getUriForFileName(currentSpecies.getImage()));
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

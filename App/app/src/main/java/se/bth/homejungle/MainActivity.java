@@ -37,47 +37,30 @@ public class MainActivity extends AppCompatActivity {
         PlantManager plantManager = db.getPlantManager();
         FuturePlantManager futurePlantManager = db.getFuturePlantManager();
 
-
         AppDatabase.databaseWriteExecutor.execute(() -> {
-
             //These functions are for deleting the existing datasets, so that there won't be duplicates
-            categoryManager.deleteCategories();
+            //categoryManager.deleteCategories();
+            //speciesManager.deleteSpecies();
             plantManager.deletePlants();
             futurePlantManager.deleteFuturePlants();
-            speciesManager.deleteSpecies();
 
-            SpeciesCategory category1 = new SpeciesCategory("Trees");
-                    long categoryTree = categoryManager.insert(category1);
-                    SpeciesCategory category2 = new SpeciesCategory("Herbs");
-                    categoryManager.insert(category2);
-                    SpeciesCategory category3 = new SpeciesCategory("Flowers");
-                    long categoryFlower = categoryManager.insert(category3);
-
-
-            Species species1 = new Species(categoryTree, "Ficus", "Nice tree for home", "Plant it", 0.5, 3, 5, LocalDate.of(0, 3, 1));
-            long ficusId = speciesManager.insert(species1);
-            Plant newPlant1 = new Plant(ficusId,  "Living room");
+            Plant newPlant1 = new Plant(1,  "Living room");
             newPlant1.setLastWatered(LocalDate.now().plusDays(-5));
             plantManager.insert(newPlant1);
-            Plant newPlant2 = new Plant(ficusId,  "Kitchen");
+            Plant newPlant2 = new Plant(1,  "Kitchen");
             newPlant2.setLastWatered(LocalDate.now().plusDays(-3));
             plantManager.insert(newPlant2);
-            Plant newPlant3 = new Plant(ficusId,  "Bathroom");
+            Plant newPlant3 = new Plant(1,  "Bathroom");
             plantManager.insert(newPlant3);
-            FuturePlant futurePlant1 = new FuturePlant(ficusId, "For balcony", LocalDate.now().plusMonths(3));
+            FuturePlant futurePlant1 = new FuturePlant(1, "For balcony", LocalDate.now().plusMonths(3));
             futurePlantManager.insert(futurePlant1);
-            FuturePlant futurePlant2 = new FuturePlant(ficusId, "For friends", LocalDate.now());
+            FuturePlant futurePlant2 = new FuturePlant(1, "For friends", LocalDate.now());
             futurePlantManager.insert(futurePlant2);
-            FuturePlant futurePlant3 = new FuturePlant(ficusId, "For test", LocalDate.now().plusDays(-2));
+            FuturePlant futurePlant3 = new FuturePlant(1, "For test", LocalDate.now().plusDays(-2));
             futurePlantManager.insert(futurePlant3);
 
-            Species species2 = new Species(categoryFlower, "Orchid", "Nice flower for home", "Plant it", 0.2, 5, 2, LocalDate.of(0, 3, 15));
-            long orchidId = speciesManager.insert(species2);
-            Plant newPlant4 = new Plant(orchidId,  "Living room");
+            Plant newPlant4 = new Plant(2,  "Living room");
             plantManager.insert(newPlant4);
-
-            Species species3 = new Species(categoryFlower, "Nasturtium", "Edible flower", "Plant it", 0.5, 2, 4, LocalDate.of(0, 4, 1));
-            speciesManager.insert(species3);
         });
 
         setContentView(R.layout.activity_main);

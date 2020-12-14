@@ -19,6 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import se.bth.homejungle.R;
 
 public class LocationFragment extends Fragment {
     public enum LocationResult {
@@ -29,7 +32,7 @@ public class LocationFragment extends Fragment {
     private static final int REQUEST_SETTINGS_LOCATION_SERVICE = 11;
     private static final int REQUEST_SETTINGS_LOCATION_PERMISSION = 12;
 
-    private static final int GPS_TIMEOUT_IN_MS = 5000;
+    private static final int GPS_TIMEOUT_IN_MS = 10000;
 
     private LocationListener locationListener;
 
@@ -110,7 +113,8 @@ public class LocationFragment extends Fragment {
                         settingsDialogIsShown = false;
                     })
                     .setNegativeButton("Cancel", (dialog, id) -> {
-                        displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
+                        displayLocationError();
+                        navigateBack();
                     });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
@@ -119,7 +123,8 @@ public class LocationFragment extends Fragment {
         // Permission was denied
         else {
             Log.v("LocationActivity::result", "Location permission was denied.");
-            displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
+            displayLocationError();
+            navigateBack();
         }
     }
 
@@ -158,7 +163,8 @@ public class LocationFragment extends Fragment {
                         settingsDialogIsShown = false;
                     })
                     .setNegativeButton("Cancel", (dialog, id) -> {
-                        displayErrorAndGoBack("Please enable GPS.");
+                        displayServiceError();
+                        navigateBack();
                     });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
@@ -182,16 +188,30 @@ public class LocationFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_SETTINGS_LOCATION_PERMISSION && isLocationPermissionDenied()) {
-            displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
-        } else if (requestCode == REQUEST_SETTINGS_LOCATION_SERVICE) {
-            displayErrorAndGoBack("Please enable GPS.");
+            displayLocationError();
+            navigateHome();
+        } else if (requestCode == REQUEST_SETTINGS_LOCATION_SERVICE && !isLocationServiceEnabled()) {
+            displayServiceError();
+            navigateHome();
         }
     }
 
-    private void displayErrorAndGoBack(String message) {
-        Log.v("LocationActivity::displayErrorAndGoBack", message);
-        Toast.makeText(getActivity(), "Home Jungle needs your location in order to find give-aways in your neighbourhood. " + message, Toast.LENGTH_LONG).show();
+    private void displayLocationError() {
+        Log.v("LocationActivity::displayLocationError", "");
+        Toast.makeText(getActivity(), "Home Jungle needs your location in order to find give-aways in your neighbourhood. Please grant Home Jungle the permission to access your location.", Toast.LENGTH_LONG).show();
+    }
+
+    private void displayServiceError() {
+        Log.v("LocationActivity::displayServiceError", "");
+        Toast.makeText(getActivity(), "Home Jungle needs your location in order to find give-aways in your neighbourhood. Please enable GPS.", Toast.LENGTH_LONG).show();
+    }
+
+    private void navigateBack() {
         getActivity().onBackPressed();
+    }
+
+    private void navigateHome() {
+        Navigation.findNavController(this.getView()).navigate(R.id.homeFragment);
     }
 
 

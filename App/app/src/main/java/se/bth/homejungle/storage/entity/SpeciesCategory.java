@@ -25,17 +25,32 @@ public class SpeciesCategory {
     public long id;
 
     /**
+     * The name of the image file.
+     */
+    @ColumnInfo(name="image")
+    public String image;
+
+    /**
      * The name of the category.
      */
     @ColumnInfo(name="name")
     public String name;
 
-    public SpeciesCategory(String name) {
+    public SpeciesCategory(String image, String name) {
+        this.image = image;
         this.name = name;
     }
 
     public long getId() {
         return id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {

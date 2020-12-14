@@ -37,6 +37,7 @@ public class MarketplaceFragment extends LocationFragment {
         View root = inflater.inflate(R.layout.fragment_marketplace, container, false);
 
         checkLocationPermission();
+        checkLocationService();
 
         final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this);
         recyclerView = root.findViewById(R.id.idRecyclerView);
