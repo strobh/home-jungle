@@ -43,7 +43,7 @@ public class PlantStartFragment extends Fragment
 
         singlePlantViewModel.getSpeciesById(speciesId).observe(getViewLifecycleOwner(), species -> {
             LocalDate plantDate = species.getPlantDate();
-            startDate.setText(plantDate.getDayOfMonth() + "." + plantDate.getMonth().toString().toLowerCase());
+            startDate.setText(plantDate.getDayOfMonth() + " " + plantDate.getMonth().toString().toLowerCase());
             steps.setText(species.getHowToStart());
         });
 
