@@ -6,6 +6,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.CustomAdapter;
 import se.bth.homejungle.storage.entity.Plant;
@@ -16,14 +20,29 @@ public class GiveawaysListItem extends CustomAdapter.ViewHolder {
     ImageView giveaways_img;
     TextView giveaways_name;
 
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+
+
     public GiveawaysListItem(View view) {
         super(view);
         giveaways_img = view.findViewById(R.id.giveaway_img);
         giveaways_name = view.findViewById(R.id.species_name);
     }
 
-    public void bind(MarketplacePlant giveaway){
-         giveaways_name.setText(giveaway.getSpeciesname());
+    public void bind(MarketplacePlant giveaway, GiveawaysFragment giveawaysFragment){
+        giveaways_name.setText(giveaway.getSpeciesname());
+        StorageReference storageReference = storage.getReference();
+        StorageReference pathReference = storageReference.child("images/" + giveaway.getId() + ".jpg");
+        //   StorageReference gsReference = storage.getReferenceFromUrl("gs://home-jungle.appspot.com/images/TbLKuO2e2ULvfR4uzvF7.jpg");
+        //StorageReference httpsReference = storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/home-jungle.appspot.com/o/images%2FTbLKuO2e2ULvfR4uzvF7.jpg?alt=media&token=c3e09889-1b6f-4995-923d-cc30e411687f");
+        //   String url = "https://storage.googleapis.com/home-jungle/images/TbLKuO2e2ULvfR4uzvF7.jpg";
+        //       Task pathReferencetask = storageReference.child("images/TbLKuO2e2ULvfR4uzvF7.jpg").getDownloadUrl();
+        pathReference.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    Glide.with(giveawaysFragment.getContext())
+                            .load(uri)
+                            .into(giveaways_img);
+                });
     }
 
     public static GiveawaysListItem create(ViewGroup parent) {

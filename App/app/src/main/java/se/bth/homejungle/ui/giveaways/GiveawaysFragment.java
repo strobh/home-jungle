@@ -51,7 +51,7 @@ public class GiveawaysFragment extends Fragment {
         add_button = root.findViewById(R.id.btn_add);
         no_giveaway_button = root.findViewById(R.id.btn_no_giveaway);
         no_giveaway_tv = root.findViewById(R.id.tv_no_giveaway);
-        final GiveawaysAdapter adapter = new GiveawaysAdapter(new GiveawaysAdapter.GiveawayDiff());
+        final GiveawaysAdapter adapter = new GiveawaysAdapter(new GiveawaysAdapter.GiveawayDiff(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

@@ -10,14 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.ui.Giveaway;
 import se.bth.homejungle.ui.MarketplacePlant;
+import se.bth.homejungle.ui.giveaways.GiveawaysFragment;
 import se.bth.homejungle.ui.giveaways.GiveawaysListItem;
 
 public class GiveawaysAdapter extends ListAdapter<MarketplacePlant, GiveawaysListItem> {
 
+    GiveawaysFragment giveawaysFragment;
 
-    public GiveawaysAdapter(@NonNull DiffUtil.ItemCallback diffCallback) {
+
+    public GiveawaysAdapter(@NonNull DiffUtil.ItemCallback diffCallback, GiveawaysFragment giveawaysFragment) {
         super(diffCallback);
+        this.giveawaysFragment = giveawaysFragment;
     }
 
     @NonNull
@@ -29,7 +34,7 @@ public class GiveawaysAdapter extends ListAdapter<MarketplacePlant, GiveawaysLis
     @Override
     public void onBindViewHolder(@NonNull GiveawaysListItem holder, int position) {
         MarketplacePlant currentGiveaway = (getItem(position));
-        holder.bind(currentGiveaway);
+        holder.bind(currentGiveaway, giveawaysFragment);
     }
 
     public MarketplacePlant getByPosition(int position){

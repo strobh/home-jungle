@@ -33,15 +33,12 @@ public class PlantStartFragment extends Fragment
                              Bundle savedInstanceState)
     {
         singlePlantViewModel = new ViewModelProvider(requireActivity()).get(SinglePlantViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_plant_info, container, false);
+        View root = inflater.inflate(R.layout.fragment_plant_start2, container, false);
         title = root.findViewById(R.id.title);
-/*
         singlePlantViewModel.getSpeciesById(speciesId).observe(getViewLifecycleOwner(), species -> {
             title.setText(species.getName());
         });
 
-*/
-   //     plantImage = root.findViewById(R.id.imageView2);
         return root;
     }
 }
