@@ -69,7 +69,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                                                 showFuturePlantsAlertDialog(databaseListFragment);
                                                 break;
                                             case 2:
-                                                NavDirections action = DatabaseListFragmentDirections.addPlantToGiveaway(plant_name.getText().toString());
+                                                NavDirections action = DatabaseListFragmentDirections.addPlantToGiveaway(currentSpecies.getName(), currentSpecies.getImage());
                                                 Navigation.findNavController(view).navigate(action);
                                                 break;
                                         }
@@ -84,7 +84,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                         showFuturePlantsAlertDialog(databaseListFragment);
                         break;
                     case GIVEAWAYS:
-                        NavDirections action = DatabaseListFragmentDirections.addPlantToGiveaway(plant_name.getText().toString());
+                        NavDirections action = DatabaseListFragmentDirections.addPlantToGiveaway(currentSpecies.getName(), currentSpecies.getImage());
                         Navigation.findNavController(view).navigate(action);
                         break;
                 }

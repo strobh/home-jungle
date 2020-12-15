@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.ui.giveaways.GiveawaysViewModel;
 import se.bth.homejungle.ui.location.LocationFragment;
 
@@ -63,6 +64,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     GiveawaysViewModel giveawaysViewModel;
     View root;
     String speciesNameString;
+    String speciesImageString;
     String userid;
 
     TextView tv_username;
@@ -82,7 +84,8 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         giveawaysViewModel = new ViewModelProvider(this).get(GiveawaysViewModel.class);
-        speciesNameString = AddGiveawayFragmentArgs.fromBundle(getArguments()).getSpeciesname();
+        speciesNameString = AddGiveawayFragmentArgs.fromBundle(getArguments()).getSpeciesName();
+        speciesImageString = AddGiveawayFragmentArgs.fromBundle(getArguments()).getSpeciesImage();
         root = inflater.inflate(R.layout.fragment_add_giveaway, container, false);
 
         progressBar = root.findViewById(R.id.progressBar2);
@@ -118,6 +121,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
         });
 
         imageView = root.findViewById(R.id.imageView);
+        imageView.setImageURI(AppDatabase.getUriForFileName(speciesImageString));
         return root;
     }
 
@@ -141,15 +145,13 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
                         startActivityForResult(pickImage , 0);
                         break;
                     case 2:
-                        //source = default image
-                        //TODO: get default image
+                        imageView.setImageURI(AppDatabase.getUriForFileName(speciesImageString));
                         break;
                 }
             }
         });
         builder.show();
     }
-
 
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);

@@ -106,7 +106,10 @@
             android:id="@+id/giveaway_added"
             app:destination="@id/navigation_giveaways" />
         <argument
-            android:name="Speciesname"
+            android:name="SpeciesName"
+            app:argType="string" />
+        <argument
+            android:name="SpeciesImage"
             app:argType="string" />
     </fragment>
     <fragment
