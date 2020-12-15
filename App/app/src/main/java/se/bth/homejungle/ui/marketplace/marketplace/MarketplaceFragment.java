@@ -89,7 +89,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
     }
 
     public void displayList(Location location) {
-        final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this);
+        final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this, location);
         recyclerView.setAdapter(adapter);
 
         /*SharedPreferences sp = getActivity().getSharedPreferences("userdata", MODE_PRIVATE);
