@@ -105,7 +105,6 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
                 // filter giveaways to distances of less than 5 km
                 marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
-
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
@@ -115,11 +114,9 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
                 // filter giveaways to distances of less than 5 km
                 marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
-
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
         }
     }
-
 }
