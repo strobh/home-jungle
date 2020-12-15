@@ -12,6 +12,10 @@ import java.util.Objects;
 import se.bth.homejungle.ui.MarketplacePlant;
 import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceFragment;
 import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceListItem;
+/**
+ * The MarketplaceAdapter is an adapter for a recyclerview which binds the data of all marketplaceplants
+ * to a recyclerview.
+ */
 
 public class MarketplaceAdapter extends ListAdapter<MarketplacePlant, MarketplaceListItem> {
     MarketplaceFragment marketplaceFragment;

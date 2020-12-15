@@ -47,6 +47,7 @@ import static android.content.Context.MODE_PRIVATE;
  * to get an unique userid which is then stored in the Shared Preferences and used
  * for every giveaway file.
  */
+
 public class GiveawaysFragment extends Fragment {
 
     private GiveawaysViewModel giveawaysViewModel;

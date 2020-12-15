@@ -84,8 +84,6 @@ public class FuturePlantsFragment extends Fragment {
             }
         });
 
-
-     //   ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemAdapter(customAdapter));
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             FuturePlantWithSpecies deleteItem;
