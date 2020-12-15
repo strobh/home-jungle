@@ -6,12 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import java.util.List;
-import java.util.concurrent.Future;
-
-import se.bth.homejungle.storage.entity.FuturePlant;
-import se.bth.homejungle.storage.entity.Plant;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.repository.FuturePlantRepository;
 import se.bth.homejungle.storage.repository.PlantRepository;

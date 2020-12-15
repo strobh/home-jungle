@@ -6,11 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import java.util.List;
 import java.util.Objects;
 
-import se.bth.homejungle.storage.entity.FuturePlant;
-import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.FuturePlantWithSpecies;
 import se.bth.homejungle.ui.plants.futureplants.FuturePlantListItem;
 
 public class FuturePlantsAdapter extends ListAdapter<FuturePlantWithSpecies, FuturePlantListItem> {

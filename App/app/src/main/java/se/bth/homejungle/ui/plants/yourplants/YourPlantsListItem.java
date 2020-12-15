@@ -16,7 +16,7 @@ import java.time.temporal.ChronoUnit;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.storage.AppDatabase;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.PlantWithSpecies;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 

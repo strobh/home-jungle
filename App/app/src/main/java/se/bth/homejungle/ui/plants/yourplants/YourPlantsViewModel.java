@@ -7,9 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.Plant;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.PlantWithSpecies;
 import se.bth.homejungle.storage.repository.PlantRepository;
 
 public class YourPlantsViewModel extends AndroidViewModel {

@@ -9,7 +9,7 @@ import java.util.List;
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.dao.SpeciesManager;
 import se.bth.homejungle.storage.entity.Species;
-import se.bth.homejungle.storage.entity.SpeciesWithCategory;
+import se.bth.homejungle.storage.entity.view.SpeciesWithCategory;
 
 /**
  * SpeciesRepository is an intermediate helper in between the Data Access Object (DAO) and the

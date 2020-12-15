@@ -3,14 +3,13 @@ package se.bth.homejungle.storage.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Query;
 
 import java.util.List;
 
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.dao.FuturePlantManager;
 import se.bth.homejungle.storage.entity.FuturePlant;
-import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.FuturePlantWithSpecies;
 
 /**
  * FuturePlantRepository is an intermediate helper in between the Data Access Object (DAO) and the

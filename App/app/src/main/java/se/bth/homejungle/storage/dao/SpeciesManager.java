@@ -10,7 +10,7 @@ import androidx.room.Transaction;
 import java.util.List;
 
 import se.bth.homejungle.storage.entity.Species;
-import se.bth.homejungle.storage.entity.SpeciesWithCategory;
+import se.bth.homejungle.storage.entity.view.SpeciesWithCategory;
 
 /**
  * SpeciesManager is the Data Access Object (DAO) used to manage plant species in the local database.

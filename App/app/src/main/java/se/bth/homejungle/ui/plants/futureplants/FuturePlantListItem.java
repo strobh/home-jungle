@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.storage.AppDatabase;
-import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.FuturePlantWithSpecies;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 

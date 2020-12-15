@@ -4,16 +4,11 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.entity.SpeciesCategory;
-import se.bth.homejungle.storage.entity.SpeciesWithCategory;
 import se.bth.homejungle.storage.repository.CategoryRepository;
-import se.bth.homejungle.storage.repository.SpeciesRepository;
 
 public class DatabaseViewModel extends AndroidViewModel {
 
