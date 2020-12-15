@@ -33,7 +33,7 @@ public class ReminderNotificationScheduler extends BroadcastReceiver {
 
         // create a broadcast intent for the AlarmManager
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, getFirstSchedulerTime(), 24 * 60 * 60 * 1000, alarmIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, getFirstSchedulerTime(), AlarmManager.INTERVAL_DAY, alarmIntent);
     }
 
     /**
@@ -74,9 +74,10 @@ public class ReminderNotificationScheduler extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 21);
-        calendar.set(Calendar.MINUTE, 20);
+        calendar.set(Calendar.MINUTE, 30);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
+        //calendar.add(Calendar.DATE, 1);
         return calendar.getTimeInMillis();
     }
 }
