@@ -51,6 +51,12 @@ public class Species {
     public String name;
 
     /**
+     * The botanic name of the plant species.
+     */
+    @ColumnInfo(name="botanic_name")
+    public String botanicName;
+
+    /**
      * A description of the plant species.
      */
     @ColumnInfo(name="description")
@@ -86,10 +92,11 @@ public class Species {
     @ColumnInfo(name="plant_date")
     public LocalDate plantDate;
 
-    public Species(long categoryId, String image, String name, String description, String howToStart, double water, int waterDays, double sun, LocalDate plantDate) {
+    public Species(long categoryId, String image, String name, String botanicName, String description, String howToStart, double water, int waterDays, double sun, LocalDate plantDate) {
         this.image = image;
         this.categoryId = categoryId;
         this.name = name;
+        this.botanicName = botanicName;
         this.description = description;
         this.howToStart = howToStart;
         this.water = water;
@@ -116,6 +123,14 @@ public class Species {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBotanicName() {
+        return botanicName;
+    }
+
+    public void setBotanicName(String botanicName) {
+        this.botanicName = botanicName;
     }
 
     public long getCategoryId() {

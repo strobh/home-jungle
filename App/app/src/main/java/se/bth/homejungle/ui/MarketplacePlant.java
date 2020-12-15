@@ -43,8 +43,8 @@ public class MarketplacePlant implements Serializable {
 
     public String getSpeciesname(){ return this.speciesname; }
 
-    public double getDistance(Location location) {
-        return DistanceCalculator.calculateDistance(location.getLatitude(), location.getLongitude(), latitude, longitude);
+    public int getDistance(Location location) {
+        return (int) Math.round(DistanceCalculator.calculateDistance(location.getLatitude(), location.getLongitude(), latitude, longitude) / 1000);
     }
 
     public String getId(){ return this.id; }

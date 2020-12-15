@@ -21,7 +21,7 @@ import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.entity.SpeciesCategory;
 
-@Database(entities = {Plant.class, FuturePlant.class, Species.class, SpeciesCategory.class}, version = 8, exportSchema = false)
+@Database(entities = {Plant.class, FuturePlant.class, Species.class, SpeciesCategory.class}, version = 10, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     /**
@@ -59,7 +59,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     };
 
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "home_jungle_db")
+                            AppDatabase.class, "home_jungle_10")
                             .addCallback(rdc)
                             .fallbackToDestructiveMigration()
                             .build();
