@@ -16,6 +16,9 @@ import se.bth.homejungle.adapter.SwipeAdapter;
 import se.bth.homejungle.ui.plants.futureplants.FuturePlantsFragment;
 import se.bth.homejungle.ui.plants.yourplants.YourPlantsFragment;
 
+/**
+ * The HomeFragment contains a Viewpager which displays YourPlantsFragment and FuturePlantsFragment.
+ */
 
 public class HomeFragment extends Fragment {
 

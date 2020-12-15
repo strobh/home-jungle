@@ -8,18 +8,16 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import se.bth.homejungle.R;
-import se.bth.homejungle.storage.AppDatabase;
-import se.bth.homejungle.storage.entity.Plant;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.Source;
+/**
+ * The PlantStartFragment is displayed in the Viewpager of the SinglePlantFragment.
+ * It shows general information about the plant.
+ */
 
 public class PlantStartFragment extends Fragment
 {
@@ -39,7 +37,7 @@ public class PlantStartFragment extends Fragment
                              Bundle savedInstanceState)
     {
         singlePlantViewModel = new ViewModelProvider(requireActivity()).get(SinglePlantViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_plant_start2, container, false);
+        View root = inflater.inflate(R.layout.fragment_plant_start, container, false);
         startDate = root.findViewById(R.id.startMonths);
         steps = root.findViewById(R.id.stepsInfo);
 

@@ -1,6 +1,5 @@
 package se.bth.homejungle.ui.marketplace.marketplace;
 
-import android.graphics.Bitmap;
 import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +13,17 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import se.bth.homejungle.FirebaseImageLoader;
 import se.bth.homejungle.R;
-import se.bth.homejungle.ui.GlideApp;
 import se.bth.homejungle.ui.MarketplacePlant;
+
+/**
+ * MarketplaceListItem contains the databinding from a giveaway to a listitem in the recyclerview.
+ *
+ * A click on a listitem will navigate to a single giveaway page "SingleGiveaway".
+ */
 
 public class MarketplaceListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
     TextView speciesName;
@@ -32,7 +34,6 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     MarketplaceFragment marketplaceFragment;
     MarketplacePlant currentPlant;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-
     Location location;
 
     public MarketplaceListItem(@NonNull View itemView, Location location) {
@@ -72,6 +73,7 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     @Override
     public void onClick(View view) {
         marketplaceFragment.setCurrentPlant(currentPlant);
+        marketplaceFragment.setLocation(location);
         NavDirections action = MarketplaceFragmentDirections.openGiveaway();
         Navigation.findNavController(view).navigate(action);
     }

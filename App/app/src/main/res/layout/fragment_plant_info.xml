@@ -20,6 +20,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:src="@drawable/ic_baseline_drop"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/water2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,6 +31,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:src="@drawable/ic_baseline_drop"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/water1"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,6 +42,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:src="@drawable/ic_baseline_drop"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/water3"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,9 +54,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:src="@drawable/ic_baseline_drop"
+            android:visibility="visible"
             app:layout_constraintStart_toEndOf="@+id/waterAmount"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
         <TextView
@@ -63,6 +66,7 @@
             android:layout_marginStart="46dp"
             android:layout_marginTop="30dp"
             android:text="@string/wateramount"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,6 +100,7 @@
             android:layout_marginStart="46dp"
             android:layout_marginTop="50dp"
             android:text="more:"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/careAmount" />
 
@@ -107,6 +112,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="46dp"
             android:text="TextView"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/moreTitle" />
@@ -118,6 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_sun"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="@+id/water1"
             app:layout_constraintTop_toBottomOf="@+id/water1" />
 
@@ -128,6 +135,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_sun"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/sun1"
             app:layout_constraintTop_toBottomOf="@+id/water1" />
 
@@ -138,6 +146,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_sun"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/sun2"
             app:layout_constraintTop_toBottomOf="@+id/water1" />
 
@@ -148,6 +157,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_sun"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/sun3"
             app:layout_constraintTop_toBottomOf="@+id/water1" />
 
@@ -158,6 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_sun"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="@+id/sun1"
             app:layout_constraintTop_toBottomOf="@+id/sun1" />
 
@@ -168,6 +179,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_sun"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/heart1"
             app:layout_constraintTop_toBottomOf="@+id/sun1" />
 
@@ -178,6 +190,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_sun"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/heart2"
             app:layout_constraintTop_toBottomOf="@+id/sun1" />
 
@@ -188,6 +201,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/ic_sun"
+            android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@+id/heart3"
             app:layout_constraintTop_toBottomOf="@+id/sun1" />
     </androidx.constraintlayout.widget.ConstraintLayout>

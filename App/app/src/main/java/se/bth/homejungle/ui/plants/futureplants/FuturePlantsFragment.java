@@ -26,6 +26,14 @@ import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
+/**
+ * FuturePlantsFragment contains a RecyclerView which contains all plants that are as future plants
+ * in the local database. The recyclerview is attached with the FuturePlantsAdapter.
+ *
+ * Furthermore, the recyclerview has an itemToucher, so that a swipe to left will call the
+ * delete-function for the listitem.
+ */
+
 public class FuturePlantsFragment extends Fragment {
 
     RecyclerView recyclerView;

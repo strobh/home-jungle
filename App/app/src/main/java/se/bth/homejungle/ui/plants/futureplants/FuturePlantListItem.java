@@ -18,6 +18,12 @@ import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
+/**
+ * FuturePlantsListItem contains the databinding from a futureplant to a listitem in the recyclerview.
+ *
+ * A click on a listitem will navigate to a single plant page "SinglePlantFragment".
+ */
+
 public class FuturePlantListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     TextView plant_name;
@@ -25,6 +31,7 @@ public class FuturePlantListItem extends RecyclerView.ViewHolder implements View
     TextView plant_date;
     ImageView plant_img;
     long plant_id;
+    long species_id;
 
     public FuturePlantListItem(View itemView) {
         super(itemView);
@@ -39,7 +46,7 @@ public class FuturePlantListItem extends RecyclerView.ViewHolder implements View
         plant_name.setText(plantWithSpecies.getSpecies().getName());
         plant_desc.setText(plantWithSpecies.getFuturePlant().getDescription());
         plant_date.setText(plantWithSpecies.getFuturePlant().getPlantDay().format(DateTimeFormatter.ISO_DATE));
-        plant_id = plantWithSpecies.getFuturePlant().getId();
+        species_id = plantWithSpecies.getSpecies().getId();
         plant_img.setImageURI(AppDatabase.getUriForFileName(plantWithSpecies.getSpecies().getImage()));
     }
 
@@ -51,7 +58,7 @@ public class FuturePlantListItem extends RecyclerView.ViewHolder implements View
 
     @Override
     public void onClick(View view) {
-        NavDirections action = HomeFragmentDirections.homeToPlantpage(Source.FUTUREPLANTS).setPlantid(plant_id);
+        NavDirections action = HomeFragmentDirections.homeToPlantpage(Source.FUTUREPLANTS,species_id).setPlantid(plant_id);
         Navigation.findNavController(view).navigate(action);
     }
 }

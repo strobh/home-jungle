@@ -28,9 +28,14 @@ import se.bth.homejungle.ui.location.LocationFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ * The MarketplaceFragment contains a recyclerview to display all giveaways in the neighborhood (that means less than 5 km).
+ * The recyclerview is attached with a MarketplaceAdapter.
+ */
+
+
 public class MarketplaceFragment extends LocationFragment implements LocationFragment.LocationCallback {
     private static final String TAG = "Marketplace";
-    SearchView searchView;
     RecyclerView recyclerView;
     ProgressBar progressBar;
     TextView errorMessage;
@@ -52,9 +57,6 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         progressBar = root.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        searchView = root.findViewById(R.id.idSearchView);
-        searchView.setVisibility(View.INVISIBLE);
-
         errorMessage = root.findViewById(R.id.errorMessage);
         errorMessage.setVisibility(View.INVISIBLE);
 
@@ -69,10 +71,6 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         checkLocationPermission(this);
 
         return root;
-    }
-
-    public void setCurrentPlant(MarketplacePlant currentPlant){
-        marketplaceViewModel.setCurrentPlant(currentPlant);
     }
 
     @Override
@@ -91,7 +89,6 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         if (locationResult == LocationResult.SUCCESS) {
             Log.v("MarketplaceFragment", "Got location");
             progressBar.setVisibility(View.INVISIBLE);
-            searchView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
             displayList(location);
         }
@@ -101,6 +98,9 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         }
     }
 
+    /**
+     * This function gets all giveaways from Firebase and filters the ones that are in the direct neighborhood.
+     */
     public void displayList(Location location) {
         adapter.setLocation(location);
 
@@ -111,11 +111,11 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
 
                 // filter giveaways to distances of less than 5 km
-             //   marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
+                marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
                 if(marketplacePlants.size() == 0){
                     noPlants.setVisibility(View.VISIBLE);
                 }
-                //marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
+                marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
@@ -128,10 +128,18 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
                 if(marketplacePlants.size() == 0){
                     noPlants.setVisibility(View.VISIBLE);
                 }
-                //marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
+                marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
         }
+    }
+
+    public void setLocation(Location location) {
+        marketplaceViewModel.setLocation(location);
+    }
+
+    public void setCurrentPlant(MarketplacePlant currentPlant){
+        marketplaceViewModel.setCurrentPlant(currentPlant);
     }
 }

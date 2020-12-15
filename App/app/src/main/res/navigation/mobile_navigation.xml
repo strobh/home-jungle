@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/navigation_marketplace"
         android:name="se.bth.homejungle.ui.marketplace.marketplace.MarketplaceFragment"
-        android:label="@string/title_marketplace"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_marketplace" >
         <action
             android:id="@+id/open_giveaway"
@@ -115,20 +115,26 @@
     <fragment
         android:id="@+id/singleGiveaway"
         android:name="se.bth.homejungle.ui.marketplace.single_giveaway.SingleGiveaway"
-        android:label="fragment_single_giveaway"
+        android:label="Home Jungle"
         tools:layout="@layout/fragment_single_giveaway" />
     <fragment
         android:id="@+id/singlePlantFragment"
         android:name="se.bth.homejungle.ui.plants.singleplant.SinglePlantFragment"
-        android:label="fragment_single_plant"
+        android:label="Home Jungle"
         tools:layout="@layout/fragment_single_plant" >
+        <argument
+            android:name="source"
+            app:argType="se.bth.homejungle.ui.Source" />
+        <argument
+            android:name="speciesid"
+            app:argType="long" />
         <argument
             android:name="plantid"
             app:argType="long"
             android:defaultValue="0L" />
-        <argument
-            android:name="source"
-            app:argType="se.bth.homejungle.ui.Source" />
+        <action
+            android:id="@+id/action_singlePlantFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/plantStartFragment"
@@ -137,5 +143,5 @@
     <fragment
         android:id="@+id/plantInfoFragment"
         android:name="se.bth.homejungle.ui.plants.singleplant.PlantInfoFragment"
-        tools:layout="@layout/fragment_plant_start2" />
+        tools:layout="@layout/fragment_plant_start" />
 </navigation>

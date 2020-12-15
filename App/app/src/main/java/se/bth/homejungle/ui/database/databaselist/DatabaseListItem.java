@@ -148,8 +148,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
     @Override
     public void onClick(View view) {
         Log.v("Click", "");
-        NavDirections action = DatabaseListFragmentDirections.actionDatabaseListFragmentToPlantInfoFragment(Source.BOTTOMBAR).setPlantid(species_id);
-//        NavDirections action = DatabaseListFragmentDirections.databaseToPlantpage(species_id);
+        NavDirections action = DatabaseListFragmentDirections.actionDatabaseListFragmentToPlantInfoFragment(Source.BOTTOMBAR, species_id);
         Navigation.findNavController(view).navigate(action);
     }
 

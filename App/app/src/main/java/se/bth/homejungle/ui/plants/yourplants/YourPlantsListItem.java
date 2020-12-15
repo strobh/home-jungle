@@ -20,6 +20,12 @@ import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
+/**
+ * YourPlantsListItem contains the databinding from a plant to a listitem in the recyclerview.
+ *
+ *  A click on a listitem will navigate to a single plant page "SinglePlantFragment".
+ */
+
 public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     TextView plant_name;
@@ -27,6 +33,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
     TextView water_amount;
     TextView water_time;
     ImageView plant_img;
+    long plantId;
     long species_id;
 
     public YourPlantsListItem(View itemView) {
@@ -59,6 +66,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
         }
 
         species_id = plantWithSpecies.getSpecies().getId();
+        plantId = plantWithSpecies.getPlant().getId();
         plant_img.setImageURI(AppDatabase.getUriForFileName(plantWithSpecies.getSpecies().getImage()));
     }
 
@@ -70,7 +78,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View view) {
-        NavDirections action = HomeFragmentDirections.homeToPlantpage(Source.YOURPLANTS).setPlantid(species_id);
+        NavDirections action = HomeFragmentDirections.homeToPlantpage(Source.YOURPLANTS, species_id).setPlantid(plantId);
         Navigation.findNavController(view).navigate(action);
     }
 

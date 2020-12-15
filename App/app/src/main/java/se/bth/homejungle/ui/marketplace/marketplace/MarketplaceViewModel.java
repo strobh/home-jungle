@@ -1,6 +1,7 @@
 package se.bth.homejungle.ui.marketplace.marketplace;
 
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class MarketplaceViewModel extends ViewModel {
     MarketplacePlantRepository marketplacePlantRepository;
     MarketplacePlantLiveData liveData = new MarketplacePlantLiveData(null);
     MarketplacePlant currentPlant;
+    Location location;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public MarketplaceViewModel(){
@@ -49,12 +51,6 @@ public class MarketplaceViewModel extends ViewModel {
         return liveData;
     }
 
-    public void getImages(){
-        StorageReference storageReference = storage.getReference();
-        StorageReference pathReference = storageReference.child("ficus.jpg");
-        Bitmap image;
-    }
-
     public void setCurrentPlant(MarketplacePlant plant){
         this.currentPlant = plant;
     }
@@ -62,13 +58,12 @@ public class MarketplaceViewModel extends ViewModel {
     public MarketplacePlant getCurrentPlant(){
         return this.currentPlant;
     }
-/*
-    public LiveData<MarketplacePlant> getSinglePlant(String docName){
-        return marketplacePlantRepository.getSinglePlant(docname);
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public MarketplacePlant getPlantByDocName(String docName){
-        marketplacePlantRepository.setPlantByDocName(docName);
-        return marketplacePlantRepository.getPlantByDocName();
-    }*/
+    public Location getLocation(){
+        return this.location;
+    }
 }

@@ -41,7 +41,7 @@ public class MarketplacePlantRepository {
 
     public MarketplacePlantLiveData getFirestoreLiveData() {
         CollectionReference collectionReference = db.collection("giveaway");
-        return new MarketplacePlantLiveData(collectionReference, "");
+        return new MarketplacePlantLiveData(collectionReference, " ");
     }
 
     public MarketplacePlantLiveData getOwnGiveawaysLiveData(String userid){

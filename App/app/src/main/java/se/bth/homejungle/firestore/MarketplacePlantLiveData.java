@@ -19,6 +19,10 @@ import java.util.List;
 
 import se.bth.homejungle.ui.MarketplacePlant;
 
+/**
+ * MarketplacePlantLiveData is used to retrieve information firebase-database. When marketplacePlantsList
+ * gets updated, if something changes, the viewmodel receives the new data.
+ */
 
 public class MarketplacePlantLiveData extends LiveData<List<MarketplacePlant>> implements EventListener<QuerySnapshot>{
     private static final String TAG = "MarketplacePlantLiveData";
@@ -27,7 +31,7 @@ public class MarketplacePlantLiveData extends LiveData<List<MarketplacePlant>> i
     private List<MarketplacePlant> plantsListTemp = new ArrayList<>();
     public MutableLiveData<List<MarketplacePlant>> marketplacePlantsList = new MutableLiveData<>();
     private ListenerRegistration listenerRegistration = () -> {};
-    private String userid;
+    private String userid = " ";
     
     public MarketplacePlantLiveData(CollectionReference collectionReference, String userid){
         this.collectionReference = collectionReference;
@@ -63,32 +67,15 @@ public class MarketplacePlantLiveData extends LiveData<List<MarketplacePlant>> i
         }
         List<DocumentSnapshot> list = querySnapshot.getDocuments();
         plantsListTemp.clear();
-
-        for(DocumentSnapshot doc : list){
+        for (DocumentSnapshot doc : list) {
             MarketplacePlant newPlant = doc.toObject(MarketplacePlant.class);
+            System.out.println("own id: " + this.userid);
+
             newPlant.setId(doc.getId());
-            if(!this.userid.equals(newPlant.getUserid())){
+            if (!this.userid.equals(newPlant.getUserid())) {
                 plantsListTemp.add(newPlant);
             }
         }
-        marketplacePlantsList.postValue(plantsListTemp);
         marketplacePlantsList.setValue(plantsListTemp);
     }
 }
-
-/*
-        db.collection("user")
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-@Override
-public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-        if(!queryDocumentSnapshots.isEmpty()){
-        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-        for(DocumentSnapshot doc : list){
-        MarketplacePlant newPlant = doc.toObject(MarketplacePlant.class);
-        plantList.add(newPlant);
-        }
-        System.out.println("Size plantslist inside viewmodel: " + plantList.size());
-        }
-        }
-        });*/

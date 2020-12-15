@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,7 +21,6 @@ import se.bth.homejungle.ui.database.databaselist.DatabaseListFragmentArgs;
 
 public class DatabaseCategoriesFragment extends Fragment {
     RecyclerView recyclerView;
-
     private DatabaseViewModel databaseViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

@@ -35,18 +35,24 @@ public class DatabaseListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        databaseListViewModel = new ViewModelProvider(this).get(DatabaseListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_database_list, container, false);
+
         recyclerView = root.findViewById(R.id.idRecyclerView);
         searchView = root.findViewById(R.id.idSearchView);
+        title = root.findViewById(R.id.tv_title);
+
         source = DatabaseListFragmentArgs.fromBundle(getArguments()).getSource();
         categoryId = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryId();
         categoryName = DatabaseListFragmentArgs.fromBundle(getArguments()).getCategoryName();
-        title = root.findViewById(R.id.tv_title);
         title.setText(categoryName);
+        getActivity().setTitle(categoryName);
+
+        databaseListViewModel = new ViewModelProvider(this).get(DatabaseListViewModel.class);
+
         final DatabaseAdapter adapter = new DatabaseAdapter(new DatabaseAdapter.PlantDiff(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         if(categoryName.equals("All")){
             databaseListViewModel.getSpecies().observe(getViewLifecycleOwner(), species -> {
                 Log.v("Database:", "Species: " + species.size());
@@ -58,6 +64,7 @@ public class DatabaseListFragment extends Fragment {
                 adapter.submitList(species);
             });
         }
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -81,6 +88,7 @@ public class DatabaseListFragment extends Fragment {
                 return false;
             }
         });
+
         return root;
     }
 

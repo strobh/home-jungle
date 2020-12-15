@@ -26,6 +26,14 @@ import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 import se.bth.homejungle.ui.Source;
 
+/**
+ * YourPlantsFragment contains a RecyclerView which contains all plants that are as own plants
+ * in the local database. The recyclerview is attached with the YourPlantsAdapter.
+ *
+ * Furthermore, the recyclerview has an itemToucher, so that a swipe to left will call the
+ * delete-function for the listitem.
+ */
+
 public class YourPlantsFragment extends Fragment {
 
     ImageButton add_button;

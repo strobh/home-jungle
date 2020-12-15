@@ -41,12 +41,13 @@ public class GiveawaysFragment extends Fragment {
     Button no_giveaway_button;
     TextView no_giveaway_tv;
     String userid;
+    View root;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         giveawaysViewModel = new ViewModelProvider(this).get(GiveawaysViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_giveaways, container, false);
+        root = inflater.inflate(R.layout.fragment_giveaways, container, false);
         recyclerView = root.findViewById(R.id.idRecyclerView);
         add_button = root.findViewById(R.id.btn_add);
         no_giveaway_button = root.findViewById(R.id.btn_no_giveaway);
@@ -77,15 +78,13 @@ public class GiveawaysFragment extends Fragment {
         no_giveaway_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = GiveawaysFragmentDirections.giveawaysToDatabase().setSource(Source.GIVEAWAYS);
-                Navigation.findNavController(root).navigate(action);
+                addGiveaway();
             }
         });
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavDirections action = GiveawaysFragmentDirections.giveawaysToDatabase().setSource(Source.GIVEAWAYS);
-                Navigation.findNavController(root).navigate(action);
+                addGiveaway();
             }
         });
 
@@ -129,6 +128,11 @@ public class GiveawaysFragment extends Fragment {
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
         return root;
+    }
+
+    private void addGiveaway() {
+        NavDirections action = GiveawaysFragmentDirections.giveawaysToDatabase().setSource(Source.GIVEAWAYS);
+        Navigation.findNavController(root).navigate(action);
     }
 
 }

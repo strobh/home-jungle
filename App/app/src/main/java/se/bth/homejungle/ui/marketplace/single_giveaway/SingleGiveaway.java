@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -24,8 +26,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.ui.MarketplacePlant;
 import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceFragment;
 import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceViewModel;
@@ -36,33 +41,43 @@ public class SingleGiveaway extends Fragment implements OnMapReadyCallback
     MapView mMapView;
     View mView;
 
-    MarketplaceViewModel marketplaceViewModel;
-    MarketplacePlant currentPlant;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView speciesName;
     TextView userName;
     TextView distance;
     TextView contact;
+    ImageView img;
+
+    MarketplaceViewModel marketplaceViewModel;
+    MarketplacePlant currentPlant;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         marketplaceViewModel = new ViewModelProvider(requireActivity()).get(MarketplaceViewModel.class);
         currentPlant = marketplaceViewModel.getCurrentPlant();
         mView = inflater.inflate(R.layout.fragment_single_giveaway, container, false);
-
 
         speciesName = mView.findViewById(R.id.species_name);
         userName = mView.findViewById(R.id.tv_username);
         distance = mView.findViewById(R.id.tv_distance);
         contact = mView.findViewById(R.id.tv_contact);
+        img = mView.findViewById(R.id.giveaway_img);
 
         speciesName.setText(currentPlant.getSpeciesname());
         userName.setText(currentPlant.getUsername());
-        //     distance.setText(currentPlant.getDistance());
+        distance.setText(currentPlant.getDistance(marketplaceViewModel.getLocation()) + " km away");
         contact.setText(currentPlant.getContact());
+
+        StorageReference storageReference = storage.getReference();
+        StorageReference pathReference = storageReference.child("images/" + currentPlant.getId() + ".jpg");
+        pathReference.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    Glide.with(getContext())
+                            .load(uri)
+                            .into(img);
+                });
 
         return mView;
     }
@@ -79,10 +94,8 @@ public class SingleGiveaway extends Fragment implements OnMapReadyCallback
             mMapView.onCreate(null);
             mMapView.onResume();
             mMapView.getMapAsync(this);
-
         }
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap)
@@ -99,21 +112,3 @@ public class SingleGiveaway extends Fragment implements OnMapReadyCallback
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
-
-
-        /*
-
-        db.collection("user").document(docName)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot doc = task.getResult();
-                        currentPlant = doc.toObject(MarketplacePlant.class);
-                        speciesName.setText(currentPlant.getSpeciesName());
-                        userName.setText(currentPlant.getUsername());
-                   //     distance.setText(currentPlant.getDistance());
-                        contact.setText(currentPlant.getContact());
-                    }
-                });
-*/
