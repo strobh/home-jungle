@@ -44,8 +44,6 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         marketplaceViewModel = new ViewModelProvider(requireActivity()).get(MarketplaceViewModel.class);
         View root = inflater.inflate(R.layout.fragment_marketplace, container, false);
 
-        checkLocationPermission(this);
-
         progressBar = root.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -55,6 +53,8 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         recyclerView = root.findViewById(R.id.idRecyclerView);
         recyclerView.setVisibility(View.INVISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        checkLocationPermission(this);
 
         return root;
     }
