@@ -71,6 +71,8 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     ProgressBar progressBar;
     TextView errorMessage;
 
+    Location location;
+
     ImageView imageView;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -271,6 +273,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     public void onLocationResult(LocationResult locationResult, Location location) {
         if (locationResult == LocationResult.SUCCESS) {
             Log.v("MarketplaceFragment", "Got location");
+            this.location = location;
             progressBar.setVisibility(View.INVISIBLE);
 
             imageView.setVisibility(View.VISIBLE);
