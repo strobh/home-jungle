@@ -14,6 +14,16 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Set the properties within `local.properties` into a `Properties` class so that values
+        // within `local.properties` (e.g. Maps API key) are accessible in this file.
+        /*Properties properties = new Properties()
+        if (rootProject.file("local.properties").exists()) {
+            properties.load(rootProject.file("local.properties").newDataInputStream())
+        }
+
+        // Inject the Maps API key into the manifest
+        manifestPlaceholders = [ mapsApiKey : properties.getProperty("MAPS_API_KEY", "") ]*/
     }
 
     buildTypes {
@@ -50,7 +60,8 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "com.google.android.material:material:1.2.1"
     implementation 'androidx.cardview:cardview:1.0.0'
-    //circle ImageView
+
+    // Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // Navigation
@@ -63,11 +74,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-
     // Animation Swiping: https://github.com/xabaras/RecyclerViewSwipeDecorator
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
-    //import the Firebase BoM
+    // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-storage'
@@ -75,7 +85,6 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:0.6.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-
+    // Google maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
-
-

@@ -24,3 +24,4 @@ The app will provide the possibility to search for different plants and get info
 	- We use a Firebase database to store and retrieve give-aways on a server
 - Using a variety of interface elements (e.g. buttons, progress bars, etc)
 	- We used buttons, progress bars, alert dialogs, checkboxes, list views, etc.
+

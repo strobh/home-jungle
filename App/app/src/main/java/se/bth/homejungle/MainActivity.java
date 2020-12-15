@@ -1,10 +1,17 @@
 package se.bth.homejungle;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -26,6 +33,9 @@ import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.entity.SpeciesCategory;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String NOTIFICATION_CHANNEL_ID = "se.bth.homejungle.notifications.channel";
+    public static final int NOTIFICATION_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
             plantManager.insert(newPlant2);
             Plant newPlant3 = new Plant(1,  "Bathroom");
             plantManager.insert(newPlant3);
-            FuturePlant futurePlant1 = new FuturePlant(1, "For balcony", LocalDate.now().plusMonths(3));
+            FuturePlant futurePlant1 = new FuturePlant(2, "For balcony", LocalDate.now().plusMonths(3));
             futurePlantManager.insert(futurePlant1);
-            FuturePlant futurePlant2 = new FuturePlant(1, "For friends", LocalDate.now());
+            FuturePlant futurePlant2 = new FuturePlant(3, "For friends", LocalDate.now());
             futurePlantManager.insert(futurePlant2);
-            FuturePlant futurePlant3 = new FuturePlant(1, "For test", LocalDate.now().plusDays(-2));
+            FuturePlant futurePlant3 = new FuturePlant(4, "For test", LocalDate.now().plusDays(-2));
             futurePlantManager.insert(futurePlant3);
 
-            Plant newPlant4 = new Plant(2,  "Living room");
+            Plant newPlant4 = new Plant(5,  "Living room");
             plantManager.insert(newPlant4);
         });
 
@@ -73,6 +83,49 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+        createNotificationChannel();
+
+        PendingIntent pendingIntent = navController.createDeepLink()
+                .setComponentName(MainActivity.class)
+                .setGraph(R.navigation.mobile_navigation)
+                .setDestination(R.id.navigation_calendar)
+                .createPendingIntent();
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_flower)
+                .setContentTitle("Home Jungle")
+                .setContentText("You have to water a plant!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+        /*PendingIntent pendingIntent = NavDeepLinkBuilder(this)
+                .setComponentName(MainActivity::class.java)
+                     .setGraph(R.navigation.nav_graph)
+                .setDestination(R.id.destination)
+                .setArguments(bundle)
+                .createPendingIntent();*/
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Home Jungle";
+            String description = "Notifications from Home Jungle";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     public boolean onSupportNavigateUp() {
