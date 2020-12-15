@@ -17,9 +17,12 @@ public class MarketplaceAdapter extends ListAdapter<MarketplacePlant, Marketplac
     MarketplaceFragment marketplaceFragment;
     Location location;
 
-    public MarketplaceAdapter(@NonNull DiffUtil.ItemCallback<MarketplacePlant> diffCallback, MarketplaceFragment marketplaceFragment, Location location) {
+    public MarketplaceAdapter(@NonNull DiffUtil.ItemCallback<MarketplacePlant> diffCallback, MarketplaceFragment marketplaceFragment) {
         super(diffCallback);
         this.marketplaceFragment = marketplaceFragment;
+    }
+
+    public void setLocation(Location location) {
         this.location = location;
     }
 
