@@ -34,7 +34,10 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
     RecyclerView recyclerView;
     ProgressBar progressBar;
     TextView errorMessage;
+    TextView noPlants;
     private MarketplaceViewModel marketplaceViewModel;
+
+    final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this);
 
     public static MarketplaceFragment newInstance() {
         return new MarketplaceFragment();
@@ -57,6 +60,10 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
 
         recyclerView = root.findViewById(R.id.idRecyclerView);
         recyclerView.setVisibility(View.INVISIBLE);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        noPlants = root.findViewById(R.id.tv_no_nearby_plant);
 
         checkLocationPermission(this);
 
@@ -94,18 +101,20 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
     }
 
     public void displayList(Location location) {
-        final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this, location);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter.setLocation(location);
 
         SharedPreferences sp = getActivity().getSharedPreferences("userdata", MODE_PRIVATE);
         if(sp.contains("userid")){
             Log.v("MarketplaceFragment", "has userid: " + sp.getString("userid", null));
             marketplaceViewModel.getOtherGiveawaysLiveData(sp.getString("userid", null)).observe(getViewLifecycleOwner(), Observable -> {});
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
-                // filter giveaways to distances of less than 5 km
-                marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
 
+                // filter giveaways to distances of less than 5 km
+             //   marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
+                if(marketplacePlants.size() > 0){
+                    noPlants.setVisibility(View.INVISIBLE);
+                }
+                //marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
@@ -113,13 +122,16 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             Log.v("MarketplaceFragment", "has no userid");
             marketplaceViewModel.getMarketplacePlantsLiveData().observe(getViewLifecycleOwner(), Observable -> {});
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
+
                 // filter giveaways to distances of less than 5 km
                 marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
-
+                if(marketplacePlants.size() > 0){
+                    noPlants.setVisibility(View.INVISIBLE);
+                }
+                //marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
         }
     }
-
 }
