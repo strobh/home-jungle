@@ -32,14 +32,14 @@
         tools:layout_editor_absoluteX="180dp"
         tools:layout_editor_absoluteY="421dp" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/plantPicture"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="70dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/plant3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -120,6 +120,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/ic_delete"
+        android:background="@null"
         app:layout_constraintBottom_toTopOf="@+id/plantPicture"
         app:layout_constraintEnd_toEndOf="parent"/>
 

@@ -92,7 +92,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this, location);
         recyclerView.setAdapter(adapter);
 
-        /*SharedPreferences sp = getActivity().getSharedPreferences("userdata", MODE_PRIVATE);
+        SharedPreferences sp = getActivity().getSharedPreferences("userdata", MODE_PRIVATE);
         if(sp.contains("userid")){
             Log.v("MarketplaceFragment", "has userid: " + sp.getString("userid", null));
             marketplaceViewModel.getOtherGiveawaysLiveData(sp.getString("userid", null)).observe(getViewLifecycleOwner(), Observable -> {});
@@ -113,6 +113,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
-        }*/
+        }
     }
+
 }
