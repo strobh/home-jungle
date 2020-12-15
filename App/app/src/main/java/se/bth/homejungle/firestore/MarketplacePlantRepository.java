@@ -36,7 +36,6 @@ public class MarketplacePlantRepository {
     private static final String SPECIESNAME_KEY = "speciesname";
     private static final String USERID = "userid";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private MarketplacePlant currentPlant;
     private boolean deleted;
 
     public MarketplacePlantLiveData getFirestoreLiveData() {
@@ -88,32 +87,4 @@ public class MarketplacePlantRepository {
                     }
                 });
     }
-
-
-/*public LiveData<MarketplacePlant> getSinglePlant(String docName){
-        DocumentReference documentReference = db.collection("user").document(docName);
-
-
-        db.collection("user").document(docName)
-    }
-
-    public void setPlantByDocName(String docName) {
-        DocumentReference documentReference = db.collection("user").document(docName);
-
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if(document.exists()){
-                        currentPlant = document.toObject(MarketplacePlant.class);
-                    }
-                }
-            }
-        });
-    }
-
-    public MarketplacePlant getPlantByDocName(){
-        return currentPlant;
-    }*/
 }
