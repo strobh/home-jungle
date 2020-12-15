@@ -7,11 +7,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.Month;
 import java.util.Objects;
 
-import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.calendar.CalendarFragment;
 
 import se.bth.homejungle.storage.entity.view.CalendarEvent;

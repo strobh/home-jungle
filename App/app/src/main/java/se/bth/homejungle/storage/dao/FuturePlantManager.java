@@ -11,7 +11,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import se.bth.homejungle.storage.entity.FuturePlant;
-import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.FuturePlantWithSpecies;
 
 /**
  * FuturePlantManager is the Data Access Object (DAO) used to manage future plants in the local

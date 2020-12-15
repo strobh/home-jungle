@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter;
 
 import java.util.Objects;
 
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.yourplants.YourPlantsListItem;
 
 public class YourPlantsAdapter extends ListAdapter<PlantWithSpecies, YourPlantsListItem> {

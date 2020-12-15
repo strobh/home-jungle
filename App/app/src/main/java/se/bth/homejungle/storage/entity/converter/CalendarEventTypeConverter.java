@@ -1,4 +1,4 @@
-package se.bth.homejungle.storage.converter;
+package se.bth.homejungle.storage.entity.converter;
 
 import androidx.room.TypeConverter;
 

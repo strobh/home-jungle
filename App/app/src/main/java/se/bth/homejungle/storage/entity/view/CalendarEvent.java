@@ -7,8 +7,8 @@ import androidx.room.TypeConverters;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import se.bth.homejungle.storage.converter.CalendarEventTypeConverter;
-import se.bth.homejungle.storage.converter.DateConverter;
+import se.bth.homejungle.storage.entity.converter.CalendarEventTypeConverter;
+import se.bth.homejungle.storage.entity.converter.DateConverter;
 import se.bth.homejungle.storage.entity.Species;
 
 /**

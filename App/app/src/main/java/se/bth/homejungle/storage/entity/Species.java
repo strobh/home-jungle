@@ -8,7 +8,7 @@ import androidx.room.TypeConverters;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import se.bth.homejungle.storage.converter.DateConverter;
+import se.bth.homejungle.storage.entity.converter.DateConverter;
 
 /**
  * The Species entity class encapsulates a plant species.

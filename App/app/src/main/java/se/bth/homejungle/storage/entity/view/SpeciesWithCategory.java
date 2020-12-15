@@ -1,9 +1,12 @@
-package se.bth.homejungle.storage.entity;
+package se.bth.homejungle.storage.entity.view;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.util.Objects;
+
+import se.bth.homejungle.storage.entity.Species;
+import se.bth.homejungle.storage.entity.SpeciesCategory;
 
 /**
  * SpeciesWithCategory models the relationship between a species and its category.

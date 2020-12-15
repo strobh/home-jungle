@@ -24,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.YourPlantsAdapter;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 import se.bth.homejungle.ui.Source;
 

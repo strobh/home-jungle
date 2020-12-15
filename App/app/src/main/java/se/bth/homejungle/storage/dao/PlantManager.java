@@ -11,7 +11,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import se.bth.homejungle.storage.entity.Plant;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.PlantWithSpecies;
 
 /**
  * PlantManager is the Data Access Object (DAO) used to manage plants in the local database.

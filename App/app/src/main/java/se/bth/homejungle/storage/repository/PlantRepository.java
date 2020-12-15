@@ -3,16 +3,15 @@ package se.bth.homejungle.storage.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.room.Query;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import se.bth.homejungle.storage.AppDatabase;
-import se.bth.homejungle.storage.converter.DateConverter;
+import se.bth.homejungle.storage.entity.converter.DateConverter;
 import se.bth.homejungle.storage.dao.PlantManager;
 import se.bth.homejungle.storage.entity.Plant;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.storage.entity.view.PlantWithSpecies;
 
 /**
  * PlantRepository is an intermediate helper in between the Data Access Object (DAO) and the view

@@ -21,7 +21,6 @@ import com.google.android.material.tabs.TabLayout;
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.SwipeAdapter;
 import se.bth.homejungle.storage.AppDatabase;
-import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.Source;
 
 /**

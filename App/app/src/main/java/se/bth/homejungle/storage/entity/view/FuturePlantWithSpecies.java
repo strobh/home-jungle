@@ -1,9 +1,12 @@
-package se.bth.homejungle.storage.entity;
+package se.bth.homejungle.storage.entity.view;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.util.Objects;
+
+import se.bth.homejungle.storage.entity.FuturePlant;
+import se.bth.homejungle.storage.entity.Species;
 
 /**
  * FuturePlantWithSpecies models the relationship between a future plant and its species.
