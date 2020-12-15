@@ -35,8 +35,6 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
 
     Location location;
 
-
-
     public MarketplaceListItem(@NonNull View itemView, Location location) {
         super(itemView);
         this.location = location;
