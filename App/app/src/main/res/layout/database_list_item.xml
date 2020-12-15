@@ -13,11 +13,11 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/giveaway_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -25,16 +25,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
         app:layout_constraintStart_toStartOf="@+id/myRectangleView"
         app:layout_constraintTop_toTopOf="@+id/myRectangleView"
-        app:srcCompat="@drawable/plant3" />
+        android:src="@drawable/plant3"/>
 
     <TextView
         android:id="@+id/species_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
+        app:layout_constraintEnd_toStartOf="@+id/btn_add"
         app:layout_constraintStart_toEndOf="@+id/giveaway_img"
         app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
 
@@ -42,11 +43,13 @@
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
+        android:layout_marginEnd="12dp"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/myRectangleView"
         app:layout_constraintTop_toTopOf="@+id/myRectangleView"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:layout_constraintVertical_bias="0.515"
+        app:srcCompat="@drawable/ic_menu_add" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

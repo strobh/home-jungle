@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.ui.giveaways.GiveawaysViewModel;
 import se.bth.homejungle.ui.location.LocationFragment;
 
@@ -55,6 +56,8 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     private static final String CONTACT_KEY = "contact";
     private static final String SPECIESNAME_KEY = "speciesname";
     private static final String USERID = "userid";
+    private static final String LATITUDE = "latitude";
+    private static final String LONGITUDE = "longitude";
     EditText username;
     EditText contact;
     TextView speciesName;
@@ -63,6 +66,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     GiveawaysViewModel giveawaysViewModel;
     View root;
     String speciesNameString;
+    String speciesImageString;
     String userid;
 
     TextView tv_username;
@@ -70,6 +74,8 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
 
     ProgressBar progressBar;
     TextView errorMessage;
+
+    Location location;
 
     ImageView imageView;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -80,7 +86,8 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         giveawaysViewModel = new ViewModelProvider(this).get(GiveawaysViewModel.class);
-        speciesNameString = AddGiveawayFragmentArgs.fromBundle(getArguments()).getSpeciesname();
+        speciesNameString = AddGiveawayFragmentArgs.fromBundle(getArguments()).getSpeciesName();
+        speciesImageString = AddGiveawayFragmentArgs.fromBundle(getArguments()).getSpeciesImage();
         root = inflater.inflate(R.layout.fragment_add_giveaway, container, false);
 
         progressBar = root.findViewById(R.id.progressBar2);
@@ -102,9 +109,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 saveData();
-                //TODO: create new giveaway with usernameInput, contactInput and Image
             }
         });
         addImageButton = root.findViewById(R.id.add_image_btn);
@@ -116,6 +121,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
         });
 
         imageView = root.findViewById(R.id.imageView);
+        imageView.setImageURI(AppDatabase.getUriForFileName(speciesImageString));
         return root;
     }
 
@@ -139,15 +145,13 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
                         startActivityForResult(pickImage , 0);
                         break;
                     case 2:
-                        //source = default image
-                        //TODO: get default image
+                        imageView.setImageURI(AppDatabase.getUriForFileName(speciesImageString));
                         break;
                 }
             }
         });
         builder.show();
     }
-
 
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
@@ -200,11 +204,15 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     }
 
     public void save(){
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
         Map<String, Object> giveawayData = new HashMap<String, Object>();
         giveawayData.put(USERNAME_KEY, username.getText().toString());
         giveawayData.put(CONTACT_KEY, contact.getText().toString());
         giveawayData.put(SPECIESNAME_KEY, speciesNameString);
         giveawayData.put(USERID, userid);
+        giveawayData.put(LATITUDE, latitude);
+        giveawayData.put(LONGITUDE, longitude);
 
         // Add a new document with a generated ID
         db.collection("giveaway")
@@ -271,6 +279,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     public void onLocationResult(LocationResult locationResult, Location location) {
         if (locationResult == LocationResult.SUCCESS) {
             Log.v("MarketplaceFragment", "Got location");
+            this.location = location;
             progressBar.setVisibility(View.INVISIBLE);
 
             imageView.setVisibility(View.VISIBLE);

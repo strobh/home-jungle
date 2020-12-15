@@ -53,8 +53,8 @@ public class CalendarListItem extends RecyclerView.ViewHolder {
 
             @Override
             public void onClick(View view) {
-         //       calendarFragment.calendarEventChecked(calendarEvent);
-                System.out.println("type: " + calendarEvent.getType());
+                calendarFragment.calendarEventChecked(calendarEvent);
+         //       System.out.println("type: " + calendarEvent.getType());
             }
         });
 

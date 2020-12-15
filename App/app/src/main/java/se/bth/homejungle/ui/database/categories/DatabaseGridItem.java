@@ -12,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.SpeciesCategory;
 import se.bth.homejungle.ui.Source;
 
@@ -33,6 +34,7 @@ public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.On
     public void bind(SpeciesCategory currentCategory, Source source){
         category_name.setText(currentCategory.getName());
         category_id = currentCategory.getId();
+        category_img.setImageURI(AppDatabase.getUriForFileName(currentCategory.getImage()));
         this.source = source;
     }
 

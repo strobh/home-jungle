@@ -35,8 +35,6 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
 
     Location location;
 
-
-
     public MarketplaceListItem(@NonNull View itemView, Location location) {
         super(itemView);
         this.location = location;
@@ -50,23 +48,19 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     public void bind(MarketplacePlant marketplacePlant, MarketplaceFragment marketplaceFragment){
         speciesName.setText(marketplacePlant.getSpeciesname());
         userName.setText(marketplacePlant.getUsername());
-        distance.setText(marketplacePlant.getDistance(location) + "km away");
+        distance.setText(marketplacePlant.getDistance(location) + " km away");
         id = marketplacePlant.getId();
         this.marketplaceFragment = marketplaceFragment;
         this.currentPlant = marketplacePlant;
 
         StorageReference storageReference = storage.getReference();
-    //    StorageReference pathReference = storageReference.child("images/yBhFsX5KH4dBYpppmdRN");
-     //   StorageReference gsReference = storage.getReferenceFromUrl("gs://home-jungle.appspot.com/images/TbLKuO2e2ULvfR4uzvF7.jpg");
-        StorageReference httpsReference = storage.getReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/home-jungle.appspot.com/o/images%2FTbLKuO2e2ULvfR4uzvF7.jpg?alt=media&token=c3e09889-1b6f-4995-923d-cc30e411687f");
-     //   String url = "https://storage.googleapis.com/home-jungle/images/TbLKuO2e2ULvfR4uzvF7.jpg";
- //       Task pathReferencetask = storageReference.child("images/TbLKuO2e2ULvfR4uzvF7.jpg").getDownloadUrl();
-        Glide.with(marketplaceFragment.getContext())
-           //     .load()
-                .load(httpsReference)
-            //    .using(new FirebaseImageLoader())
-            //    .load(pathReferencetask)
-                .into(img);
+        StorageReference pathReference = storageReference.child("images/" + marketplacePlant.getId() + ".jpg");
+        pathReference.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    Glide.with(marketplaceFragment.getContext())
+                            .load(uri)
+                            .into(img);
+                });
     }
 
     public static MarketplaceListItem create(ViewGroup parent, Location location) {

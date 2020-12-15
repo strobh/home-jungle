@@ -100,13 +100,16 @@
     <fragment
         android:id="@+id/addGiveawayFragment"
         android:name="se.bth.homejungle.ui.giveaways.add_giveaway.AddGiveawayFragment"
-        android:label="fragment_add_giveaway"
-        tools:layout="@layout/fragment_add_giveaway" >
+        android:label="Add giveaway"
+        tools:layout="@layout/fragment_add_giveaway">
         <action
             android:id="@+id/giveaway_added"
             app:destination="@id/navigation_giveaways" />
         <argument
-            android:name="Speciesname"
+            android:name="SpeciesName"
+            app:argType="string" />
+        <argument
+            android:name="SpeciesImage"
             app:argType="string" />
     </fragment>
     <fragment
