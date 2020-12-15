@@ -1,9 +1,13 @@
 package se.bth.homejungle.ui;
 
+import android.location.Location;
+
 import com.google.firebase.firestore.PropertyName;
 import com.google.j2objc.annotations.Property;
 
 import java.io.Serializable;
+
+import se.bth.homejungle.helper.DistanceCalculator;
 
 public class MarketplacePlant implements Serializable {
     private String username;
@@ -39,10 +43,8 @@ public class MarketplacePlant implements Serializable {
 
     public String getSpeciesname(){ return this.speciesname; }
 
-    public int getDistance() {
-        int distance = 0;
-        //TODO: calculation of distance to current GPS
-        return distance;
+    public double getDistance(Location location) {
+        return DistanceCalculator.calculateDistance(location.getLatitude(), location.getLongitude(), latitude, longitude);
     }
 
     public String getId(){ return this.id; }
