@@ -44,6 +44,14 @@ public class MarketplacePlant implements Serializable {
 
     public String getSpeciesname(){ return this.speciesname; }
 
+    public double getLongitude(){
+        return this.longitude;
+    }
+
+    public double getLatitude(){
+        return this.latitude;
+    }
+
     public int getDistance(Location location) {
         Log.v("MarketplacePlant", "getDistance");
         Log.v("MarketplacePlant", "User: " + location.getLatitude() + ", " + location.getLongitude());
