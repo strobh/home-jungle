@@ -1,5 +1,6 @@
 package se.bth.homejungle.adapter;
 
+import android.location.Location;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,16 +15,18 @@ import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceListItem;
 
 public class MarketplaceAdapter extends ListAdapter<MarketplacePlant, MarketplaceListItem> {
     MarketplaceFragment marketplaceFragment;
+    Location location;
 
-    public MarketplaceAdapter(@NonNull DiffUtil.ItemCallback<MarketplacePlant> diffCallback, MarketplaceFragment marketplaceFragment) {
+    public MarketplaceAdapter(@NonNull DiffUtil.ItemCallback<MarketplacePlant> diffCallback, MarketplaceFragment marketplaceFragment, Location location) {
         super(diffCallback);
         this.marketplaceFragment = marketplaceFragment;
+        this.location = location;
     }
 
     @NonNull
     @Override
     public MarketplaceListItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return MarketplaceListItem.create(parent);
+        return MarketplaceListItem.create(parent, location);
     }
 
     @Override

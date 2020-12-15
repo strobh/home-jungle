@@ -1,6 +1,7 @@
 package se.bth.homejungle.ui.marketplace.marketplace;
 
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,13 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     MarketplacePlant currentPlant;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
+    Location location;
 
 
-    public MarketplaceListItem(@NonNull View itemView) {
+
+    public MarketplaceListItem(@NonNull View itemView, Location location) {
         super(itemView);
+        this.location = location;
         speciesName = itemView.findViewById(R.id.species_name);
         userName = itemView.findViewById(R.id.user_name);
         distance = itemView.findViewById(R.id.distance);
@@ -46,7 +50,7 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     public void bind(MarketplacePlant marketplacePlant, MarketplaceFragment marketplaceFragment){
         speciesName.setText(marketplacePlant.getSpeciesname());
         userName.setText(marketplacePlant.getUsername());
-        distance.setText(marketplacePlant.getDistance() + "km away");
+        distance.setText(marketplacePlant.getDistance(location) + "km away");
         id = marketplacePlant.getId();
         this.marketplaceFragment = marketplaceFragment;
         this.currentPlant = marketplacePlant;
@@ -65,10 +69,10 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
                 .into(img);
     }
 
-    public static MarketplaceListItem create(ViewGroup parent) {
+    public static MarketplaceListItem create(ViewGroup parent, Location location) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.marketplace_list_item, parent, false);
-        return new MarketplaceListItem(view);
+        return new MarketplaceListItem(view, location);
     }
 
     @Override
