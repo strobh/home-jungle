@@ -34,6 +34,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
     RecyclerView recyclerView;
     ProgressBar progressBar;
     TextView errorMessage;
+    TextView noPlants;
     private MarketplaceViewModel marketplaceViewModel;
 
     public static MarketplaceFragment newInstance() {
@@ -57,6 +58,8 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
 
         recyclerView = root.findViewById(R.id.idRecyclerView);
         recyclerView.setVisibility(View.INVISIBLE);
+
+        noPlants = root.findViewById(R.id.tv_no_nearby_plant);
 
         checkLocationPermission(this);
 
@@ -103,8 +106,12 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             Log.v("MarketplaceFragment", "has userid: " + sp.getString("userid", null));
             marketplaceViewModel.getOtherGiveawaysLiveData(sp.getString("userid", null)).observe(getViewLifecycleOwner(), Observable -> {});
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
+
                 // filter giveaways to distances of less than 5 km
                 marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
+                if(marketplacePlants.size() > 0){
+                    noPlants.setVisibility(View.INVISIBLE);
+                }
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
@@ -114,6 +121,9 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
                 // filter giveaways to distances of less than 5 km
                 marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
+                if(marketplacePlants.size() > 0){
+                    noPlants.setVisibility(View.INVISIBLE);
+                }
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
             });
