@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/navigation_giveaways"
         android:name="se.bth.homejungle.ui.giveaways.GiveawaysFragment"
-        android:label="@string/title_giveaways"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_giveaways" >
         <action
             android:id="@+id/giveaways_to_database"
