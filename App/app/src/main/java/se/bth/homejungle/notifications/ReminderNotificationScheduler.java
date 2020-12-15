@@ -9,6 +9,10 @@ import android.util.Log;
 
 import java.util.Calendar;
 
+/**
+ * This class sets up a scheduler that is executed once a day at around 8:30.
+ * It schedules another intent for exactly 9:00 that publishes the notifications then.
+ */
 public class ReminderNotificationScheduler extends BroadcastReceiver {
 
     /**

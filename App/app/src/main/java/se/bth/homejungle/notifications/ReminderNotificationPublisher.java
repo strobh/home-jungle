@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+/**
+ * This BroadcastReceiver is scheduled for every day at 9:00 to publish the today's reminder
+ * notification.
+ */
 public class ReminderNotificationPublisher extends BroadcastReceiver {
 
     public static final String NOTIFICATION_CHANNEL_ID = "se.bth.homejungle.notifications.channel";

@@ -30,6 +30,10 @@ import se.bth.homejungle.storage.entity.view.CalendarEventType;
 import static se.bth.homejungle.notifications.ReminderNotificationPublisher.NOTIFICATION_CHANNEL_ID;
 import static se.bth.homejungle.notifications.ReminderNotificationPublisher.NOTIFICATION_ID;
 
+/**
+ * This background task retrieves today's calendar events and creates the corresponding
+ * notification and displays it to the user.
+ */
 public class PublishNotificationTask extends AsyncTask<BroadcastReceiver.PendingResult, Void, Void> {
     private WeakReference<Context> contextRef;
 
