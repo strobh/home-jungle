@@ -14,6 +14,9 @@
     <string name="no_giveaways">You have no giveaways</string>
     <string name="no_nearby_plant">There are no plants in your neighborhood</string>
 
+    <string name="no_plants">You have no plants</string>
+    <string name="no_future_plants">You have no plants</string>
+
     <string name="add_btn">Add</string>
 
     <string name="add_pop_up">Add a plant</string>

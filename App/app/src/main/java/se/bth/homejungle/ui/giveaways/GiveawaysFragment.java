@@ -33,6 +33,20 @@ import se.bth.homejungle.ui.MarketplacePlant;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ * The GiveawaysFragment is used to display all own giveaways in a recyclerview.
+ * The recyclerview is attached with the GiveawaysAdapter and an ItemtouchHelper.
+ *
+ * The fragment contains a button, which navigates to the database to add a new
+ * giveaway.
+ *
+ * If there are no own giveaways, a corresponding message and a further button to
+ * add a giveaway is shown.
+ *
+ * If the user creates his or her first giveaway, a userdocument is created on firebase
+ * to get an unique userid which is then stored in the Shared Preferences and used
+ * for every giveaway file.
+ */
 public class GiveawaysFragment extends Fragment {
 
     private GiveawaysViewModel giveawaysViewModel;
@@ -107,7 +121,6 @@ public class GiveawaysFragment extends Fragment {
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                        // .addBackgroundColor(ContextCompat.getColor(getContext(), R.color.red))
                         .addActionIcon(R.drawable.ic_delete)
                         .create()
                         .decorate();

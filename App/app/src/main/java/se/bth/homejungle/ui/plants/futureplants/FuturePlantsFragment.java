@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -38,6 +40,8 @@ public class FuturePlantsFragment extends Fragment {
 
     RecyclerView recyclerView;
     ImageButton add_button;
+    TextView noPlant;
+    Button noPlantBtn;
 
     private FuturePlantsViewModel futurePlantsViewModel;
 
@@ -47,12 +51,26 @@ public class FuturePlantsFragment extends Fragment {
         futurePlantsViewModel = new ViewModelProvider(this).get(FuturePlantsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_future_plants, container, false);
 
+        noPlant = root.findViewById(R.id.tv_no_plant);
+        noPlantBtn = root.findViewById(R.id.btn_no_plant);
         recyclerView = root.findViewById(R.id.idRecyclerView);
         final FuturePlantsAdapter adapter = new FuturePlantsAdapter(new FuturePlantsAdapter.PlantDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         futurePlantsViewModel.getFuturePlantsWithSpecies().observe(getViewLifecycleOwner(), plants -> {
+            if(plants.size() < 1){
+                noPlant.setVisibility(View.VISIBLE);
+                noPlantBtn.setVisibility(View.VISIBLE);
+            } else {
+                noPlantBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        NavDirections action = HomeFragmentDirections.homeToDatabase().setSource(Source.FUTUREPLANTS);
+                        Navigation.findNavController(root).navigate(action);
+                    }
+                });
+            }
             Log.v("Database", "Future plants: " + plants.size());
             adapter.submitList(plants);
         });

@@ -16,6 +16,10 @@ import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.SpeciesCategory;
 import se.bth.homejungle.ui.Source;
 
+/**
+ * The DatabaseGridItem is used to bind the data of a category to the recyclerview in DatabaseGridFragment.
+ * If a category is clicked, it navigates to the corresponding DatabaseListFragment.
+ */
 
 public class DatabaseGridItem extends RecyclerView.ViewHolder implements View.OnClickListener {
 

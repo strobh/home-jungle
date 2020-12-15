@@ -19,6 +19,13 @@ import se.bth.homejungle.storage.entity.SpeciesCategory;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.database.databaselist.DatabaseListFragmentArgs;
 
+/**
+ * The DatabaseCategoriesFragment is used as the first page of the database which shows
+ * all categories in a RecyclerView with a GridLayoutManager. The recyclerview is attached
+ * with the DatabaseGridAdapter.
+ */
+
+
 public class DatabaseCategoriesFragment extends Fragment {
     RecyclerView recyclerView;
     private DatabaseViewModel databaseViewModel;

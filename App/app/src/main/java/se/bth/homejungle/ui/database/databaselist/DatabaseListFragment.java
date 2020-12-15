@@ -21,6 +21,10 @@ import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.yourplants.YourPlantsViewModel;
 
+/**
+ * The DatabaseListFragment displays all plants of one category in a recyclerview which is
+ * attached with the Databaseadapter.
+ */
 
 public class DatabaseListFragment extends Fragment {
 

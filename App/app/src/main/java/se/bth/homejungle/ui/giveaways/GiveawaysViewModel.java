@@ -14,6 +14,7 @@ import se.bth.homejungle.firestore.MarketplacePlantRepository;
 import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.ui.MarketplacePlant;
 
+
 public class GiveawaysViewModel extends ViewModel {
     private MarketplacePlantRepository marketplacePlantRepository;
     public MutableLiveData<List<MarketplacePlant>> marketplacePlantsList = new MutableLiveData<List<MarketplacePlant>>();

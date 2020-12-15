@@ -35,6 +35,12 @@ import se.bth.homejungle.ui.MarketplacePlant;
 import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceFragment;
 import se.bth.homejungle.ui.marketplace.marketplace.MarketplaceViewModel;
 
+/**
+ * The SingleGiveawayFragment is used to display one giveaway of another user. It is opened from
+ * the MarketplaceFragment and contains information such as the map with the location of the
+ * giveaway, the username, distance and contactinformation.
+ */
+
 public class SingleGiveaway extends Fragment implements OnMapReadyCallback
 {
     GoogleMap mGoogleMap;

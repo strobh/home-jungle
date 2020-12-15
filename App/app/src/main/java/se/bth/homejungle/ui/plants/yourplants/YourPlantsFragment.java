@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,6 +38,8 @@ import se.bth.homejungle.ui.Source;
 
 public class YourPlantsFragment extends Fragment {
 
+    TextView noPlant;
+    Button noPlantBtn;
     ImageButton add_button;
     private YourPlantsViewModel plantViewModel;
 
@@ -43,12 +47,26 @@ public class YourPlantsFragment extends Fragment {
         plantViewModel = new ViewModelProvider(this).get(YourPlantsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_your_plants, container, false);
 
+        noPlant = root.findViewById(R.id.tv_no_plant);
+        noPlantBtn = root.findViewById(R.id.btn_no_plant);
         RecyclerView recyclerView = root.findViewById(R.id.idRecyclerView);
         final YourPlantsAdapter adapter = new YourPlantsAdapter(new YourPlantsAdapter.PlantDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         plantViewModel.getPlantsWithSpecies().observe(getViewLifecycleOwner(), plants -> {
+            if(plants.size() < 1){
+                noPlant.setVisibility(View.VISIBLE);
+                noPlantBtn.setVisibility(View.VISIBLE);
+            } else {
+                noPlantBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        NavDirections action = HomeFragmentDirections.homeToDatabase().setSource(Source.YOURPLANTS);
+                        Navigation.findNavController(root).navigate(action);
+                    }
+                });
+            }
             Log.v("Database", "Your plants: " + plants.size());
             adapter.submitList(plants);
         });
