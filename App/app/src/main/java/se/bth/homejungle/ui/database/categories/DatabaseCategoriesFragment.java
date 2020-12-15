@@ -36,7 +36,7 @@ public class DatabaseCategoriesFragment extends Fragment {
 
         databaseViewModel.getSpeciesCategories().observe(getViewLifecycleOwner(), speciesCategories -> {
             if(!speciesCategories.get(0).getName().equals("All")){
-                SpeciesCategory speciesCategoryAll = new SpeciesCategory("all.png", "All");
+                SpeciesCategory speciesCategoryAll = new SpeciesCategory("all", "All");
                 speciesCategories.add(0, speciesCategoryAll);
             }
             Log.v("Database:", "Grid-Species: " + speciesCategories.size());
