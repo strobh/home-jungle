@@ -12,6 +12,11 @@ import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.ui.database.databaselist.DatabaseListFragment;
 import se.bth.homejungle.ui.database.databaselist.DatabaseListItem;
 
+/**
+ * The DatabaseAdapter is an adapter for a recyclerview which binds the data of plants of a category
+ * to a recyclerview. This is adapter is used in DatabaseListFragment.
+ */
+
 public class DatabaseAdapter extends ListAdapter<Species, DatabaseListItem> {
     DatabaseListFragment databaseListFragment;
 

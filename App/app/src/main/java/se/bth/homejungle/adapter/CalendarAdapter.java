@@ -15,6 +15,11 @@ import se.bth.homejungle.storage.entity.view.CalendarEvent;
 import se.bth.homejungle.ui.calendar.CalendarListItem;
 import se.bth.homejungle.ui.calendar.CalendarMonthListItem;
 
+/**
+ * The CalendarAdapter is an adapter for a recyclerview which binds the data of a Calendar to Listitem.
+ * It uses different viewHolders, depending on if the date is the first of a new month.
+ */
+
 public class CalendarAdapter extends ListAdapter<CalendarEvent, RecyclerView.ViewHolder> {
     CalendarFragment calendarFragment;
     private static int TYPE_MONTH = 0;
@@ -23,10 +28,6 @@ public class CalendarAdapter extends ListAdapter<CalendarEvent, RecyclerView.Vie
     public CalendarAdapter(DiffUtil.ItemCallback<CalendarEvent> diffCallback, CalendarFragment calendarFragment) {
         super(diffCallback);
         this.calendarFragment = calendarFragment;
-    }
-
-    public CalendarEvent getByPosition(int position) {
-        return getCurrentList().get(position);
     }
 
     @NonNull

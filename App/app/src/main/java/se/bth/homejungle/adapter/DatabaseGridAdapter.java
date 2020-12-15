@@ -13,6 +13,11 @@ import se.bth.homejungle.storage.entity.SpeciesCategory;
 import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.database.categories.DatabaseGridItem;
 
+/**
+ * The DatabaseAdapter is an adapter for a recyclerview which binds the data of a category
+ * to a recyclerview. This is adapter is used in DatabaseGridFragment.
+ */
+
 public class DatabaseGridAdapter extends ListAdapter<SpeciesCategory, DatabaseGridItem>{
     Source source;
 

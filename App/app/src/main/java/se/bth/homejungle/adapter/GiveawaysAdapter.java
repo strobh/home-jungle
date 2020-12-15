@@ -15,6 +15,11 @@ import se.bth.homejungle.ui.MarketplacePlant;
 import se.bth.homejungle.ui.giveaways.GiveawaysFragment;
 import se.bth.homejungle.ui.giveaways.GiveawaysListItem;
 
+/**
+ * The GiveawaysAdapter is an adapter for a recyclerview which binds the data of all own giveaways
+ * to a recyclerview.
+ */
+
 public class GiveawaysAdapter extends ListAdapter<MarketplacePlant, GiveawaysListItem> {
 
     GiveawaysFragment giveawaysFragment;

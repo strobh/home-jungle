@@ -10,6 +10,10 @@ import java.util.Objects;
 
 import se.bth.homejungle.storage.entity.view.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.yourplants.YourPlantsListItem;
+/**
+ * The YourPlantsAdapter is an adapter for a recyclerview which binds the data of all own plants
+ * to a recyclerview.
+ */
 
 public class YourPlantsAdapter extends ListAdapter<PlantWithSpecies, YourPlantsListItem> {
 

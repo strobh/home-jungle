@@ -11,6 +11,11 @@ import java.util.Objects;
 import se.bth.homejungle.storage.entity.view.FuturePlantWithSpecies;
 import se.bth.homejungle.ui.plants.futureplants.FuturePlantListItem;
 
+/**
+ * The FuturePlantsAdapter is an adapter for a recyclerview which binds the data of all futureplants
+ * to a recyclerview.
+ */
+
 public class FuturePlantsAdapter extends ListAdapter<FuturePlantWithSpecies, FuturePlantListItem> {
 
     public FuturePlantsAdapter(@NonNull DiffUtil.ItemCallback<FuturePlantWithSpecies> diffCallback) {
