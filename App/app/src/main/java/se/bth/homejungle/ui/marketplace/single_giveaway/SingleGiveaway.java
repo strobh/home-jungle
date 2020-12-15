@@ -64,7 +64,6 @@ public class SingleGiveaway extends Fragment implements OnMapReadyCallback
         //     distance.setText(currentPlant.getDistance());
         contact.setText(currentPlant.getContact());
 
-
         return mView;
     }
 
@@ -93,11 +92,11 @@ public class SingleGiveaway extends Fragment implements OnMapReadyCallback
         mGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(56.160820, 15.586710)).title("Karlskrona"));
+        LatLng plantPosition = new LatLng(currentPlant.getLatitude(), currentPlant.getLongitude());
 
-        CameraPosition Karlskrona = CameraPosition.builder().target(new LatLng(56.160820, 15.586710)).zoom(16).bearing(0).tilt(45).build();
-
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Karlskrona));
+        googleMap.addMarker(new MarkerOptions().position(plantPosition).title("Karlskrona"));
+        CameraPosition cameraPosition = CameraPosition.builder().target(plantPosition).zoom(14).bearing(0).build();
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
 
