@@ -11,6 +11,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -50,7 +51,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
     public void bind(PlantWithSpecies plantWithSpecies) {
         plant_name.setText(plantWithSpecies.getSpecies().getName());
         plant_desc.setText(plantWithSpecies.getPlant().getDescription());
-        water_amount.setText((plantWithSpecies.getSpecies().getWater() * 0.2) + " l");
+        water_amount.setText((new DecimalFormat("##.#").format((plantWithSpecies.getSpecies().getWater() * 0.2))) + " l");
 
         long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), plantWithSpecies.getNextWateringDate());
         if (daysBetween < -1) {
