@@ -114,6 +114,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
                 if(marketplacePlants.size() > 0){
                     noPlants.setVisibility(View.INVISIBLE);
                 }
+
                 //marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);

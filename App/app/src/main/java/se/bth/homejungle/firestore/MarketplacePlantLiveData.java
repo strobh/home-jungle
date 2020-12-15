@@ -67,7 +67,7 @@ public class MarketplacePlantLiveData extends LiveData<List<MarketplacePlant>> i
         for(DocumentSnapshot doc : list){
             MarketplacePlant newPlant = doc.toObject(MarketplacePlant.class);
             newPlant.setId(doc.getId());
-            if(this.userid != newPlant.getUserid()){
+            if(!this.userid.equals(newPlant.getUserid())){
                 plantsListTemp.add(newPlant);
             }
         }
