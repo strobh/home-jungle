@@ -1,17 +1,8 @@
 package se.bth.homejungle;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,8 +11,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.time.LocalDate;
-import java.util.concurrent.Future;
 
+import se.bth.homejungle.notifications.ReminderNotificationScheduler;
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.dao.CategoryManager;
 import se.bth.homejungle.storage.dao.FuturePlantManager;
@@ -29,13 +20,8 @@ import se.bth.homejungle.storage.dao.PlantManager;
 import se.bth.homejungle.storage.dao.SpeciesManager;
 import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.Plant;
-import se.bth.homejungle.storage.entity.Species;
-import se.bth.homejungle.storage.entity.SpeciesCategory;
 
 public class MainActivity extends AppCompatActivity {
-
-    public static final String NOTIFICATION_CHANNEL_ID = "se.bth.homejungle.notifications.channel";
-    public static final int NOTIFICATION_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,48 +70,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-
-        createNotificationChannel();
-
-        PendingIntent pendingIntent = navController.createDeepLink()
-                .setComponentName(MainActivity.class)
-                .setGraph(R.navigation.mobile_navigation)
-                .setDestination(R.id.navigation_calendar)
-                .createPendingIntent();
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_flower)
-                .setContentTitle("Home Jungle")
-                .setContentText("You have to water a plant!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
-
-        /*PendingIntent pendingIntent = NavDeepLinkBuilder(this)
-                .setComponentName(MainActivity::class.java)
-                     .setGraph(R.navigation.nav_graph)
-                .setDestination(R.id.destination)
-                .setArguments(bundle)
-                .createPendingIntent();*/
-    }
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Home Jungle";
-            String description = "Notifications from Home Jungle";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
+        // setup scheduler on start
+        ReminderNotificationScheduler notificationScheduler = new ReminderNotificationScheduler();
+        notificationScheduler.setupScheduler(this);
     }
 
     public boolean onSupportNavigateUp() {
