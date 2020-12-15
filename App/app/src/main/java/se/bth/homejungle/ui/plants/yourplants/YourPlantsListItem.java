@@ -17,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 import se.bth.homejungle.R;
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
 public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -69,7 +70,7 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View view) {
-        NavDirections action = HomeFragmentDirections.homeToPlantpage().setPlantid(species_id);
+        NavDirections action = HomeFragmentDirections.homeToPlantpage(Source.YOURPLANTS).setPlantid(species_id);
         Navigation.findNavController(view).navigate(action);
     }
 

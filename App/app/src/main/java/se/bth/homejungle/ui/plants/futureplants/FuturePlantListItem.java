@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import se.bth.homejungle.R;
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
+import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
 public class FuturePlantListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -50,7 +51,7 @@ public class FuturePlantListItem extends RecyclerView.ViewHolder implements View
 
     @Override
     public void onClick(View view) {
-        NavDirections action = HomeFragmentDirections.homeToPlantpage().setPlantid(plant_id);
+        NavDirections action = HomeFragmentDirections.homeToPlantpage(Source.FUTUREPLANTS).setPlantid(plant_id);
         Navigation.findNavController(view).navigate(action);
     }
 }

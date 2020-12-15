@@ -30,4 +30,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="location_error_message_marketplace">Home Jungle was not able to determine your location to show nearby give-aways.</string>
+
+    <!-- plantpages -->
+    <string name="wateramount">water</string>
+    <string name="sunamount">sun</string>
+    <string name="careamount">care</string>
 </resources>

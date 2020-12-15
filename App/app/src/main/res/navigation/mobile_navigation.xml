@@ -126,6 +126,9 @@
             android:name="plantid"
             app:argType="long"
             android:defaultValue="0L" />
+        <argument
+            android:name="source"
+            app:argType="se.bth.homejungle.ui.Source" />
     </fragment>
     <fragment
         android:id="@+id/plantStartFragment"

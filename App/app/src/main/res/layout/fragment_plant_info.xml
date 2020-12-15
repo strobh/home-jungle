@@ -17,112 +17,75 @@
             android:id="@+id/water3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/ic_baseline_drop"
-            app:layout_constraintEnd_toStartOf="@+id/water4"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/water2"
-            app:layout_constraintTop_toBottomOf="@+id/plantInfoTitle" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/water2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/ic_baseline_drop"
-            app:layout_constraintEnd_toStartOf="@+id/water3"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/water1"
-            app:layout_constraintTop_toBottomOf="@+id/plantInfoTitle" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/water4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/ic_baseline_drop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/water3"
-            app:layout_constraintTop_toBottomOf="@+id/plantInfoTitle" />
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <ImageView
             android:id="@+id/water1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
             android:src="@drawable/ic_baseline_drop"
-            app:layout_constraintEnd_toStartOf="@+id/water2"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/waterAmount"
-            app:layout_constraintTop_toBottomOf="@+id/plantInfoTitle" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/plantPicture"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/plant3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/plantName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plantPicture" />
 
-        <TextView
-            android:id="@+id/plantInfoTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="Information"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plantName" />
 
         <TextView
             android:id="@+id/waterAmount"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="40dp"
-            android:text="Water"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/water1"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/wateramount"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plantInfoTitle" />
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/sunlightAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="46dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"
-            android:text="Sun"
+            android:text="@string/sunamount"
             app:layout_constraintBottom_toTopOf="@+id/careAmount"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/waterAmount"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/water1" />
 
         <TextView
             android:id="@+id/careAmount"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_marginStart="46dp"
-            android:layout_marginTop="30dp"
-            android:text="Care"
+            android:layout_marginTop="40dp"
+            android:text="@string/careamount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sunlightAmount" />
 
@@ -132,172 +95,100 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="46dp"
             android:layout_marginTop="50dp"
-            android:text="More:"
+            android:text="more:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/careAmount" />
 
         <TextView
             android:id="@+id/moreInformation"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="46dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="46dp"
             android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/moreTitle" />
 
-        <ImageButton
-            android:id="@+id/deleteButton"
+
+        <ImageView
+            android:id="@+id/sun1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:background="@null"
-            android:src="@drawable/ic_delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintStart_toStartOf="@+id/water1"
+            app:layout_constraintTop_toBottomOf="@+id/water1" />
 
+        <ImageView
+            android:id="@+id/sun2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintStart_toEndOf="@+id/sun1"
+            app:layout_constraintTop_toBottomOf="@+id/water1" />
+
+        <ImageView
+            android:id="@+id/sun3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintStart_toEndOf="@+id/sun2"
+            app:layout_constraintTop_toBottomOf="@+id/water1" />
+
+        <ImageView
+            android:id="@+id/sun4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintStart_toEndOf="@+id/sun3"
+            app:layout_constraintTop_toBottomOf="@+id/water1" />
+
+
+        <ImageView
+            android:id="@+id/heart1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintStart_toStartOf="@+id/sun1"
+            app:layout_constraintTop_toBottomOf="@+id/sun1" />
+
+        <ImageView
+            android:id="@+id/heart2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintStart_toEndOf="@+id/heart1"
+            app:layout_constraintTop_toBottomOf="@+id/sun1" />
+
+        <ImageView
+            android:id="@+id/heart3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintStart_toEndOf="@+id/heart2"
+            app:layout_constraintTop_toBottomOf="@+id/sun1" />
+
+        <ImageView
+            android:id="@+id/heart4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintStart_toEndOf="@+id/heart3"
+            app:layout_constraintTop_toBottomOf="@+id/sun1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
-
-<!--
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_plant_start_scene"
-    tools:context=".ui.plants.singleplant.PlantStartFragment"
-    tools:ignore="MissingClass">
-
-    <ImageView
-        android:id="@+id/water4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_drop"
-        tools:layout_editor_absoluteX="255dp"
-        tools:layout_editor_absoluteY="421dp" />
-
-    <ImageView
-        android:id="@+id/water3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_drop"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="421dp" />
-
-    <ImageView
-        android:id="@+id/water2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_drop"
-        tools:layout_editor_absoluteX="180dp"
-        tools:layout_editor_absoluteY="421dp" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/plantPicture"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/plant3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/plantName"
-        android:layout_width="64dp"
-        android:layout_height="17dp"
-        android:layout_marginTop="30dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantPicture" />
-
-    <TextView
-        android:id="@+id/plantInfoTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Information"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantName" />
-
-    <TextView
-        android:id="@+id/waterAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="40dp"
-        android:text="Water"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plantInfoTitle" />
-
-    <TextView
-        android:id="@+id/sunlightAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:text="Sun"
-        app:layout_constraintBottom_toTopOf="@+id/careAmount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waterAmount"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/careAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="30dp"
-        android:text="Care"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sunlightAmount" />
-
-    <TextView
-        android:id="@+id/moreTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="50dp"
-        android:text="More:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/careAmount" />
-
-    <TextView
-        android:id="@+id/moreInformation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moreTitle" />
-
-    <ImageButton
-        android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_delete"
-        android:background="@null"
-        app:layout_constraintBottom_toTopOf="@+id/plantPicture"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <ImageView
-        android:id="@+id/water1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:src="@drawable/ic_baseline_drop"
-        app:layout_constraintStart_toEndOf="@+id/waterAmount"
-        tools:layout_editor_absoluteY="421dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
--->

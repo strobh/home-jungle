@@ -12,22 +12,26 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
+import se.bth.homejungle.ui.Source;
 
 public class PlantStartFragment extends Fragment
 {
-    TextView title;
-    ImageView plantImage;
     TextView startDate;
     TextView steps;
     SinglePlantViewModel singlePlantViewModel;
     long speciesId;
-    ImageButton delete;
+    Source source;
 
-    public PlantStartFragment(long speciesId){
+    public PlantStartFragment(long speciesId, Source source){
         this.speciesId = speciesId;
+        this.source = source;
     }
 
     @Override
@@ -36,28 +40,15 @@ public class PlantStartFragment extends Fragment
     {
         singlePlantViewModel = new ViewModelProvider(requireActivity()).get(SinglePlantViewModel.class);
         View root = inflater.inflate(R.layout.fragment_plant_start2, container, false);
-        title = root.findViewById(R.id.title);
         startDate = root.findViewById(R.id.startMonths);
         steps = root.findViewById(R.id.stepsInfo);
-        delete = root.findViewById(R.id.deleteButton);
-
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deletePlant();
-            }
-        });
 
         singlePlantViewModel.getSpeciesById(speciesId).observe(getViewLifecycleOwner(), species -> {
-            title.setText(species.getName());
-            startDate.setText(species.getPlantDate().toString());
+            LocalDate plantDate = species.getPlantDate();
+            startDate.setText(plantDate.getDayOfMonth() + "." + plantDate.getMonth().toString().toLowerCase());
             steps.setText(species.getHowToStart());
         });
 
         return root;
-    }
-
-    public void deletePlant(){
-
     }
 }
