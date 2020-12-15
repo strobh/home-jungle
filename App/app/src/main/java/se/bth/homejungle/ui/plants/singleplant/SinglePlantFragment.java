@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -28,6 +29,7 @@ public class SinglePlantFragment extends Fragment {
     TabLayout tabLayout;
     ImageView plantImage;
     ImageButton delete;
+    TextView title;
     SinglePlantViewModel singlePlantViewModel;
     long speciesId;
     Source source;
@@ -41,6 +43,7 @@ public class SinglePlantFragment extends Fragment {
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tablayout);
         plantImage = myFragment.findViewById(R.id.plant_img);
+        title = myFragment.findViewById(R.id.title);
         delete = myFragment.findViewById(R.id.deleteButton);
         singlePlantViewModel = new ViewModelProvider(requireActivity()).get(SinglePlantViewModel.class);
 
@@ -48,6 +51,7 @@ public class SinglePlantFragment extends Fragment {
         source = SinglePlantFragmentArgs.fromBundle(getArguments()).getSource();
 
         singlePlantViewModel.getSpeciesById(speciesId).observe(getViewLifecycleOwner(), species -> {
+            title.setText(species.getName());
             plantImage.setImageURI(AppDatabase.getUriForFileName(species.getImage()));
         });
 
