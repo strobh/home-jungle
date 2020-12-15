@@ -17,8 +17,10 @@
         android:theme="@style/Theme.HomeJungle">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${mapsApiKey}" />
-
+            android:value= "AIzaSyA84EinnHe8yrPrhLOCW1Ptqzgqi4FRqfE" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
