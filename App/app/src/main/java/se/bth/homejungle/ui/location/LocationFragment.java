@@ -19,6 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import se.bth.homejungle.R;
 
 public class LocationFragment extends Fragment {
     public enum LocationResult {
@@ -29,7 +32,7 @@ public class LocationFragment extends Fragment {
     private static final int REQUEST_SETTINGS_LOCATION_SERVICE = 11;
     private static final int REQUEST_SETTINGS_LOCATION_PERMISSION = 12;
 
-    private static final int GPS_TIMEOUT_IN_MS = 5000;
+    private static final int GPS_TIMEOUT_IN_MS = 10000;
 
     private LocationListener locationListener;
 
@@ -38,14 +41,18 @@ public class LocationFragment extends Fragment {
      */
     private boolean settingsDialogIsShown = false;
 
+    private LocationCallback callback;
+
     /**
      * Checks whether the location permission is granted and requests permission if not.
      */
-    public boolean checkLocationPermission() {
+    public boolean checkLocationPermission(LocationCallback callback) {
         // If we are still waiting for an answer from the user, do not check
         if (settingsDialogIsShown) {
             return false;
         }
+
+        this.callback = callback;
 
         if (isLocationPermissionDenied()) {
             Log.v("LocationActivity::checkLocationPermission", "Location permission is not granted. Requesting permission.");
@@ -53,6 +60,7 @@ public class LocationFragment extends Fragment {
             return false;
         } else {
             Log.v("LocationActivity::checkLocationPermission", "Location permission is granted.");
+            this.callback.onPermissionResult(true);
             return true;
         }
     }
@@ -92,6 +100,7 @@ public class LocationFragment extends Fragment {
         // Permission was granted
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Log.v("LocationActivity::result", "Location permission was granted.");
+            this.callback.onPermissionResult(true);
         }
         // Permission was denied and user clicked 'Never Ask Again', show a dialog
         else if (!shouldShowRequestPermissionRationale(permissions[0])) {
@@ -110,7 +119,9 @@ public class LocationFragment extends Fragment {
                         settingsDialogIsShown = false;
                     })
                     .setNegativeButton("Cancel", (dialog, id) -> {
-                        displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
+                        this.callback.onPermissionResult(false);
+                        //displayLocationError();
+                        //navigateBack();
                     });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
@@ -119,60 +130,15 @@ public class LocationFragment extends Fragment {
         // Permission was denied
         else {
             Log.v("LocationActivity::result", "Location permission was denied.");
-            displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
+            this.callback.onPermissionResult(false);
+            //displayLocationError();
+            //navigateBack();
         }
     }
 
     /**
-     * Returns whether the GPS location service is enabled or not.
-     *
-     * @return True if the GPS location service is enabled, false otherwise.
-     */
-    public boolean isLocationServiceEnabled() {
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        if (locationManager == null) {
-            return false;
-        }
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-    }
-
-    /**
-     * Checks whether the GPS location service is enabled and requests to enable it if not.
-     *
-     * @return True if the GPS location service is enabled, false otherwise.
-     */
-    public boolean checkLocationService() {
-        if (!isLocationServiceEnabled()) {
-            Log.v("LocationActivity::checkLocationService", "Location service is not enabled. Request to enable it.");
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-            alertDialogBuilder.setTitle("Enable GPS");
-            alertDialogBuilder
-                    .setMessage("Home Jungle needs your location in order to find give-aways in your neighbourhood. " +
-                            "Click 'Settings' to manually enable GPS.")
-                    .setCancelable(false)
-                    .setPositiveButton("Settings", (dialog, id) -> {
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        //Uri uri = Uri.fromParts("package", getPackageName(), null);
-                        //intent.setData(uri);
-                        startActivityForResult(intent, REQUEST_SETTINGS_LOCATION_SERVICE);
-                        settingsDialogIsShown = false;
-                    })
-                    .setNegativeButton("Cancel", (dialog, id) -> {
-                        displayErrorAndGoBack("Please enable GPS.");
-                    });
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-            settingsDialogIsShown = true;
-            return false;
-        } else {
-            Log.v("LocationActivity::checkLocationService", "Location service is enabled.");
-            return true;
-        }
-    }
-
-    /**
-     * Callback that is called whenever a settings dialog (i.e. in {@link #checkLocationService()}
-     * and {@link #onRequestPermissionsResult(int, String[], int[])}) was closed.
+     * Callback that is called whenever a settings dialog (i.e. in
+     * {@link #onRequestPermissionsResult(int, String[], int[])}) was closed.
      *
      * @param requestCode Request code of the dialog.
      * @param resultCode Result of the opened activity.
@@ -181,17 +147,29 @@ public class LocationFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_SETTINGS_LOCATION_PERMISSION && isLocationPermissionDenied()) {
-            displayErrorAndGoBack("Please grant Home Jungle the permission to access your location.");
-        } else if (requestCode == REQUEST_SETTINGS_LOCATION_SERVICE) {
-            displayErrorAndGoBack("Please enable GPS.");
+        if (requestCode == REQUEST_SETTINGS_LOCATION_PERMISSION) {
+            if (isLocationPermissionDenied()) {
+                this.callback.onPermissionResult(false);
+                //displayLocationError();
+                //navigateHome();
+            }
+            else {
+                this.callback.onPermissionResult(true);
+            }
         }
     }
 
-    private void displayErrorAndGoBack(String message) {
-        Log.v("LocationActivity::displayErrorAndGoBack", message);
-        Toast.makeText(getActivity(), "Home Jungle needs your location in order to find give-aways in your neighbourhood. " + message, Toast.LENGTH_LONG).show();
+    private void displayLocationError() {
+        Log.v("LocationActivity::displayLocationError", "");
+        Toast.makeText(getActivity(), "Home Jungle needs your location in order to find give-aways in your neighbourhood. Please grant Home Jungle the permission to access your location.", Toast.LENGTH_LONG).show();
+    }
+
+    private void navigateBack() {
         getActivity().onBackPressed();
+    }
+
+    private void navigateHome() {
+        Navigation.findNavController(this.getView()).navigate(R.id.homeFragment);
     }
 
 
@@ -212,6 +190,8 @@ public class LocationFragment extends Fragment {
          * @param location The location if successful, null otherwise
          */
         void onLocationResult(LocationResult locationResult, Location location);
+
+        void onPermissionResult(boolean granted);
     }
 
     /**

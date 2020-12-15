@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.format.DateTimeFormatter;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.FuturePlantWithSpecies;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
@@ -38,7 +39,7 @@ public class FuturePlantListItem extends RecyclerView.ViewHolder implements View
         plant_desc.setText(plantWithSpecies.getFuturePlant().getDescription());
         plant_date.setText(plantWithSpecies.getFuturePlant().getPlantDay().format(DateTimeFormatter.ISO_DATE));
         plant_id = plantWithSpecies.getFuturePlant().getId();
-        // TODO: finish
+        plant_img.setImageURI(AppDatabase.getUriForFileName(plantWithSpecies.getSpecies().getImage()));
     }
 
     public static FuturePlantListItem create(ViewGroup parent) {

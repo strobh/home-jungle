@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.format.DateTimeFormatter;
 
 import se.bth.homejungle.R;
+import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.PlantWithSpecies;
 import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
@@ -38,10 +39,10 @@ public class YourPlantsListItem extends RecyclerView.ViewHolder implements View.
     public void bind(PlantWithSpecies plantWithSpecies) {
         plant_name.setText(plantWithSpecies.getSpecies().getName());
         plant_desc.setText(plantWithSpecies.getPlant().getDescription());
-        water_amount.setText(plantWithSpecies.getSpecies().getWater() + " l");
+        water_amount.setText(String.valueOf(plantWithSpecies.getSpecies().getWater()));
         water_time.setText(plantWithSpecies.getNextWateringDate().format(DateTimeFormatter.ISO_DATE));
         species_id = plantWithSpecies.getSpecies().getId();
-        // TODO: finish
+        plant_img.setImageURI(AppDatabase.getUriForFileName(plantWithSpecies.getSpecies().getImage()));
     }
 
     public static YourPlantsListItem create(ViewGroup parent) {

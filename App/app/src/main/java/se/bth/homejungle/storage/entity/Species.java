@@ -39,6 +39,12 @@ public class Species {
     public long categoryId;
 
     /**
+     * The name of the image file.
+     */
+    @ColumnInfo(name="image")
+    public String image;
+
+    /**
      * The name of the plant species.
      */
     @ColumnInfo(name="name")
@@ -80,7 +86,8 @@ public class Species {
     @ColumnInfo(name="plant_date")
     public LocalDate plantDate;
 
-    public Species(long categoryId, String name, String description, String howToStart, double water, int waterDays, double sun, LocalDate plantDate) {
+    public Species(long categoryId, String image, String name, String description, String howToStart, double water, int waterDays, double sun, LocalDate plantDate) {
+        this.image = image;
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
@@ -93,6 +100,14 @@ public class Species {
 
     public long getId() {
         return id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {

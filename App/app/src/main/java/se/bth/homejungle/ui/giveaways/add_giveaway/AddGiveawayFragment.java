@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -26,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,11 +45,12 @@ import java.util.Map;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.ui.giveaways.GiveawaysViewModel;
+import se.bth.homejungle.ui.location.LocationFragment;
 
 import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
 
-public class AddGiveawayFragment extends Fragment {
+public class AddGiveawayFragment extends LocationFragment implements LocationFragment.LocationCallback {
     private static final String USERNAME_KEY = "username";
     private static final String CONTACT_KEY = "contact";
     private static final String SPECIESNAME_KEY = "speciesname";
@@ -62,6 +65,12 @@ public class AddGiveawayFragment extends Fragment {
     String speciesNameString;
     String userid;
 
+    TextView tv_username;
+    TextView tv_contact;
+
+    ProgressBar progressBar;
+    TextView errorMessage;
+
     ImageView imageView;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -72,12 +81,22 @@ public class AddGiveawayFragment extends Fragment {
         // Inflate the layout for this fragment
         giveawaysViewModel = new ViewModelProvider(this).get(GiveawaysViewModel.class);
         speciesNameString = AddGiveawayFragmentArgs.fromBundle(getArguments()).getSpeciesname();
-
         root = inflater.inflate(R.layout.fragment_add_giveaway, container, false);
+
+        progressBar = root.findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.VISIBLE);
+
+        errorMessage = root.findViewById(R.id.errorMessage2);
+        errorMessage.setVisibility(View.INVISIBLE);
+
+        checkLocationPermission(this);
+
         username = root.findViewById(R.id.edittext_username);
         contact = root.findViewById(R.id.edittext_contact);
         speciesName = root.findViewById(R.id.species_name);
         speciesName.setText(speciesNameString);
+        tv_username = root.findViewById(R.id.tv_username);
+        tv_contact = root.findViewById(R.id.tv_contact);
 
         addButton = root.findViewById(R.id.button);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -237,4 +256,35 @@ public class AddGiveawayFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onPermissionResult(boolean granted) {
+        if (granted) {
+            requestLocation(true, this);
+        } else {
+            progressBar.setVisibility(View.INVISIBLE);
+            errorMessage.setText("Home Jungle needs your location in order to offer the give-away in your neighbourhood. Make sure that Home Jungle can access your location.");
+            errorMessage.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onLocationResult(LocationResult locationResult, Location location) {
+        if (locationResult == LocationResult.SUCCESS) {
+            Log.v("MarketplaceFragment", "Got location");
+            progressBar.setVisibility(View.INVISIBLE);
+
+            imageView.setVisibility(View.VISIBLE);
+            speciesName.setVisibility(View.VISIBLE);
+            username.setVisibility(View.VISIBLE);
+            contact.setVisibility(View.VISIBLE);
+            addImageButton.setVisibility(View.VISIBLE);
+            addButton.setVisibility(View.VISIBLE);
+            tv_username.setVisibility(View.VISIBLE);
+            tv_contact.setVisibility(View.VISIBLE);
+        }
+        else {
+            progressBar.setVisibility(View.INVISIBLE);
+            errorMessage.setVisibility(View.VISIBLE);
+        }
+    }
 }
