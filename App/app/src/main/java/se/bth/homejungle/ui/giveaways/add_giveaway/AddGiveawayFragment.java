@@ -278,7 +278,9 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     @Override
     public void onLocationResult(LocationResult locationResult, Location location) {
         if (locationResult == LocationResult.SUCCESS) {
-            Log.v("MarketplaceFragment", "Got location");
+            Log.v("AddGiveawayFragment", "Got location");
+            Log.v("AddGiveawayFragment", "Lat: " + location.getLatitude());
+            Log.v("AddGiveawayFragment", "Lon: " + location.getLongitude());
             this.location = location;
             progressBar.setVisibility(View.INVISIBLE);
 

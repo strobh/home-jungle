@@ -1,6 +1,7 @@
 package se.bth.homejungle.ui;
 
 import android.location.Location;
+import android.util.Log;
 
 import com.google.firebase.firestore.PropertyName;
 import com.google.j2objc.annotations.Property;
@@ -44,6 +45,10 @@ public class MarketplacePlant implements Serializable {
     public String getSpeciesname(){ return this.speciesname; }
 
     public int getDistance(Location location) {
+        Log.v("MarketplacePlant", "getDistance");
+        Log.v("MarketplacePlant", "User: " + location.getLatitude() + ", " + location.getLongitude());
+        Log.v("MarketplacePlant", "Give-away: " + latitude + ", " + longitude);
+        Log.v("MarketplacePlant", "Distance: " + DistanceCalculator.calculateDistance(location.getLatitude(), location.getLongitude(), latitude, longitude));
         return (int) Math.round(DistanceCalculator.calculateDistance(location.getLatitude(), location.getLongitude(), latitude, longitude) / 1000);
     }
 
