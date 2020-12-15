@@ -50,7 +50,7 @@ public class MarketplaceListItem extends RecyclerView.ViewHolder implements View
     public void bind(MarketplacePlant marketplacePlant, MarketplaceFragment marketplaceFragment){
         speciesName.setText(marketplacePlant.getSpeciesname());
         userName.setText(marketplacePlant.getUsername());
-        distance.setText(marketplacePlant.getDistance(location) + "km away");
+        distance.setText(marketplacePlant.getDistance(location) + " km away");
         id = marketplacePlant.getId();
         this.marketplaceFragment = marketplaceFragment;
         this.currentPlant = marketplacePlant;

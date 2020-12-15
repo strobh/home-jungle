@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MarketplaceFragment extends LocationFragment implements LocationFragment.LocationCallback {
     private static final String TAG = "Marketplace";
+    SearchView searchView;
     RecyclerView recyclerView;
     ProgressBar progressBar;
     TextView errorMessage;
@@ -47,12 +49,14 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         progressBar = root.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
+        searchView = root.findViewById(R.id.idSearchView);
+        searchView.setVisibility(View.INVISIBLE);
+
         errorMessage = root.findViewById(R.id.errorMessage);
         errorMessage.setVisibility(View.INVISIBLE);
 
         recyclerView = root.findViewById(R.id.idRecyclerView);
         recyclerView.setVisibility(View.INVISIBLE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         checkLocationPermission(this);
 
@@ -79,6 +83,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
         if (locationResult == LocationResult.SUCCESS) {
             Log.v("MarketplaceFragment", "Got location");
             progressBar.setVisibility(View.INVISIBLE);
+            searchView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
             displayList(location);
         }
@@ -91,6 +96,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
     public void displayList(Location location) {
         final MarketplaceAdapter adapter = new MarketplaceAdapter(new MarketplaceAdapter.MarketplacePlantDiff(), this, location);
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         SharedPreferences sp = getActivity().getSharedPreferences("userdata", MODE_PRIVATE);
         if(sp.contains("userid")){
@@ -98,7 +104,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             marketplaceViewModel.getOtherGiveawaysLiveData(sp.getString("userid", null)).observe(getViewLifecycleOwner(), Observable -> {});
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
                 // filter giveaways to distances of less than 5 km
-                marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5000).collect(Collectors.toList());
+                //marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
 
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
@@ -108,7 +114,7 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             marketplaceViewModel.getMarketplacePlantsLiveData().observe(getViewLifecycleOwner(), Observable -> {});
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
                 // filter giveaways to distances of less than 5 km
-                marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5000).collect(Collectors.toList());
+                //marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
 
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
