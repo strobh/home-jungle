@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -17,7 +18,7 @@
         android:theme="@style/Theme.HomeJungle">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value= "AIzaSyA84EinnHe8yrPrhLOCW1Ptqzgqi4FRqfE" />
+            android:value="AIzaSyA84EinnHe8yrPrhLOCW1Ptqzgqi4FRqfE" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -30,6 +31,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <receiver android:name=".notifications.ReminderNotificationScheduler">
+            <intent-filter>
+                <action android:name="se.bth.homejungle.SCHEDULE_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".notifications.ReminderNotificationPublisher">
+            <intent-filter>
+                <action android:name="se.bth.homejungle.PUBLISH_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".notifications.AlarmAutoStartUp">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+    </application>
 </manifest>
