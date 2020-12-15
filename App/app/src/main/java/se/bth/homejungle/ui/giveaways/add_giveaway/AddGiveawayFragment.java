@@ -56,6 +56,8 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     private static final String CONTACT_KEY = "contact";
     private static final String SPECIESNAME_KEY = "speciesname";
     private static final String USERID = "userid";
+    private static final String LATITUDE = "latitude";
+    private static final String LONGITUDE = "longitude";
     EditText username;
     EditText contact;
     TextView speciesName;
@@ -107,9 +109,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 saveData();
-                //TODO: create new giveaway with usernameInput, contactInput and Image
             }
         });
         addImageButton = root.findViewById(R.id.add_image_btn);
@@ -204,11 +204,15 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
     }
 
     public void save(){
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
         Map<String, Object> giveawayData = new HashMap<String, Object>();
         giveawayData.put(USERNAME_KEY, username.getText().toString());
         giveawayData.put(CONTACT_KEY, contact.getText().toString());
         giveawayData.put(SPECIESNAME_KEY, speciesNameString);
         giveawayData.put(USERID, userid);
+        giveawayData.put(LATITUDE, latitude);
+        giveawayData.put(LONGITUDE, longitude);
 
         // Add a new document with a generated ID
         db.collection("giveaway")

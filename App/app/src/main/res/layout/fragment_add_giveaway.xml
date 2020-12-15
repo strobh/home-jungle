@@ -6,30 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.giveaways.add_giveaway.AddGiveawayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:src="@drawable/default_dot"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/giveaway_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:src="@android:drawable/ic_dialog_map"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/species_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/add_image_btn"
-        app:layout_constraintTop_toBottomOf="@+id/giveaway_location" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/edittext_username"
@@ -66,6 +51,7 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_menu_camera"
         android:visibility="invisible"
+        android:background="@null"
         app:layout_constraintBottom_toBottomOf="@+id/species_name"
         app:layout_constraintEnd_toStartOf="@+id/species_name"
         app:layout_constraintHorizontal_bias="0.5"
