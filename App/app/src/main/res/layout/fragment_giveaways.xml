@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.giveaways.GiveawaysFragment">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="14dp"
-        android:text="@string/title_giveaways"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
@@ -32,12 +21,11 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="14dp"
         android:background="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+        tools:layout_editor_absoluteY="55dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRecyclerView"
