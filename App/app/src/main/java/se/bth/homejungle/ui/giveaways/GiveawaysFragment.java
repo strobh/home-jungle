@@ -21,15 +21,13 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.firestore.DocumentReference;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.GiveawaysAdapter;
-import se.bth.homejungle.ui.Source;
 import se.bth.homejungle.ui.MarketplacePlant;
+import se.bth.homejungle.ui.Source;
 
 import static android.content.Context.MODE_PRIVATE;
 

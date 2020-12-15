@@ -3,9 +3,6 @@ package se.bth.homejungle.ui;
 import android.location.Location;
 import android.util.Log;
 
-import com.google.firebase.firestore.PropertyName;
-import com.google.j2objc.annotations.Property;
-
 import java.io.Serializable;
 
 import se.bth.homejungle.helper.DistanceCalculator;

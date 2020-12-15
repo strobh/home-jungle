@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
-import se.bth.homejungle.ui.calendar.CalendarFragment;
-
 import se.bth.homejungle.storage.entity.view.CalendarEvent;
+import se.bth.homejungle.ui.calendar.CalendarFragment;
 import se.bth.homejungle.ui.calendar.CalendarListItem;
 import se.bth.homejungle.ui.calendar.CalendarMonthListItem;
 

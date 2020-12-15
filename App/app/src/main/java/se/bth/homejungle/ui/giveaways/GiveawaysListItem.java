@@ -12,7 +12,6 @@ import com.google.firebase.storage.StorageReference;
 
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.CustomAdapter;
-import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.ui.MarketplacePlant;
 
 public class GiveawaysListItem extends CustomAdapter.ViewHolder {

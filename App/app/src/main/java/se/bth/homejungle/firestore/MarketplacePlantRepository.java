@@ -1,32 +1,20 @@
 package se.bth.homejungle.firestore;
 
-import android.app.Application;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import se.bth.homejungle.R;
-import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.ui.MarketplacePlant;
-import se.bth.homejungle.ui.giveaways.add_giveaway.AddGiveawayFragmentDirections;
 
 import static android.content.ContentValues.TAG;
 

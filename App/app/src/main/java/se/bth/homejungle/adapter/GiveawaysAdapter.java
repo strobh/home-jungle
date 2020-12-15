@@ -5,12 +5,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
-import se.bth.homejungle.storage.entity.Species;
-import se.bth.homejungle.ui.Giveaway;
 import se.bth.homejungle.ui.MarketplacePlant;
 import se.bth.homejungle.ui.giveaways.GiveawaysFragment;
 import se.bth.homejungle.ui.giveaways.GiveawaysListItem;

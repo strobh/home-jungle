@@ -25,8 +25,8 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import se.bth.homejungle.R;
 import se.bth.homejungle.adapter.YourPlantsAdapter;
 import se.bth.homejungle.storage.entity.view.PlantWithSpecies;
-import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 import se.bth.homejungle.ui.Source;
+import se.bth.homejungle.ui.plants.HomeFragmentDirections;
 
 /**
  * YourPlantsFragment contains a RecyclerView which contains all plants that are as own plants

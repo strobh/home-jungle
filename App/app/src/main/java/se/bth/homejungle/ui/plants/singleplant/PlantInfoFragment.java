@@ -1,20 +1,16 @@
 package se.bth.homejungle.ui.plants.singleplant;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import se.bth.homejungle.R;
-import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.ui.Source;
 
 /**

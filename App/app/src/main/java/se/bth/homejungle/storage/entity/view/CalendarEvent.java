@@ -7,9 +7,9 @@ import androidx.room.TypeConverters;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import se.bth.homejungle.storage.entity.Species;
 import se.bth.homejungle.storage.entity.converter.CalendarEventTypeConverter;
 import se.bth.homejungle.storage.entity.converter.DateConverter;
-import se.bth.homejungle.storage.entity.Species;
 
 /**
  * The Plant entity class models a database view that contains all information necessary for the

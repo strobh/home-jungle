@@ -1,8 +1,5 @@
 package se.bth.homejungle.ui.giveaways;
 
-import android.app.Application;
-
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,7 +8,6 @@ import java.util.List;
 
 import se.bth.homejungle.firestore.MarketplacePlantLiveData;
 import se.bth.homejungle.firestore.MarketplacePlantRepository;
-import se.bth.homejungle.storage.entity.Plant;
 import se.bth.homejungle.ui.MarketplacePlant;
 
 

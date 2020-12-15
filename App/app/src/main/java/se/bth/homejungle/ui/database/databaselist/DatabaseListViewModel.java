@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 
 import se.bth.homejungle.storage.entity.FuturePlant;
 import se.bth.homejungle.storage.entity.Plant;

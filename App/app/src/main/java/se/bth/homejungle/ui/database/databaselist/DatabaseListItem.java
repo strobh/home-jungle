@@ -19,8 +19,6 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalDate;
-
 import se.bth.homejungle.R;
 import se.bth.homejungle.storage.AppDatabase;
 import se.bth.homejungle.storage.entity.FuturePlant;
