@@ -94,7 +94,7 @@ public class SingleGiveaway extends Fragment implements OnMapReadyCallback
 
         LatLng plantPosition = new LatLng(currentPlant.getLatitude(), currentPlant.getLongitude());
 
-        googleMap.addMarker(new MarkerOptions().position(plantPosition).title("Karlskrona"));
+        googleMap.addMarker(new MarkerOptions().position(plantPosition).title("Location of give-away"));
         CameraPosition cameraPosition = CameraPosition.builder().target(plantPosition).zoom(14).bearing(0).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
