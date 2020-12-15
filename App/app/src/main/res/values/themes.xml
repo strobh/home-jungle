@@ -19,8 +19,8 @@
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
         <!-- Used for the title and text -->
         <item name="android:textColorPrimary">#569A59</item>
-        <item name="android:paddingLeft">5dp</item>
-        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
         <!-- Used for the background -->
         <item name="android:background">#BFDAC0</item>
     </style>

@@ -91,7 +91,6 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
                 System.out.println("Click on button");
             }
         });
-        //TODO: img
     }
 
     public void showYourPlantsAlertDialog(DatabaseListFragment databaseListFragment){
@@ -99,6 +98,7 @@ public class DatabaseListItem extends RecyclerView.ViewHolder implements View.On
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.leftMargin = 5;
         input.setLayoutParams(lp);
         new AlertDialog.Builder(databaseListFragment.getContext(), R.style.AlertDialogStyle)
                 .setTitle(R.string.add_pop_up)

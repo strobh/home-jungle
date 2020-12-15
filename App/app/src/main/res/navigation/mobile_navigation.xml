@@ -127,4 +127,12 @@
             app:argType="long"
             android:defaultValue="0L" />
     </fragment>
+    <fragment
+        android:id="@+id/plantStartFragment"
+        android:name="se.bth.homejungle.ui.plants.singleplant.PlantStartFragment"
+        tools:layout="@layout/fragment_plant_info" />
+    <fragment
+        android:id="@+id/plantInfoFragment"
+        android:name="se.bth.homejungle.ui.plants.singleplant.PlantInfoFragment"
+        tools:layout="@layout/fragment_plant_start2" />
 </navigation>

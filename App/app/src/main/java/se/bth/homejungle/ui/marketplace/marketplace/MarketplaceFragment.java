@@ -114,7 +114,6 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
                 if(marketplacePlants.size() > 0){
                     noPlants.setVisibility(View.INVISIBLE);
                 }
-
                 //marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
                 //Log.v(TAG, "MarketplacePlants: " + marketplacePlants.size());
                 adapter.submitList(marketplacePlants);
@@ -123,7 +122,6 @@ public class MarketplaceFragment extends LocationFragment implements LocationFra
             Log.v("MarketplaceFragment", "has no userid");
             marketplaceViewModel.getMarketplacePlantsLiveData().observe(getViewLifecycleOwner(), Observable -> {});
             marketplaceViewModel.getPlantList().observe(getViewLifecycleOwner(), marketplacePlants -> {
-
                 // filter giveaways to distances of less than 5 km
                 marketplacePlants = marketplacePlants.stream().filter((MarketplacePlant plant) -> plant.getDistance(location) < 5).collect(Collectors.toList());
                 if(marketplacePlants.size() > 0){

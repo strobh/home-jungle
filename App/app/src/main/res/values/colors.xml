@@ -3,15 +3,12 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="teal_200">#306332</color>
+    <color name="teal_700">#114E07</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#D65252</color>
     <color name="row_green">#7CBD7F</color>
     <color name="top_green">#39553B</color>
     <color name="dark_green">#212E22</color>
-
-
-
 </resources>
