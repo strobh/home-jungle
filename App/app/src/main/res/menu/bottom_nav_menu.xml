@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_nav_home"
         android:title="@string/title_your_plants" />
 
     <!--     android:icon="@drawable/ic_calendar_background" -->
@@ -11,22 +11,22 @@
 
     <item
         android:id="@+id/navigation_calendar"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_nav_calendar"
         android:title="@string/title_calendar" />
 
     <item
         android:id="@+id/navigation_database"
-        android:icon="@drawable/ic_flower"
+        android:icon="@drawable/ic_nav_database"
         android:title="@string/title_database" />
 
     <item
         android:id="@+id/navigation_marketplace"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_nav_marketplace"
         android:title="@string/title_marketplace" />
 
     <item
         android:id="@+id/navigation_giveaways"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_nav_giveaway"
         android:title="@string/title_giveaways" />
 
 </menu>
