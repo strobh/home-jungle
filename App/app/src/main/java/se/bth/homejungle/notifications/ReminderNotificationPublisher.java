@@ -17,6 +17,11 @@ public class ReminderNotificationPublisher extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.v("ReminderNotificationPublisher", "onReceive");
+
+        // setup scheduler for next day on start
+        ReminderNotificationScheduler notificationScheduler = new ReminderNotificationScheduler();
+        notificationScheduler.setupScheduler(context);
+
         final PendingResult result = goAsync();
         new PublishNotificationTask(context).execute(result);
     }
