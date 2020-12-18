@@ -32,11 +32,6 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".notifications.ReminderNotificationScheduler">
-            <intent-filter>
-                <action android:name="se.bth.homejungle.SCHEDULE_NOTIFICATION"/>
-            </intent-filter>
-        </receiver>
         <receiver android:name=".notifications.ReminderNotificationPublisher">
             <intent-filter>
                 <action android:name="se.bth.homejungle.PUBLISH_NOTIFICATION"/>
