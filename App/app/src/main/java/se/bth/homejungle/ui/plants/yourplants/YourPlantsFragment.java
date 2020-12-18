@@ -49,6 +49,14 @@ public class YourPlantsFragment extends Fragment {
 
         noPlant = root.findViewById(R.id.tv_no_plant);
         noPlantBtn = root.findViewById(R.id.btn_no_plant);
+        noPlantBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavDirections action = HomeFragmentDirections.homeToDatabase().setSource(Source.YOURPLANTS);
+                Navigation.findNavController(root).navigate(action);
+            }
+        });
+
         RecyclerView recyclerView = root.findViewById(R.id.idRecyclerView);
         final YourPlantsAdapter adapter = new YourPlantsAdapter(new YourPlantsAdapter.PlantDiff());
         recyclerView.setAdapter(adapter);
@@ -58,14 +66,6 @@ public class YourPlantsFragment extends Fragment {
             if(plants.size() < 1){
                 noPlant.setVisibility(View.VISIBLE);
                 noPlantBtn.setVisibility(View.VISIBLE);
-            } else {
-                noPlantBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        NavDirections action = HomeFragmentDirections.homeToDatabase().setSource(Source.YOURPLANTS);
-                        Navigation.findNavController(root).navigate(action);
-                    }
-                });
             }
             Log.v("Database", "Your plants: " + plants.size());
             adapter.submitList(plants);

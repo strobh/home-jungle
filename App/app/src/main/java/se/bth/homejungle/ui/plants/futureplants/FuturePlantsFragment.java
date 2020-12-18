@@ -53,6 +53,14 @@ public class FuturePlantsFragment extends Fragment {
 
         noPlant = root.findViewById(R.id.tv_no_plant);
         noPlantBtn = root.findViewById(R.id.btn_no_plant);
+        noPlantBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavDirections action = HomeFragmentDirections.homeToDatabase().setSource(Source.FUTUREPLANTS);
+                Navigation.findNavController(root).navigate(action);
+            }
+        });
+
         recyclerView = root.findViewById(R.id.idRecyclerView);
         final FuturePlantsAdapter adapter = new FuturePlantsAdapter(new FuturePlantsAdapter.PlantDiff());
         recyclerView.setAdapter(adapter);
@@ -62,14 +70,6 @@ public class FuturePlantsFragment extends Fragment {
             if(plants.size() < 1){
                 noPlant.setVisibility(View.VISIBLE);
                 noPlantBtn.setVisibility(View.VISIBLE);
-            } else {
-                noPlantBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        NavDirections action = HomeFragmentDirections.homeToDatabase().setSource(Source.FUTUREPLANTS);
-                        Navigation.findNavController(root).navigate(action);
-                    }
-                });
             }
             Log.v("Database", "Future plants: " + plants.size());
             adapter.submitList(plants);
