@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
+        /*AppDatabase db = AppDatabase.getDatabase(getApplicationContext());
         CategoryManager categoryManager = db.getCategoryManager();
         SpeciesManager speciesManager = db.getSpeciesManager();
         PlantManager plantManager = db.getPlantManager();
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
             Plant newPlant4 = new Plant(5,  "Living room");
             plantManager.insert(newPlant4);
-        });
+        });*/
 
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
