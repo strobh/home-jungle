@@ -292,7 +292,7 @@ public class AddGiveawayFragment extends LocationFragment implements LocationFra
             tv_contact.setVisibility(View.VISIBLE);
         }
         else {
-            errorMessage.setText("Home Jungle needs your location in order to find give-aways in your neighbourhood. Make sure that Home Jungle can access your location.");
+            errorMessage.setText("Home Jungle needs your location in order to offer the give-away in your neighbourhood. Make sure that Home Jungle can access your location.");
             errorMessage.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
         }
